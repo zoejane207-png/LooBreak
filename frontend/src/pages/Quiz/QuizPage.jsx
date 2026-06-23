@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getPosts } from "../../services/posts";
-import Post from "../../components/Post";
+import { getQuiz } from "../../services/quiz";
+import Quiz from "../../components/Quiz";
 import LogoutButton from "../../components/LogoutButton";
 
-export function FeedPage() {
-  const [posts, setPosts] = useState([]);
+export function QuizPage() {
+  const [quiz, setQuiz] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export function FeedPage() {
     if (loggedIn) {
       getPosts(token)
         .then((data) => {
-          setPosts(data.posts);
+          setQuiz(data.posts);
           localStorage.setItem("token", data.token);
         })
         .catch((err) => {
@@ -33,7 +33,7 @@ export function FeedPage() {
 
   return (
     <>
-      <h2>Posts</h2>
+      <h2>Quiz</h2>
       <div className="feed" role="feed">
         {posts.map((post) => (
           <Post post={post} key={post._id} />

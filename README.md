@@ -1,4 +1,4 @@
-## Acebook MERN Template
+## LooBreak
 
 In this project, you are task with working on an existing application. A
 significant part of the challenge will be to familiarise yourself with the
@@ -23,7 +23,7 @@ the application works.
 
 ### Card wall
 
-REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
+[TRELLO](https://trello.com/b/xcTayIHB/push-play-flush)
 
 ### Quickstart
 

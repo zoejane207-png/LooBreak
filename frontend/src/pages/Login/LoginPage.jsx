@@ -1,50 +1,37 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { login } from "../../services/authentication";
 
 export function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const token = await login(email, password);
+      const token = await login(username);
       localStorage.setItem("token", token);
-      navigate("/posts");
+      navigate("/homepage");
     } catch (err) {
       console.error(err);
       navigate("/login");
     }
   }
 
-  function handleEmailChange(event) {
-    setEmail(event.target.value);
-  }
-
-  function handlePasswordChange(event) {
-    setPassword(event.target.value);
+  function handleUsernameChange(event) {
+    setUsername(event.target.value);
   }
 
   return (
     <>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email">Username:</label>
         <input
-          id="email"
+          id="username"
           type="text"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
+          value={username}
+          onChange={handleUsernameChange}
         />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
