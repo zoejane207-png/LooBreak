@@ -1,8 +1,5 @@
 ## LooBreak
 
-In this project, you are task with working on an existing application. A
-significant part of the challenge will be to familiarise yourself with the
-codebase you've inherited, as you work to **improve and extend** it.
 
 ### Structure
 
@@ -45,10 +42,8 @@ If you haven't already, make sure you have node and NVM installed.
 
 ### Set up your project
 
-1. Have one team member fork this repository
-2. Rename the fork to `acebook-<team name>`
-3. Every team member clone the fork to their local machine
-4. Install dependencies for both the `frontend` and `api` applications:
+1. Every team member clone the fork to their local machine
+2. Install dependencies for both the `frontend` and `api` applications:
    ```
    cd frontend
    npm install
@@ -90,7 +85,7 @@ VITE_BACKEND_URL="http://localhost:3000"
 Create a file `api/.env` with the following contents:
 
 ```
-MONGODB_URL="mongodb://0.0.0.0/acebook"
+MONGODB_URL="mongodb://0.0.0.0/loobreak"
 NODE_ENV="development"
 JWT_SECRET="secret"
 ```
