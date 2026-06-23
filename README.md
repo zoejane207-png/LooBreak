@@ -37,11 +37,11 @@ If you haven't already, make sure you have node and NVM installed.
    ```
    Then follow the instructions to update your `~/.zshrc`.
 2. Open a new terminal
-3. Install the latest version of [Node.js](https://nodejs.org/en/), (`20.5.0` at
-   time of writing).
+3. Install Node.js version 24:
    ```
-   nvm install 20
+   nvm install 24
    ```
+   _Note: This project requires Node 24 or later to run._
 
 ### Set up your project
 
@@ -55,6 +55,8 @@ If you haven't already, make sure you have node and NVM installed.
    cd ../api
    npm install
    ```
+   **Note:** If you see peer dependency warnings during install, they should resolve automatically. If you encounter `ERESOLVE` errors, you can use `npm install --legacy-peer-deps` as a fallback.
+
 5. Install an ESLint plugin for your editor, for example
    [ESLint for VSCode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 6. Install MongoDB - pick the latest version available, at the time of writing this, it's @8.0. 
@@ -121,3 +123,17 @@ Then, after signing up, you should be able to log in by going to
 
 After logging in, you won't see much but you can create posts using PostMan and
 they should then show up in the browser if you refresh the page.
+
+### Dependencies
+
+This project uses:
+
+- **Node.js 24+** - Runtime
+- **React 18** - Frontend UI
+- **Vite 8** - Frontend build tool
+- **Express 4** - Backend server
+- **Mongoose 8** - MongoDB object modeling
+- **MongoDB 8** - Database
+- **Vitest 4** - Testing framework
+
+All versions have been tested together and should work without conflicts.
