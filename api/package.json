@@ -1,7 +1,7 @@
 {
-  "name": "acebook-api",
+  "name": "loobreak-api",
   "version": "1.0.0",
-  "description": "Backend template for the Makers Acebook project.",
+  "description": "LooBreak",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
