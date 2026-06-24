@@ -2,10 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const usersRouter = require("./routes/users");
+const playersRouter = require("./routes/players");
 const quizRouter = require("./routes/quiz");
-const authenticationRouter = require("./routes/authentication");
-const tokenChecker = require("./middleware/tokenChecker");
+
+
 
 const app = express();
 
@@ -18,9 +18,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // API Routes
-app.use("/users", usersRouter);
-app.use("/quiz", tokenChecker, quizRouter);
-app.use("/tokens", authenticationRouter);
+app.use("/players", playersRouter);
+app.use("/quiz", quizRouter);
+
 
 // 404 Handler
 app.use((_req, res) => {
