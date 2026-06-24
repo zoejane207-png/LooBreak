@@ -1,14 +1,14 @@
-const Player = require("../models/player");
+const User = require("../models/user");
 
 function create(req, res) {
   const username = req.body.username;
   const score = req.body.score;
 
-  const player = new Player({ username, score });
-  player
+  const user = new User({ username, score });
+  user
     .save()
-    .then((player) => {
-      console.log("player created, id:", player._id.toString());
+    .then((user) => {
+      console.log("User created, id:", user._id.toString());
       res.status(201).json({ message: "OK" });
     })
     .catch((err) => {
@@ -17,8 +17,8 @@ function create(req, res) {
     });
 }
 
-const PlayersController = {
+const UsersController = {
   create: create,
 };
 
-module.exports = PlayersController;
+module.exports = UsersController;
