@@ -73,29 +73,60 @@ const quizzes = [
 ];
 
 const tips = [
-  { tip: "Flush once, not twice — Save water by avoiding double flushes. One good flush should do the job." },
-  { tip: "Keep a plunger nearby — Always have one accessible to handle clogs before they worsen." },
-  { tip: "Use the half-flush option — Modern toilets often have dual-flush buttons. Use the smaller button for liquids only." },
-  { tip: "Wash your hands for 20 seconds — Hum 'Happy Birthday' twice to make sure you scrub long enough." },
-  { tip: "Close the lid before flushing — It helps stop germs from spreading into the air." },
-  { tip: "Don't flush wipes — Even 'flushable' wipes can clog pipes. Bin them instead." },
-  { tip: "Check for leaks — A running toilet can waste hundreds of litres a day. Listen for hissing." },
-  { tip: "Keep a small bin in the bathroom — Avoid the temptation to flush things that shouldn't be flushed." },
-  { tip: "Refill the toilet roll — Be kind to the next person and replace the empty roll." },
-  { tip: "Open a window or use the fan — Good ventilation keeps the bathroom fresh and reduces mould." },
+  {
+    tip: "Flush once, not twice — Save water by avoiding double flushes. One good flush should do the job.",
+  },
+  {
+    tip: "Keep a plunger nearby — Always have one accessible to handle clogs before they worsen.",
+  },
+  {
+    tip: "Use the half-flush option — Modern toilets often have dual-flush buttons. Use the smaller button for liquids only.",
+  },
+  {
+    tip: "Wash your hands for 20 seconds — Hum 'Happy Birthday' twice to make sure you scrub long enough.",
+  },
+  {
+    tip: "Close the lid before flushing — It helps stop germs from spreading into the air.",
+  },
+  {
+    tip: "Don't flush wipes — Even 'flushable' wipes can clog pipes. Bin them instead.",
+  },
+  {
+    tip: "Check for leaks — A running toilet can waste hundreds of litres a day. Listen for hissing.",
+  },
+  {
+    tip: "Keep a small bin in the bathroom — Avoid the temptation to flush things that shouldn't be flushed.",
+  },
+  {
+    tip: "Refill the toilet roll — Be kind to the next person and replace the empty roll.",
+  },
+  {
+    tip: "Open a window or use the fan — Good ventilation keeps the bathroom fresh and reduces mould.",
+  },
 ];
 
 const icebreakers = [
   { icebreaker: "Count how many toilet rolls are in the bathroom" },
-  { icebreaker: "Guess the brand of the hand soap without looking at the label" },
-  { icebreaker: "Find the most unusual item anyone's kept on their bathroom shelf" },
+  {
+    icebreaker: "Guess the brand of the hand soap without looking at the label",
+  },
+  {
+    icebreaker:
+      "Find the most unusual item anyone's kept on their bathroom shelf",
+  },
   { icebreaker: "Name three things you could do in under a minute right now" },
   { icebreaker: "What's the strangest place you've ever had to use a toilet?" },
   { icebreaker: "If your bathroom had a theme song, what would it be?" },
   { icebreaker: "Describe your ideal bathroom in three words" },
   { icebreaker: "What's one item you always forget to restock?" },
-  { icebreaker: "Spot the oldest product in the bathroom and check its expiry date" },
-  { icebreaker: "If you could add one gadget to this bathroom, what would it be?" },
+  {
+    icebreaker:
+      "Spot the oldest product in the bathroom and check its expiry date",
+  },
+  {
+    icebreaker:
+      "If you could add one gadget to this bathroom, what would it be?",
+  },
 ];
 
 async function seed() {
@@ -115,7 +146,7 @@ async function seed() {
 
   console.log(
     `Seeded ${users.length} users, ${quizzes.length} quizzes, ` +
-      `${tips.length} tips, and ${icebreakers.length} icebreakers.`
+      `${tips.length} tips, and ${icebreakers.length} icebreakers.`,
   );
 
   // Close the connection so the script exits cleanly.
