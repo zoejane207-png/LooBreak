@@ -8,9 +8,15 @@ export default function NavBar() {
   return (
     <nav className="navbar" id="navbar">
       <img src={logo} alt="LooBreak Logo" className="navbar-logo" />
-      <Link to="/" id="home-button">Home</Link>
-      <Link to="/quiz" id="quiz-button">Quiz</Link>
-      <Link to="/leaderboard" id="leaderboard-button">Leaderboard</Link>
+      <Link to="/" id="home-button">
+        Home
+      </Link>
+      <Link to="/quiz" id="quiz-button">
+        Quiz
+      </Link>
+      <Link to="/leaderboard" id="leaderboard-button">
+        Leaderboard
+      </Link>
       <button onClick={() => setIsDark(!isDark)}>
         {isDark ? "Light Mode" : "Dark Mode"}
       </button>
