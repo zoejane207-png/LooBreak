@@ -9,7 +9,7 @@ describe("Home Page", () => {
     render(
       <BrowserRouter>
         <HomePage />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     const heading = screen.getByRole("heading");
@@ -20,7 +20,7 @@ describe("Home Page", () => {
     render(
       <BrowserRouter>
         <HomePage />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     const signupLink = screen.getByText("Sign Up");
@@ -31,7 +31,7 @@ describe("Home Page", () => {
     render(
       <BrowserRouter>
         <HomePage />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     const loginLink = screen.getByText("Log In");
