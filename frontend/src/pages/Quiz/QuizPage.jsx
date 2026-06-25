@@ -8,6 +8,8 @@ export function QuizPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finished, setFinished] = useState(false);
   const currentQuestion = quiz[currentIndex];
+  const [score, setScore] = useState(0);
+  const [playerAnswer, setPlayerAnswer] = useState("");
 
   useEffect(() => {
     getQuiz().then((data) => {
@@ -25,6 +27,14 @@ export function QuizPage() {
     }
   }
 
+  function handleAnswer(playerAnswer) {
+    event.preventDefault():
+    setPlayerAnswer(answer)
+    if (playerAnswer === currentQuestion.correct_answer) {
+      setScore(+1)
+    }
+  }
+
   if (!quiz.length) {
     return <h3>Loading questions...</h3>;
   }
@@ -34,6 +44,8 @@ export function QuizPage() {
     ...currentQuestion.incorrect_answers,
   ].sort();
 
+
+
   return (
     <>
       <h2>Quiz</h2>
@@ -42,7 +54,7 @@ export function QuizPage() {
         <p>{currentQuestion.question}</p>
         <div>
           {answers.map((answer) => (
-            <button key={answer}> {answer}</button>
+            <button key={answer} onClick={handleAnswer}> {answer}</button>
           ))}
         </div>
         {!finished && <button onClick={handleNextQuestion}>→</button>}
