@@ -1,12 +1,12 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const { connectToDatabase } = require("./db/db");
-const User = require("./models/user");
+const Player = require("./models/player");
 const Quiz = require("./models/quiz");
 const Tip = require("./models/tip");
 const Icebreaker = require("./models/icebreaker");
 
-const users = [
+const players = [
   { playername: "alice", score: 10 },
   { playername: "bob", score: 9 },
   { playername: "charlie", score: 8 },
@@ -102,19 +102,19 @@ async function seed() {
   await connectToDatabase();
 
   // Clear out any existing data so re-running the seed gives a clean slate.
-  await User.deleteMany({});
+  await Player.deleteMany({});
   await Quiz.deleteMany({});
   await Tip.deleteMany({});
   await Icebreaker.deleteMany({});
 
   // Insert the seed data.
-  await User.insertMany(users);
+  await Player.insertMany(players);
   await Quiz.insertMany(quizzes);
   await Tip.insertMany(tips);
   await Icebreaker.insertMany(icebreakers);
 
   console.log(
-    `Seeded ${users.length} users, ${quizzes.length} quizzes, ` +
+    `Seeded ${players.length} players, ${quizzes.length} quizzes, ` +
       `${tips.length} tips, and ${icebreakers.length} icebreakers.`
   );
 
