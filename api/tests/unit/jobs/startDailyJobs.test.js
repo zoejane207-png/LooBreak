@@ -1,6 +1,6 @@
 const cron = require("node-cron");
 
-jest.mock('node-cron', () => ({
+jest.mock('cron', () => ({
     schedule: jest.fn(),
 }));
 jest.mock("../../services/dailyQuizService", () => ({
@@ -31,10 +31,10 @@ describe('startDailyJobs', () => {
         );
     });
 
-    it("runs all three services and logs success when they resolve", async () => {
+    it("runs all three daily services and logs success when they resolve", async () => {
         startDailyJobs();
 
-        const callback = cron.schedule.mock.calls[0][1];
+        const callback = cron.schedule.mock.calls[0][1]; //need to understand this fully
         console.log('CALLBACK:', callback);
         const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
 

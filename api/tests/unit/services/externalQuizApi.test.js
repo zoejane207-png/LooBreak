@@ -30,7 +30,7 @@ describe('externalQuizApi mocked data', () => {
       json: async () => mockData,
     });
 
-    const quizData = await fetchExternalQuiz();
+    const quizData = await fetchExternalQuiz();  // this does not actually call the url
 
     expect(Array.isArray(quizData.results)).toBe(true);
     expect(quizData.results.length).toBeGreaterThan(0);
