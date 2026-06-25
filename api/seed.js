@@ -7,16 +7,16 @@ const Tip = require("./models/tip");
 const Icebreaker = require("./models/icebreaker");
 
 const users = [
-  { username: "alice", score: 10 },
-  { username: "bob", score: 9 },
-  { username: "charlie", score: 8 },
-  { username: "diana", score: 7 },
-  { username: "ethan", score: 6 },
-  { username: "fiona", score: 12 },
-  { username: "george", score: 4 },
-  { username: "hana", score: 15 },
-  { username: "ivan", score: 3 },
-  { username: "julia", score: 11 },
+  { playername: "alice", score: 10 },
+  { playername: "bob", score: 9 },
+  { playername: "charlie", score: 8 },
+  { playername: "diana", score: 7 },
+  { playername: "ethan", score: 6 },
+  { playername: "fiona", score: 12 },
+  { playername: "george", score: 4 },
+  { playername: "hana", score: 15 },
+  { playername: "ivan", score: 3 },
+  { playername: "julia", score: 11 },
 ];
 
 const quizzes = [

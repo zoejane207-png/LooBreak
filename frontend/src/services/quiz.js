@@ -3,7 +3,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export async function getQuiz() {
   const requestOptions = {
-    method: "GET"
+    method: "GET",
   };
 
   const response = await fetch(`${BACKEND_URL}/quiz`, requestOptions);
@@ -13,7 +13,5 @@ export async function getQuiz() {
   }
 
   const data = await response.json();
-  // console.log(data);
-  console.log(data.quiz[0]);
-  return data.quiz[0];
+  return data.quiz;
 }

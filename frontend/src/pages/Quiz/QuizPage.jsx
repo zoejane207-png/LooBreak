@@ -4,31 +4,44 @@ import { getQuiz } from "../../services/quiz";
 // import Quiz from "../../components/Quiz";
 
 export function QuizPage() {
-  
   const [quiz, setQuiz] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentQuestion = quiz[currentIndex];
 
   useEffect(() => {
     getQuiz().then((data) => {
-      setQuiz(data)
+      setQuiz(data);
     });
   }, []);
 
-  const question = quiz.question;
-  const answers = [quiz.correct_answer, quiz.incorrect_answers]
+  function handleNextQuestion() {
+    if (currentIndex < quiz.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  }
 
-  console.log(quiz.incorrect_answers);
-  // for (let questionIndex = 0; questionSet.length < 10; questionIndex++)
+  if (!quiz.length) {
+    return <h3>Loading questions...</h3>;
+  }
+
+  const answers = [
+    currentQuestion.correct_answer,
+    ...currentQuestion.incorrect_answers,
+  ].sort();
 
   return (
     <>
       <h2>Quiz</h2>
-      <h3>Question:</h3>
+      <h3>Question {currentIndex + 1}:</h3>
       <div className="feed" role="feed">
-        <p>{question}</p>
-        <p>{answers}</p>
-        <button>→</button>
+        <p>{currentQuestion.question}</p>
+        <div>
+          {answers.map((answer) => (
+            <button key={answer}> {answer}</button>
+          ))}
+        </div>
+        <button onClick={handleNextQuestion}>→</button>
       </div>
     </>
   );
 }
-

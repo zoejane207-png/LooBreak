@@ -1,10 +1,10 @@
 const Player = require("../models/player");
 
 function create(req, res) {
-  const username = req.body.username;
+  const playername = req.body.playername;
   const score = req.body.score;
 
-  const player = new Player({ username, score });
+  const player = new Player({ playername, score });
   player
     .save()
     .then((player) => {
