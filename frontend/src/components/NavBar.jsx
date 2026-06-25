@@ -1,20 +1,25 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/toilet-icon-png-5.png";
+import logo from "../assets/toilet-vector.png";
 import useDarkMode from "../utils/useDarkMode";
 
 export default function NavBar() {
   const [isDark, setIsDark] = useDarkMode();
 
   return (
-    <nav className="navbar" id="navbar">
-      <img src={logo} alt="LooBreak Logo" className="navbar-logo" />
-      <Link to="/" id="home-button">
+    <nav className="navbar" data-testid="navbar">
+      <img
+        src={logo}
+        alt="LooBreak Logo"
+        data-testid="navbar-logo"
+        className="logo"
+      />
+      <Link to="/" data-testid="home-button">
         Home
       </Link>
-      <Link to="/quiz" id="quiz-button">
+      <Link to="/quiz" data-testid="quiz-button">
         Quiz
       </Link>
-      <Link to="/leaderboard" id="leaderboard-button">
+      <Link to="/leaderboard" data-testid="leaderboard-button">
         Leaderboard
       </Link>
       <button onClick={() => setIsDark(!isDark)}>

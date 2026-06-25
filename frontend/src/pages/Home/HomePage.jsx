@@ -8,14 +8,10 @@ export default function HomePage() {
       <NavBar />
       <div className="home">
         <h1>Welcome to LooBreak!</h1>
-        <Link to="/quiz" id="quiz-button" aria-label="quiz-button">
+        <Link to="/quiz" data-testid="quiz-button">
           Quiz
         </Link>
-        <Link
-          to="/leaderboard"
-          id="leaderboard-button"
-          aria-label="quiz-button"
-        >
+        <Link to="/leaderboard" data-testid="leaderboard-button">
           Leaderboard
         </Link>
       </div>
