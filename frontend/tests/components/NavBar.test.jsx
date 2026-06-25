@@ -7,15 +7,17 @@ import { MemoryRouter, Routes, Route } from "react-router-dom";
 describe("NavBar", () => {
   beforeEach(() => {
     render(
-        <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-            initialEntries={["/"]}
-            <NavBar />
-            <Routes>
-                <Route path="/" element={<div>Home Page</div>} />
-                <Route path="/quiz" element={<div>Quiz Page</div>} />
-                <Route path="/leaderboard" element={<div>Leaderboard Page</div>} />
-            </Routes>
-        </MemoryRouter>
+      <MemoryRouter
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
+        initialEntries={["/"]}
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<div>Home Page</div>} />
+          <Route path="/quiz" element={<div>Quiz Page</div>} />
+          <Route path="/leaderboard" element={<div>Leaderboard Page</div>} />
+        </Routes>
+      </MemoryRouter>,
     );
   });
 
@@ -35,13 +37,15 @@ describe("NavBar", () => {
   });
 
   test("Navbar shows the leaderboard button", () => {
-    const leaderboardButton = screen.getByRole("link", { name: /leaderboard/i });
+    const leaderboardButton = screen.getByRole("link", {
+      name: /leaderboard/i,
+    });
     expect(leaderboardButton.textContent).toBeTruthy();
   });
 
   test("Navbar shows the light/dark mode button", () => {
     expect(
-        screen.getByRole("button", { name: /dark mode|light mode/i })
+      screen.getByRole("button", { name: /dark mode|light mode/i }),
     ).toBeInTheDocument();
   });
 

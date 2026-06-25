@@ -7,14 +7,14 @@ describe("Home Page", () => {
   beforeEach(() => {
     // We need the Browser Router so that the Link elements load correctly
     render(
-        <BrowserRouter
-          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-        >
-          <HomePage />
-        </BrowserRouter>,
+      <BrowserRouter
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
+        <HomePage />
+      </BrowserRouter>,
     );
   });
-  
+
   test("welcomes you to the site", () => {
     const heading = screen.getByRole("heading", {
       name: "Welcome to LooBreak!",
@@ -33,7 +33,9 @@ describe("Home Page", () => {
   });
 
   test("Displays a leaderboard link", async () => {
-    const leaderboardLinks = screen.getAllByRole("link", { name: /leaderboard/i });
+    const leaderboardLinks = screen.getAllByRole("link", {
+      name: /leaderboard/i,
+    });
     expect(leaderboardLinks[1].getAttribute("href")).toEqual("/leaderboard");
   });
 });

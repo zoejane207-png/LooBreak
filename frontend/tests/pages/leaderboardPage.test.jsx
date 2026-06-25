@@ -7,11 +7,11 @@ describe("Leaderboard Page", () => {
   beforeEach(() => {
     // We need the Browser Router so that the Link elements load correctly
     render(
-        <BrowserRouter
-          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-        >
-          <LeaderboardPage />
-        </BrowserRouter>,
+      <BrowserRouter
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
+        <LeaderboardPage />
+      </BrowserRouter>,
     );
   });
 
