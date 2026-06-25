@@ -2,7 +2,7 @@ const Quiz = require("../models/quiz");
 
 async function getQuiz(req, res) {
   const quiz = await Quiz.find();
-  res.status(200).json({ quiz: quiz});
+  res.status(200).json({ quiz: quiz });
 }
 
 async function createQuiz(req, res) {

@@ -28,7 +28,7 @@ export function QuizPage() {
   }
 
   function handleAnswer(playerAnswer) {
-    event.preventDefault():
+    event.preventDefault();
     setPlayerAnswer(answer)
     if (playerAnswer === currentQuestion.correct_answer) {
       setScore(+1)
