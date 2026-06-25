@@ -6,6 +6,7 @@ import { getQuiz } from "../../services/quiz";
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [finished, setFinished] = useState(false);
   const currentQuestion = quiz[currentIndex];
 
   useEffect(() => {
@@ -17,6 +18,10 @@ export function QuizPage() {
   function handleNextQuestion() {
     if (currentIndex < quiz.length - 1) {
       setCurrentIndex(currentIndex + 1);
+    }
+    if (currentIndex === quiz.length - 1) {
+      setFinished(true);
+      //when results page is finished we can navigate to it here!
     }
   }
 
@@ -40,7 +45,7 @@ export function QuizPage() {
             <button key={answer}> {answer}</button>
           ))}
         </div>
-        <button onClick={handleNextQuestion}>→</button>
+        {!finished && <button onClick={handleNextQuestion}>→</button>}
       </div>
     </>
   );
