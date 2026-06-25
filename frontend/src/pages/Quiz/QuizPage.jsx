@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import { getQuiz } from "../../services/quiz";
 // import Quiz from "../../components/Quiz";
+import NavBar from "../../components/NavBar";
 
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
@@ -46,6 +47,7 @@ export function QuizPage() {
 
   return (
     <>
+      <NavBar />
       <h2>Quiz</h2>
       <h3>Question {currentIndex + 1}:</h3>
       <div className="feed" role="feed">

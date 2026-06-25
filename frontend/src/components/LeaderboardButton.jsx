@@ -7,7 +7,11 @@ export default function LeaderboardButton() {
   }
 
   return (
-    <button onClick={LeaderboardRedirect} className="leaderboard" aria-label="leaderboard">
+    <button
+      onClick={LeaderboardRedirect}
+      className="leaderboard"
+      aria-label="leaderboard"
+    >
       Leaderboard
     </button>
   );
