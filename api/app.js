@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 // API Routes
 app.use("/players", playersRouter);
 app.use("/quiz", quizRouter);
-app.use("/", iceBreakerRouter);
+app.use("/icebreaker", iceBreakerRouter);
 
 // 404 Handler
 app.use((_req, res) => {
