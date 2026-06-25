@@ -1,7 +1,7 @@
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-
-import { HomePage } from "../../src/pages/Home/HomePage";
+import HomePage from "../../src/pages/Home/HomePage";
 
 describe("Home Page", () => {
   test("welcomes you to the site", () => {
@@ -12,29 +12,40 @@ describe("Home Page", () => {
       </BrowserRouter>,
     );
 
-    const heading = screen.getByRole("heading");
-    expect(heading.textContent).toEqual("Welcome to Acebook!");
+    const heading = screen.getByRole("heading", { name: "Welcome to LooBreak!" });
+    expect(heading).toBeInTheDocument();
   });
 
-  test("Displays a signup link", async () => {
+  test("displays navbar", () => {
     render(
       <BrowserRouter>
         <HomePage />
       </BrowserRouter>,
     );
 
-    const signupLink = screen.getByText("Sign Up");
-    expect(signupLink.getAttribute("href")).toEqual("/signup");
+    const navBar = screen.getByRole("navigation");
+    expect(navBar).toBeInTheDocument();
   });
 
-  test("Displays a login link", async () => {
+  test("Displays a quiz link", async () => {
     render(
       <BrowserRouter>
         <HomePage />
       </BrowserRouter>,
     );
 
-    const loginLink = screen.getByText("Log In");
-    expect(loginLink.getAttribute("href")).toEqual("/login");
+    const quizLink = screen.getByRole("link", { name: "Quiz"});
+    expect(quizLink.getAttribute("href")).toEqual("/quiz");
+  });
+
+  test("Displays a leaderboard link", async () => {
+    render(
+      <BrowserRouter>
+        <HomePage />
+      </BrowserRouter>,
+    );
+
+    const leaderboardLink = screen.getByRole("link", { name: "Leaderboard" });
+    expect(leaderboardLink.getAttribute("href")).toEqual("/leaderboard");
   });
 });

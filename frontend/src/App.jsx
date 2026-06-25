@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import { HomePage } from "./pages/Home/HomePage";
+import HomePage from "./pages/Home/HomePage";
 import { QuizPage } from "./pages/Quiz/QuizPage";
-import { LeaderboardPage } from "./pages/Leaderboard/LeaderboardPage";
+import LeaderboardPage from "./pages/Leaderboard/LeaderboardPage";
 
 // docs: https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
