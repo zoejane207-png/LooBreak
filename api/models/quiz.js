@@ -12,5 +12,4 @@ const QuizSchema = new mongoose.Schema({
 // use to construct entries in our Database.
 const Quiz = mongoose.model("Quiz", QuizSchema);
 
-
 module.exports = Quiz;

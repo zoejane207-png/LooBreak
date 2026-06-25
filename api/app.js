@@ -5,8 +5,6 @@ const cors = require("cors");
 const playersRouter = require("./routes/players");
 const quizRouter = require("./routes/quiz");
 
-
-
 const app = express();
 
 // Allow requests from any client
@@ -20,7 +18,6 @@ app.use(bodyParser.json());
 // API Routes
 app.use("/players", playersRouter);
 app.use("/quiz", quizRouter);
-
 
 // 404 Handler
 app.use((_req, res) => {
