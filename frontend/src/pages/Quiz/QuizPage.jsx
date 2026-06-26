@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import { getQuiz } from "../../services/quiz";
 // import Quiz from "../../components/Quiz";
+import NavBar from "../../components/NavBar";
 
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
@@ -48,10 +49,9 @@ export function QuizPage() {
     ...currentQuestion.incorrect_answers,
   ].sort();
 
-  console.log(score);
-
   return (
     <>
+      <NavBar />
       <h2>Quiz</h2>
       <h3>Question {currentIndex + 1}:</h3>
       <p>Score: {score}/10</p>
