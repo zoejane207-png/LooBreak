@@ -107,4 +107,18 @@ describe("Quiz Page", () => {
 
     expect(screen.queryByRole("button", { name: "→" })).toBeInTheDocument();
   });
+
+  test("Score increments after submit when answer is correct", async () => {
+    const user = userEvent
+    renderWithRouter(<QuizPage />);
+
+    await screen.findByText(mockQuiz[0].question);
+
+    expect(screen.getByText("Score: 0/10")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Licorice" }));
+    await user.click(screen.getByRole("button", { name: "Submit" }));
+
+    expect(screen.getByText("Score: 1/10")).toBeInTheDocument();
+  })
 });
