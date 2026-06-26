@@ -146,7 +146,7 @@ async function seed() {
 
   console.log(
     `Seeded ${players.length} players, ${quizzes.length} quizzes, ` +
-      `${tips.length} tips, and ${icebreakers.length} icebreakers.`
+      `${tips.length} tips, and ${icebreakers.length} icebreakers.`,
   );
 
   // Close the connection so the script exits cleanly.

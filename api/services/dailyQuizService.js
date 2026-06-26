@@ -18,7 +18,7 @@ async function populateTodaysQuiz() {
     });
   }
 
-  await Quiz.insertMany(docs);   // single array argument
+  await Quiz.insertMany(docs); // single array argument
 }
 
 module.exports = { populateTodaysQuiz };
