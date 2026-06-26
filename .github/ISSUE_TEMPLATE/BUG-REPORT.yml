@@ -14,6 +14,7 @@ body:
         - v1.5 API brings in data and stores in Quiz collection db.
         - v1.6 Fixed issue with second click and disabled answer buttons after selected.
         - v1.7 navbar added to all pages + basic light/dark mode
+        - v1.8 added in submit button and li9nk to results page when quiz is finished 
         # - v3
         # - v4
   - type: dropdown
