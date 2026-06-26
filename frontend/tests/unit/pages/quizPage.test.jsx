@@ -4,8 +4,8 @@ import { vi, describe, test, beforeEach, expect } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
 
-import { QuizPage } from "../../src/pages/Quiz/QuizPage";
-import { getQuiz } from "../../src/services/quiz";
+import { QuizPage } from "../../../src/pages/Quiz/QuizPage";
+import { getQuiz } from "../../../src/services/quiz";
 
 vi.mock("react-router-dom", async (importOriginal) => {
   const actual = await importOriginal();
@@ -15,7 +15,7 @@ vi.mock("react-router-dom", async (importOriginal) => {
 });
 
 // Mocking the getQuiz service
-vi.mock("../../src/services/quiz", () => {
+vi.mock("../../../src/services/quiz", () => {
   return {
     getQuiz: vi.fn(),
   };

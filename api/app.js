@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const playersRouter = require("./routes/players");
 const quizRouter = require("./routes/quiz");
+const iceBreakerRouter = require("./routes/icebreaker")
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 // API Routes
 app.use("/players", playersRouter);
 app.use("/quiz", quizRouter);
+app.use("/icebreaker", iceBreakerRouter);
 
 // 404 Handler
 app.use((_req, res) => {

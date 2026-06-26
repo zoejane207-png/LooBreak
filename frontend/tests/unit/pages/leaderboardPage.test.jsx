@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import LeaderboardPage from "../../src/pages/Leaderboard/LeaderboardPage";
+import LeaderboardPage from "../../../src/pages/Leaderboard/LeaderboardPage";
 
 describe("Leaderboard Page", () => {
   beforeEach(() => {
