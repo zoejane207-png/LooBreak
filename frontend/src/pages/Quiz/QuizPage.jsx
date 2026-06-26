@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getQuiz } from "../../services/quiz";
-// import Quiz from "../../components/Quiz";
 import NavBar from "../../components/NavBar";
 
 export function QuizPage() {
@@ -11,7 +10,7 @@ export function QuizPage() {
   const currentQuestion = quiz[currentIndex];
   const [score, setScore] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
-  const [playerAnswer, setPlayerAnswer] = useState("")
+  const [playerAnswer, setPlayerAnswer] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ export function QuizPage() {
 
   function handleNextQuestion() {
     setIsSelected(false);
-    setHasSubmitted(false)
+    setHasSubmitted(false);
     if (currentIndex < quiz.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
@@ -34,8 +33,7 @@ export function QuizPage() {
 
   function handleAnswer(currentQuestion, answer) {
     setIsSelected(true);
-    setPlayerAnswer(answer)
-    
+    setPlayerAnswer(answer);
   }
 
   function handleSubmit() {
@@ -76,8 +74,19 @@ export function QuizPage() {
             </button>
           ))}
         </div>
-        {!hasSubmitted && <button disabled={!isSelected} onClick={handleSubmit}>Submit</button>}
-        {!finished && hasSubmitted && <button onClick={handleNextQuestion}>→</button>}
+        {!hasSubmitted && (
+          <button disabled={!isSelected} onClick={handleSubmit}>
+            Submit
+          </button>
+        )}
+        {!finished && hasSubmitted && (
+          <button onClick={handleNextQuestion}>→</button>
+        )}
+        {finished && hasSubmitted && (
+          <Link to="/results" data-testid="results-button">
+            Results
+          </Link>
+        )}
       </div>
     </>
   );
