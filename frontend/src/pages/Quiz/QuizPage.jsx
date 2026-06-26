@@ -10,7 +10,7 @@ export function QuizPage() {
   const [finished, setFinished] = useState(false);
   const currentQuestion = quiz[currentIndex];
   const [score, setScore] = useState(0);
-  const [playerAnswer, setPlayerAnswer] = useState("");
+  const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {
     getQuiz().then((data) => {
@@ -19,6 +19,7 @@ export function QuizPage() {
   }, []);
 
   function handleNextQuestion() {
+    setIsSelected(false);
     if (currentIndex < quiz.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
@@ -28,12 +29,15 @@ export function QuizPage() {
     }
   }
 
-  function handleAnswer(playerAnswer) {
-    event.preventDefault();
-    setPlayerAnswer(answer);
-    if (playerAnswer === currentQuestion.correct_answer) {
-      setScore(+1);
+  function handleAnswer(currentQuestion, answer) {
+    setIsSelected(true);
+    if (answer === currentQuestion.correct_answer) {
+      setScore(score + 1);
+      // turn button green
+    } else {
+     //turn button red
     }
+    
   }
 
   if (!quiz.length) {
@@ -50,12 +54,16 @@ export function QuizPage() {
       <NavBar />
       <h2>Quiz</h2>
       <h3>Question {currentIndex + 1}:</h3>
+      <p>Score: {score}/10</p>
       <div className="feed" role="feed">
         <p>{currentQuestion.question}</p>
         <div>
           {answers.map((answer) => (
-            <button key={answer} onClick={handleAnswer}>
-              {" "}
+            <button
+              key={answer}
+              onClick={() => handleAnswer(currentQuestion, answer)}
+              disabled={isSelected}
+            >
               {answer}
             </button>
           ))}
