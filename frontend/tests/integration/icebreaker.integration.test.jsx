@@ -22,7 +22,6 @@ describe("Icebreaker Component", () => {
     it("fetches from database and displays an icebreaker when the button is clicked", async () => {
         const mockData = { iceBreaker: { icebreaker: "What is your favorite hobby?" } };
         getIcebreaker.mockResolvedValue(mockData);
-        // const button = screen.getByRole("button", { name: /show me an icebreaker!/i });
         const { button } = setup();
 
         fireEvent.click(button);
@@ -36,7 +35,6 @@ describe("Icebreaker Component", () => {
         getIcebreaker.mockResolvedValue(mockData);
         const { button } = setup();        
         // First click to reveal
-        // const button = screen.getByRole("button");
         fireEvent.click(button);
         await screen.findByText(/what is your favorite hobby\?/i);
 
@@ -48,7 +46,6 @@ describe("Icebreaker Component", () => {
     it("throws an error when unable to call database", async () => {
         getIcebreaker.mockRejectedValue(new Error("Database connection failed"));
         const { button } = setup();
-        // const button = screen.getByRole("button", { name: /show me an icebreaker!/i });
         fireEvent.click(button);
         const error = await screen.findByText(/could not fetch icebreaker/i);
         expect(error).toBeInTheDocument();
