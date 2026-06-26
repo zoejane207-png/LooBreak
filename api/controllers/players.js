@@ -3,8 +3,12 @@ const Player = require("../models/player");
 function create(req, res) {
   const playername = req.body.playername;
   const score = req.body.score;
-
   const player = new Player({ playername, score });
+
+  if (!playername || player.playername.trim().length < 3)
+    return res.status(400).json({ message: "Must insert playername with no less than 3 characters" });
+  
+
   player
     .save()
     .then((player) => {
