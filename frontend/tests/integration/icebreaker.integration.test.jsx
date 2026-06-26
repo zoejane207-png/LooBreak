@@ -10,10 +10,8 @@ vi.mock("../../src/services/icebreaker", () => ({
 
 describe("Icebreaker Component", () => {
     const setup = () => {
-
         render(<Icebreaker />);
-        const button = screen.getByRole("button", { name: /show me an icebreaker!/i });
-        // fireEvent.click(button);
+        const button = screen.getByTestId("icebreaker-reveal-btn");
         return { button };
     };
 

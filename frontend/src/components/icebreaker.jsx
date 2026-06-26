@@ -26,12 +26,12 @@ export default function Icebreaker () {
         }
     };
     return (
-        <div className={styles.container}>
+        <div className={styles.container} data-testid="icebreaker-component">
             <IceBreakerRevealButton 
             show={show}
             handleClick={handleClick} />
             {error && <p>{error}</p>}
-            
+
             {icebreaker && show && (
                 <div style={{ marginTop: "1rem" }}>
                     <p className={styles.icebreakerText}>{icebreaker.icebreaker}</p>

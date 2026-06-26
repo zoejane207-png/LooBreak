@@ -13,7 +13,7 @@ export default function HomePage() {
         <Link to="/quiz" data-testid="quiz-button">
           Quiz
         </Link>
-        <Icebreaker data-testid="icebreaker-button"/>
+        <Icebreaker data-testid="icebreaker-component" />
         <Link to="/leaderboard" data-testid="leaderboard-button">
           Leaderboard
         </Link>
