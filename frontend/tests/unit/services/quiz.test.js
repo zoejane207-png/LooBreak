@@ -1,6 +1,6 @@
 import createFetchMock from "vitest-fetch-mock";
 import { describe, expect, vi, test } from "vitest";
-import { getQuiz } from "../../src/services/quiz";
+import { getQuiz } from "../../../src/services/quiz";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
