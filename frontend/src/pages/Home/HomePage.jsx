@@ -1,12 +1,20 @@
-import { Link } from "react-router-dom";
-
 import "./HomePage.css";
+import { Link } from "react-router-dom";
+import NavBar from "../../components/NavBar";
 
-export function HomePage() {
+export default function HomePage() {
   return (
-    <div className="home">
-      <h1>Welcome to LooBreak!</h1>
-      <Link to="/quiz">Quiz</Link>
-    </div>
+    <>
+      <NavBar />
+      <div className="home">
+        <h1>Welcome to LooBreak!</h1>
+        <Link to="/quiz" data-testid="quiz-button">
+          Quiz
+        </Link>
+        <Link to="/leaderboard" data-testid="leaderboard-button">
+          Leaderboard
+        </Link>
+      </div>
+    </>
   );
 }
