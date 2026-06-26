@@ -1,4 +1,6 @@
 import "./HomePage.css";
+import "../../components/icebreaker.module.css";
+import Icebreaker from "../../components/icebreaker";
 import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 
@@ -11,6 +13,7 @@ export default function HomePage() {
         <Link to="/quiz" data-testid="quiz-button">
           Quiz
         </Link>
+        <Icebreaker data-testid="icebreaker-component" />
         <Link to="/leaderboard" data-testid="leaderboard-button">
           Leaderboard
         </Link>
