@@ -11,6 +11,8 @@ export function QuizPage() {
   const currentQuestion = quiz[currentIndex];
   const [score, setScore] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
+  const [playerAnswer, setPlayerAnswer] = useState("")
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
     getQuiz().then((data) => {
@@ -20,6 +22,7 @@ export function QuizPage() {
 
   function handleNextQuestion() {
     setIsSelected(false);
+    setHasSubmitted(false)
     if (currentIndex < quiz.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
@@ -31,13 +34,18 @@ export function QuizPage() {
 
   function handleAnswer(currentQuestion, answer) {
     setIsSelected(true);
-    if (answer === currentQuestion.correct_answer) {
+    setPlayerAnswer(answer)
+    
+  }
+
+  function handleSubmit() {
+    setHasSubmitted(true);
+    if (playerAnswer === currentQuestion.correct_answer) {
       setScore(score + 1);
       // turn button green
     } else {
-     //turn button red
+      //turn button red
     }
-    
   }
 
   if (!quiz.length) {
@@ -68,7 +76,8 @@ export function QuizPage() {
             </button>
           ))}
         </div>
-        {!finished && <button onClick={handleNextQuestion}>→</button>}
+        {!hasSubmitted && <button disabled={!isSelected} onClick={handleSubmit}>Submit</button>}
+        {!finished && hasSubmitted && <button onClick={handleNextQuestion}>→</button>}
       </div>
     </>
   );
