@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import HomePage from "../../src/pages/Home/HomePage";
+import HomePage from "../../../src/pages/Home/HomePage";
 
 describe("Home Page", () => {
   beforeEach(() => {

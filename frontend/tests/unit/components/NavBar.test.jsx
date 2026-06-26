@@ -1,4 +1,4 @@
-import NavBar from "../../src/components/NavBar";
+import NavBar from "../../../src/components/NavBar";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
