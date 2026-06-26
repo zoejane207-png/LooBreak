@@ -68,7 +68,7 @@ export function QuizPage() {
             <button
               key={answer}
               onClick={() => handleAnswer(currentQuestion, answer)}
-              disabled={isSelected}
+              disabled={hasSubmitted}
             >
               {answer}
             </button>
