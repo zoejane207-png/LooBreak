@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { createPlayer } from "../../services/results";
+import { createPlayer } from "../services/results";
 
 export default function ResultsForm(props) {
   const score = props.score;
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     playername: "",
-    score: 0,
+    score: score,
   });
   const [errors, setErrors] = useState({});
   const generatePlayerName = () => {
@@ -52,9 +52,9 @@ export default function ResultsForm(props) {
     event.preventDefault();
     try {
       const newErrors = {};
-      if (formData.playername.length() < 3)
+      if (formData.playername.length < 3)
         newErrors.playername = "Playername must be more than 3 characters long";
-      if (formData.playername.length() > 12)
+      if (formData.playername.length > 12)
         newErrors.playername =
           "Playername must be less than 12 characters long";
       if (!formData.playername) newErrors.playername = "Playername is required";
@@ -63,7 +63,7 @@ export default function ResultsForm(props) {
         return;
       }
 
-      const { playername, score, ...rest } = FormData;
+      const { playername, score, ...rest } = formData;
       await createPlayer({
         ...rest,
         playername: playername.trim(),
@@ -86,10 +86,10 @@ export default function ResultsForm(props) {
           value={formData.playername}
           onChange={handleChange}
         />
-        <button onClick={generatePlayerName}>Generate playername</button>
+        <button type="button" onClick={generatePlayerName}>Generate playername</button>
         <input type="hidden" name="score" value={score} />
         {errors.playername && <p>{errors.playername}</p>}
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );

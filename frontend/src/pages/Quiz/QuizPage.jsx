@@ -28,7 +28,6 @@ export function QuizPage() {
     }
     if (currentIndex === quiz.length - 2) {
       setFinished(true);
-      //when results page is finished we can navigate to it here!
     }
   }
 
@@ -84,7 +83,7 @@ export function QuizPage() {
   return (
     <>
       <NavBar />
-      {!finished && !hasSubmitted && (
+      {!finished && (
         <div data-test-id="quiz">
           <h2>Quiz</h2>
           <h3>Question {currentIndex + 1}:</h3>
@@ -126,7 +125,7 @@ export function QuizPage() {
           )}
         </div>
       )}
-      {finished && hasSubmitted && (
+      {finished && (
         <div data-test-id="quiz-result">
           <Results score={score} />
           <ResultsForm score={score} />

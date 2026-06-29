@@ -2,7 +2,7 @@ const e = require("express");
 const Player = require("../models/player");
 const JWT = require("jsonwebtoken");
 
-function createPlayer(req, res) {
+async function createPlayer(req, res) {
   const playername = req.body.playername;
   const existingPlayername = await Player.findOne({ playername: playername });
   const score = req.body.score;
