@@ -21,6 +21,7 @@ body:
         - v2.1 added frontend and backend unit tests for quiz and fixed test for update on QuizPage.jsx
         - v2.2 added feature to show LooTips - branched off Icebraker branch with similar code.
         - v2.3 fixed issue from v2.1 and v1.5 special chars and added colours to answer buttons to show selected and correct/incorrect
+        - v2.4 fixed ticket for footer lootips
         
   - type: dropdown
     id: severity
