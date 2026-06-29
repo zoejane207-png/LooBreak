@@ -1,0 +1,119 @@
+{
+    "response_code": 0,
+    "results": [
+        {
+            "type": "not a type",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "Testing if correct is shuffled",
+            "correct_answer": "correct",
+            "incorrect_answers": [
+                "incorrect1",
+                "incorrect2",
+                "incorrect3"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "not a difficulty",
+            "category": "General Knowledge",
+            "question": "Testing if correct is shuffled",
+            "correct_answer": "correct",
+            "incorrect_answers": [
+                "incorrect1",
+                "incorrect2",
+                "incorrect3"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "not a category",
+            "question": "Testing if correct is shuffled",
+            "correct_answer": "correct",
+            "incorrect_answers": [
+                "incorrect1",
+                "incorrect2",
+                "incorrect3"
+            ]
+        },
+        {
+            "type": "wrong",
+            "difficulty": "wrong",
+            "category": "wrong",
+            "question": "Testing if correct is shuffled",
+            "correct_answer": "correct",
+            "incorrect_answers": [
+                "incorrect1",
+                "incorrect2",
+                "incorrect3"
+            ]
+        },
+        {
+            "type": "",
+            "difficulty": "",
+            "category": "",
+            "question": "Testing if no correct",
+            "correct_answer": "",
+            "incorrect_answers": [
+                "incorrect1",
+                "incorrect2",
+                "incorrect3"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "Testing if no incorrect",
+            "correct_answer": "correct",
+            "incorrect_answers": [
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "Testing if no questions",
+            "correct_answer": "",
+            "incorrect_answers": [
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "Testing if correct is shuffled",
+            "correct_answer": "correct",
+            "incorrect_answers": [
+                "0incorrect1",
+                "0incorrect2",
+                "0incorrect3"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "Testing if correct is shuffled",
+            "correct_answer": "correct",
+            "incorrect_answers": [
+                "0incorrect1",
+                "0incorrect2",
+                "0incorrect3"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "Testing if correct is shuffled",
+            "correct_answer": "correct",
+            "incorrect_answers": [
+                "0incorrect1",
+                "0incorrect2",
+                "0incorrect3"
+            ]
+        }
+    ]
+}
