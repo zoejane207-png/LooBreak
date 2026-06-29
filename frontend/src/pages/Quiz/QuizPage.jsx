@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getQuiz } from "../../services/quiz";
-// import Quiz from "../../components/Quiz";
+import NavBar from "../../components/NavBar";
 
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
@@ -9,7 +9,9 @@ export function QuizPage() {
   const [finished, setFinished] = useState(false);
   const currentQuestion = quiz[currentIndex];
   const [score, setScore] = useState(0);
+  const [isSelected, setIsSelected] = useState(false);
   const [playerAnswer, setPlayerAnswer] = useState("");
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
     getQuiz().then((data) => {
@@ -18,6 +20,8 @@ export function QuizPage() {
   }, []);
 
   function handleNextQuestion() {
+    setIsSelected(false);
+    setHasSubmitted(false);
     if (currentIndex < quiz.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
@@ -27,11 +31,18 @@ export function QuizPage() {
     }
   }
 
-  function handleAnswer(playerAnswer) {
-    event.preventDefault();
-    setPlayerAnswer(answer)
+  function handleAnswer(currentQuestion, answer) {
+    setIsSelected(true);
+    setPlayerAnswer(answer);
+  }
+
+  function handleSubmit() {
+    setHasSubmitted(true);
     if (playerAnswer === currentQuestion.correct_answer) {
-      setScore(+1)
+      setScore(score + 1);
+      // turn button green
+    } else {
+      //turn button red
     }
   }
 
@@ -44,20 +55,38 @@ export function QuizPage() {
     ...currentQuestion.incorrect_answers,
   ].sort();
 
-
-
   return (
     <>
+      <NavBar />
       <h2>Quiz</h2>
       <h3>Question {currentIndex + 1}:</h3>
+      <p>Score: {score}/10</p>
       <div className="feed" role="feed">
         <p>{currentQuestion.question}</p>
         <div>
           {answers.map((answer) => (
-            <button key={answer} onClick={handleAnswer}> {answer}</button>
+            <button
+              key={answer}
+              onClick={() => handleAnswer(currentQuestion, answer)}
+              disabled={hasSubmitted}
+            >
+              {answer}
+            </button>
           ))}
         </div>
-        {!finished && <button onClick={handleNextQuestion}>→</button>}
+        {!hasSubmitted && (
+          <button disabled={!isSelected} onClick={handleSubmit}>
+            Submit
+          </button>
+        )}
+        {!finished && hasSubmitted && (
+          <button onClick={handleNextQuestion}>→</button>
+        )}
+        {finished && hasSubmitted && (
+          <Link to="/results" data-testid="results-button">
+            Results
+          </Link>
+        )}
       </div>
     </>
   );

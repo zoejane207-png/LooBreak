@@ -1,7 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import { HomePage } from "./pages/Home/HomePage";
+import HomePage from "./pages/Home/HomePage";
 import { QuizPage } from "./pages/Quiz/QuizPage";
+import LeaderboardPage from "./pages/Leaderboard/LeaderboardPage";
+import ResultsPage from "./pages/Results/ResultsPage";
 
 // docs: https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
@@ -12,6 +14,14 @@ const router = createBrowserRouter([
   {
     path: "/quiz",
     element: <QuizPage />,
+  },
+  {
+    path: "/leaderboard",
+    element: <LeaderboardPage />,
+  },
+  {
+    path: "/results",
+    element: <ResultsPage />,
   },
 ]);
 

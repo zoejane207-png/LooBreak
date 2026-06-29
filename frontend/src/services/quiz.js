@@ -2,16 +2,17 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export async function getQuiz() {
-  const requestOptions = {
-    method: "GET",
-  };
+  try {
+    const requestOptions = {
+      method: "GET",
+    };
 
-  const response = await fetch(`${BACKEND_URL}/quiz`, requestOptions);
+    const response = await fetch(`${BACKEND_URL}/quiz`, requestOptions);
 
-  if (response.status !== 200) {
+    const data = await response.json();
+    return data.quiz;
+  } catch (err) {
+    console.error(err);
     throw new Error("Unable to fetch quiz");
   }
-
-  const data = await response.json();
-  return data.quiz;
 }

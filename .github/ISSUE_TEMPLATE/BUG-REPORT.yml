@@ -9,9 +9,16 @@ body:
         - v1
         - v1.1
         - v1.2
-        - v1.3 quiz question and answers loading on page
-        - v1.4 all 10 questions on quiz page
+        - v1.3 quiz question and answers loading on page.
+        - v1.4 all 10 questions on quiz page.
         - v1.5 API brings in data and stores in Quiz collection db.
+        - v1.6 Fixed issue with second click and disabled answer buttons after selected.
+        - v1.7 navbar added to all pages + basic light/dark mode
+        - v1.8 user tests converted to player tests. all pass on backend
+        - v1.9 added in submit button and li9nk to results page when quiz is finished 
+        - v1.10 fixed v1.9 issue
+        - v2.0 added icebreaker component to the homepage displaying a single random icebreaker on each click
+        - v2.1 added frontend and backend unit tests for quiz and fixed test for update on QuizPage.jsx
         # - v3
         # - v4
   - type: dropdown
