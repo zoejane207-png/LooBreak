@@ -4,15 +4,14 @@ const JWT = require("jsonwebtoken");
 
 function createPlayer(req, res) {
   const playername = req.body.playername;
+  const existingPlayername = await Player.findOne({ playername: playername });
   const score = req.body.score;
   const player = new Player({ playername, score });
 
-  if (!playername || player.playername.trim().length < 3)
-    return res
-      .status(400)
-      .json({
-        message: "Must insert playername with no less than 3 characters",
-      });
+  if (playername === existingPlayername.playername)
+    return res.status(400).json({
+      message: "Playername already exists",
+    });
 
   player
     .save()
