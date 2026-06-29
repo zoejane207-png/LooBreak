@@ -4,27 +4,45 @@ import { IceBreakerRevealButton } from "../../../src/components/icebreakerButton
 import '@testing-library/jest-dom/vitest';
 
 describe("IceBreakerRevealButton", () => {
+    const setup = (props = {}) => {
+        const defaultProps = {
+            show: false,
+            handleClick: vi.fn(),
+            ...props
+        };
+        render(<IceBreakerRevealButton {...defaultProps} />);
+        return{
+            button: screen.getByTestId("icebreaker-reveal-btn"),
+            ...defaultProps
+        };
+    };
+
     it("renders the 'Show' text when show is false", () => {
-        render(<IceBreakerRevealButton show={false} handleClick={vi.fn()} />);
-        
-        const button = screen.getByRole("button", { name: /show me an icebreaker!/i });
-        expect(button).toBeInTheDocument();
+        setup({ show: false });
+        const button = screen.getByTestId("icebreaker-reveal-btn");
+        expect(button).toHaveTextContent(/show me the icebreakers! 🧊/i);
     });
 
     it("renders the 'Hide' text when show is true", () => {
-        render(<IceBreakerRevealButton show={true} handleClick={vi.fn()} />);
+        setup({ show: true });
         
-        const button = screen.getByRole("button", { name: /hide the icebreaker/i });
-        expect(button).toBeInTheDocument();
+        const button = screen.getByTestId("icebreaker-reveal-btn");
+        expect(button).toHaveTextContent(/hide the icebreakers 🧊/i);
     });
 
     it("calls the handleClick function when clicked", () => {
         const mockClick = vi.fn();
         render(<IceBreakerRevealButton show={false} handleClick={mockClick} />);
         
-        const button = screen.getByRole("button");
+        const button = screen.getByTestId("icebreaker-reveal-btn");
         fireEvent.click(button);
         
         expect(mockClick).toHaveBeenCalledTimes(1);
+    });
+
+    it("has type='button' to prevent form submission", () => {
+        setup();
+        const button = screen.getByTestId("icebreaker-reveal-btn");
+        expect(button).toHaveAttribute("type", "button");
     });
 });

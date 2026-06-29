@@ -1,3 +1,16 @@
+import { vi } from 'vitest';
+
+const localStorageMock = {
+    getItem: vi.fn(),
+    setItem: vi.fn(),
+    removeItem: vi.fn(),
+    clear: vi.fn(),
+};
+
+Object.defineProperty(window, 'localStorage', {
+    value: localStorageMock,
+    writable: true,
+});
 // jsdom in this environment does not provide a localStorage implementation,
 // which causes any component/hook using it (e.g. useDarkMode) to crash in tests.
 // Provide a minimal in-memory polyfill so tests render real pages.
