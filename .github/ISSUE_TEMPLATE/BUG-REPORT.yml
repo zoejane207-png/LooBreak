@@ -19,7 +19,7 @@ body:
         - v1.10 fixed v1.9 issue
         - v2.0 added icebreaker component to the homepage displaying a single random icebreaker on each click
         - v2.1 added frontend and backend unit tests for quiz and fixed test for update on QuizPage.jsx
-        - v2.2 fixed issue from v2.1 and v1.5 special chars and added colours to answer buttons to show selected and correct/incorrect
+        - v2.3 fixed issue from v2.1 and v1.5 special chars and added colours to answer buttons to show selected and correct/incorrect
         # - v3
         # - v4
   - type: dropdown
