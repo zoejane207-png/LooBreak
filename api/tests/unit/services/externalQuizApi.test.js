@@ -2,7 +2,26 @@ const {
   fetchExternalQuiz,
   hasDuplicateIncorrectAnswers,
   findQuestionsWithDuplicateIncorrectAnswers,
+  fetchExternalQuizWithoutDuplicates,
 } = require("../../../services/externalQuizApi.js");
+
+// Build a fake API response. Pass true to make the first question contain a
+// duplicate incorrect answer.
+function buildResponse({ withDuplicate }) {
+  const incorrect_answers = withDuplicate
+    ? ['B', 'B', 'D']
+    : ['B', 'C', 'D'];
+  return {
+    ok: true,
+    status: 200,
+    json: async () => ({
+      response_code: 0,
+      results: [
+        { question: 'Q?', correct_answer: 'A', incorrect_answers },
+      ],
+    }),
+  };
+}
 
 describe('externalQuizApi mocked data', () => {
   beforeEach(() => {
@@ -100,5 +119,44 @@ describe('findQuestionsWithDuplicateIncorrectAnswers', () => {
   it('returns an empty array when results is missing or not an array', () => {
     expect(findQuestionsWithDuplicateIncorrectAnswers({})).toEqual([]);
     expect(findQuestionsWithDuplicateIncorrectAnswers(null)).toEqual([]);
+  });
+});
+
+describe('fetchExternalQuizWithoutDuplicates', () => {
+  beforeEach(() => {
+    global.fetch = jest.fn();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('returns the data on the first try when there are no duplicates', async () => {
+    global.fetch.mockResolvedValueOnce(buildResponse({ withDuplicate: false }));
+
+    const data = await fetchExternalQuizWithoutDuplicates();
+
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(data.results).toHaveLength(1);
+  });
+
+  it('re-requests a fresh set when the first response has duplicates', async () => {
+    global.fetch
+      .mockResolvedValueOnce(buildResponse({ withDuplicate: true }))
+      .mockResolvedValueOnce(buildResponse({ withDuplicate: false }));
+
+    const data = await fetchExternalQuizWithoutDuplicates();
+
+    expect(global.fetch).toHaveBeenCalledTimes(2);   // retried once
+    expect(findQuestionsWithDuplicateIncorrectAnswers(data)).toEqual([]);
+  });
+
+  it('throws after maxAttempts if every response has duplicates', async () => {
+    global.fetch.mockResolvedValue(buildResponse({ withDuplicate: true }));
+
+    await expect(fetchExternalQuizWithoutDuplicates(3)).rejects.toThrow(
+      'Could not fetch a quiz without duplicate answers after 3 attempts',
+    );
+    expect(global.fetch).toHaveBeenCalledTimes(3);
   });
 });

@@ -96,7 +96,7 @@ export function QuizPage() {
             marginBottom: "1rem",
           }}
         >
-          {answers.map((answer) => (
+          {answers.map((answer, index) => (
             <button
               style={{
                 paddingInline: "2rem",
@@ -104,7 +104,7 @@ export function QuizPage() {
                 borderRadius: "5px",
                 ...getButtonStyle(answer),
               }}
-              key={answer}
+              key={index}
               onClick={() => handleAnswer(currentQuestion, answer)}
               disabled={hasSubmitted}
             >

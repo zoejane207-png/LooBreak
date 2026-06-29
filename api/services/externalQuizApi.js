@@ -42,8 +42,28 @@ function findQuestionsWithDuplicateIncorrectAnswers(data) {
   return results.filter(hasDuplicateIncorrectAnswers);
 }
 
+// Fetch a quiz from the external API, but if any question comes back with
+// duplicate incorrect answers, throw the whole set away and request a fresh
+// set of 10. We retry up to maxAttempts times before giving up, so a
+// persistently broken API can't make us loop forever.
+async function fetchExternalQuizWithoutDuplicates(maxAttempts = 5) {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const data = await fetchExternalQuiz();
+    const badQuestions = findQuestionsWithDuplicateIncorrectAnswers(data);
+
+    if (badQuestions.length === 0) {
+      return data;
+    }
+  }
+
+  throw new Error(
+    `Could not fetch a quiz without duplicate answers after ${maxAttempts} attempts`,
+  );
+}
+
 module.exports = {
   fetchExternalQuiz,
   hasDuplicateIncorrectAnswers,
   findQuestionsWithDuplicateIncorrectAnswers,
+  fetchExternalQuizWithoutDuplicates,
 };
