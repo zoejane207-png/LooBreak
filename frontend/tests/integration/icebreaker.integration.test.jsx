@@ -19,6 +19,22 @@ describe("Icebreaker Component", () => {
         vi.clearAllMocks();
     });
 
+    it("displays loading message while fetching", async () => {
+        let resolvePromise;
+        const pendingPromise = new Promise((resolve) => {
+            resolvePromise = resolve;
+        });
+        getIcebreaker.mockReturnValue(pendingPromise);
+        const { button } = setup();
+
+            fireEvent.click(button);
+
+        expect(screen.getByText(/icebreakers loading/i)).toBeInTheDocument();
+        await act(async () => {
+            resolvePromise({ iceBreakers: [] });
+        });        
+    });
+
     it("fetches from database and displays 3 icebreakers when the button is clicked", async () => {
         const mockData = { iceBreakers: [
             { _id: "1", icebreaker: "What is your favorite hobby?" }, 
