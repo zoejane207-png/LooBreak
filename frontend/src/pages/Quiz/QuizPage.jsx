@@ -25,7 +25,7 @@ export function QuizPage() {
     if (currentIndex < quiz.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
-    if (currentIndex === quiz.length - 1) {
+    if (currentIndex === quiz.length - 2) {
       setFinished(true);
       //when results page is finished we can navigate to it here!
     }
@@ -46,6 +46,31 @@ export function QuizPage() {
     }
   }
 
+  function getButtonStyle(answer) {
+    let style = {};
+
+    if (isSelected && answer === playerAnswer) {
+      style.border = "3px solid #fceb00";
+    } else {
+      style.border = "1px solid #1E1E1E";
+    }
+
+    if (!hasSubmitted && isSelected) {
+      if (answer === playerAnswer) {
+        style.backgroundColor = "yellow";
+        style.color = "black";
+      }
+    } else if (hasSubmitted) {
+      if (answer === currentQuestion.correct_answer) {
+        style.backgroundColor = "green";
+      } else {
+        style.backgroundColor = "red";
+      }
+    }
+
+    return style;
+  }
+
   if (!quiz.length) {
     return <h3>Loading questions...</h3>;
   }
@@ -63,9 +88,22 @@ export function QuizPage() {
       <p>Score: {score}/10</p>
       <div className="feed" role="feed">
         <p>{currentQuestion.question}</p>
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.5rem",
+            marginBottom: "1rem",
+          }}
+        >
           {answers.map((answer) => (
             <button
+              style={{
+                paddingInline: "2rem",
+                paddingBlock: "0.5rem",
+                borderRadius: "5px",
+                ...getButtonStyle(answer),
+              }}
               key={answer}
               onClick={() => handleAnswer(currentQuestion, answer)}
               disabled={hasSubmitted}
