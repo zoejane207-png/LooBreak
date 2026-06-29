@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { getQuiz } from "../../services/quiz";
 import NavBar from "../../components/NavBar";
+import Results from "../../components/Results";
+import ResultsForm from "../../components/ResultsForm";
 
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
@@ -58,36 +59,41 @@ export function QuizPage() {
   return (
     <>
       <NavBar />
-      <h2>Quiz</h2>
-      <h3>Question {currentIndex + 1}:</h3>
-      <p>Score: {score}/10</p>
-      <div className="feed" role="feed">
-        <p>{currentQuestion.question}</p>
-        <div>
-          {answers.map((answer) => (
-            <button
-              key={answer}
-              onClick={() => handleAnswer(currentQuestion, answer)}
-              disabled={isSelected}
-            >
-              {answer}
-            </button>
-          ))}
+      {!finished && !hasSubmitted && (
+        <div data-test-id="quiz">
+          <h2>Quiz</h2>
+          <h3>Question {currentIndex + 1}:</h3>
+          <p>Score: {score}/10</p>
+          <div className="feed" role="feed">
+            <p>{currentQuestion.question}</p>
+            <div>
+              {answers.map((answer) => (
+                <button
+                  key={answer}
+                  onClick={() => handleAnswer(currentQuestion, answer)}
+                  disabled={isSelected}
+                >
+                  {answer}
+                </button>
+              ))}
+            </div>
+            {!hasSubmitted && (
+              <button disabled={!isSelected} onClick={handleSubmit}>
+                Submit
+              </button>
+            )}
+            {!finished && hasSubmitted && (
+              <button onClick={handleNextQuestion}>→</button>
+            )}
+          </div>
         </div>
-        {!hasSubmitted && (
-          <button disabled={!isSelected} onClick={handleSubmit}>
-            Submit
-          </button>
-        )}
-        {!finished && hasSubmitted && (
-          <button onClick={handleNextQuestion}>→</button>
-        )}
-        {finished && hasSubmitted && (
-          <Link to="/results" data-testid="results-button">
-            Results
-          </Link>
-        )}
-      </div>
+      )}
+      {finished && hasSubmitted && (
+        <div data-test-id="quiz-result">
+          <Results score={score} />
+          <ResultsForm score={score} />
+        </div>
+      )}
     </>
   );
 }
