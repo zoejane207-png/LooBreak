@@ -116,6 +116,14 @@ export function QuizPage() {
               ))}
             </div>
           </div>
+          {!hasSubmitted && (
+          <button disabled={!isSelected} onClick={handleSubmit}>
+            Submit
+          </button>
+          )}
+          {!finished && hasSubmitted && (
+            <button onClick={handleNextQuestion}>→</button>
+          )}
         </div>
       )}
       {finished && hasSubmitted && (
