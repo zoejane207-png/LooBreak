@@ -131,10 +131,11 @@ describe('fetchExternalQuizWithoutDuplicates', () => {
     jest.restoreAllMocks();
   });
 
+  // Most tests pass delayMs = 0 so they don't actually wait out the rate limit.
   it('returns the data on the first try when there are no duplicates', async () => {
     global.fetch.mockResolvedValueOnce(buildResponse({ withDuplicate: false }));
 
-    const data = await fetchExternalQuizWithoutDuplicates();
+    const data = await fetchExternalQuizWithoutDuplicates(5, 0);
 
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(data.results).toHaveLength(1);
@@ -145,18 +146,64 @@ describe('fetchExternalQuizWithoutDuplicates', () => {
       .mockResolvedValueOnce(buildResponse({ withDuplicate: true }))
       .mockResolvedValueOnce(buildResponse({ withDuplicate: false }));
 
-    const data = await fetchExternalQuizWithoutDuplicates();
+    const data = await fetchExternalQuizWithoutDuplicates(5, 0);
 
     expect(global.fetch).toHaveBeenCalledTimes(2);   // retried once
     expect(findQuestionsWithDuplicateIncorrectAnswers(data)).toEqual([]);
   });
 
+  it('retries on a network error and then succeeds', async () => {
+    global.fetch
+      .mockRejectedValueOnce(new Error('network down'))
+      .mockResolvedValueOnce(buildResponse({ withDuplicate: false }));
+
+    const data = await fetchExternalQuizWithoutDuplicates(5, 0);
+
+    expect(global.fetch).toHaveBeenCalledTimes(2);   // retried after the error
+    expect(data.results).toHaveLength(1);
+  });
+
+  it('retries on a non-OK response (e.g. rate limited) and then succeeds', async () => {
+    global.fetch
+      .mockResolvedValueOnce({ ok: false, status: 429 })
+      .mockResolvedValueOnce(buildResponse({ withDuplicate: false }));
+
+    const data = await fetchExternalQuizWithoutDuplicates(5, 0);
+
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+    expect(data.results).toHaveLength(1);
+  });
+
   it('throws after maxAttempts if every response has duplicates', async () => {
     global.fetch.mockResolvedValue(buildResponse({ withDuplicate: true }));
 
-    await expect(fetchExternalQuizWithoutDuplicates(3)).rejects.toThrow(
-      'Could not fetch a quiz without duplicate answers after 3 attempts',
+    await expect(fetchExternalQuizWithoutDuplicates(3, 0)).rejects.toThrow(
+      'Could not fetch a valid quiz after 3 attempts',
     );
     expect(global.fetch).toHaveBeenCalledTimes(3);
+  });
+
+  it('reports the last error when it gives up after network failures', async () => {
+    global.fetch.mockRejectedValue(new Error('network down'));
+
+    await expect(fetchExternalQuizWithoutDuplicates(2, 0)).rejects.toThrow(
+      'network down',
+    );
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+  });
+
+  it('waits between attempts to respect the rate limit', async () => {
+    const setTimeoutSpy = jest
+      .spyOn(global, 'setTimeout')
+      .mockImplementation((cb) => cb());   // run the delay immediately
+
+    global.fetch
+      .mockResolvedValueOnce(buildResponse({ withDuplicate: true }))
+      .mockResolvedValueOnce(buildResponse({ withDuplicate: false }));
+
+    await fetchExternalQuizWithoutDuplicates();   // default 5000ms delay
+
+    expect(setTimeoutSpy).toHaveBeenCalledTimes(1);   // one wait before the retry
+    expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 5000);
   });
 });

@@ -42,22 +42,49 @@ function findQuestionsWithDuplicateIncorrectAnswers(data) {
   return results.filter(hasDuplicateIncorrectAnswers);
 }
 
-// Fetch a quiz from the external API, but if any question comes back with
-// duplicate incorrect answers, throw the whole set away and request a fresh
-// set of 10. We retry up to maxAttempts times before giving up, so a
-// persistently broken API can't make us loop forever.
-async function fetchExternalQuizWithoutDuplicates(maxAttempts = 5) {
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    const data = await fetchExternalQuiz();
-    const badQuestions = findQuestionsWithDuplicateIncorrectAnswers(data);
+// OpenTDB rate-limits each IP to one request every 5 seconds, so we wait this
+// long between attempts to avoid being throttled.
+const RATE_LIMIT_MS = 5000;
 
-    if (badQuestions.length === 0) {
-      return data;
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Fetch a quiz from the external API and return a set of 10 questions that has
+// no duplicate answers. An attempt fails if either the request errors (network
+// failure / non-OK response) or the response contains duplicate answers; in
+// both cases we wait out the rate limit and request a fresh set. We retry up to
+// maxAttempts times before giving up, so a persistently broken API can't make
+// us loop forever.
+async function fetchExternalQuizWithoutDuplicates(
+  maxAttempts = 5,
+  delayMs = RATE_LIMIT_MS,
+) {
+  let lastError;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    // Wait between attempts (but not before the first) so we don't exceed the
+    // API's one-request-per-5-seconds limit.
+    if (attempt > 1) {
+      await delay(delayMs);
+    }
+
+    try {
+      const data = await fetchExternalQuiz();
+      const badQuestions = findQuestionsWithDuplicateIncorrectAnswers(data);
+
+      if (badQuestions.length === 0) {
+        return data;
+      }
+
+      lastError = new Error("response contained duplicate answers");
+    } catch (err) {
+      lastError = err;
     }
   }
 
   throw new Error(
-    `Could not fetch a quiz without duplicate answers after ${maxAttempts} attempts`,
+    `Could not fetch a valid quiz after ${maxAttempts} attempts: ${lastError.message}`,
   );
 }
 
