@@ -9,13 +9,11 @@ export default function Icebreaker () {
     const [error, setError] = useState(null);
     
     const handleClick = async () => {
-        console.log("Button clicked!");
         if (show) {
             setShow(false)
         } else {
             try {
                 const icebreakerData = await getIcebreaker();
-                console.log("Data received:", icebreakerData);  
                 setIcebreakers(icebreakerData.iceBreakers);
                 setShow(!show);
                 setError(null);
