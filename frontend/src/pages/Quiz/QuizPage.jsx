@@ -50,7 +50,7 @@ export function QuizPage() {
     let style = {};
 
     if (isSelected && answer === playerAnswer) {
-      style.border = "3px solid #fceb00";
+      style.border = "3px solid #00cafc";
     } else {
       style.border = "1px solid #1E1E1E";
     }
