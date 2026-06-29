@@ -1,10 +1,9 @@
 import "./HomePage.css";
 import "../../components/icebreaker.module.css";
-import "../../components/lootips.module.css";
 import Icebreaker from "../../components/icebreaker";
-import LooTips from "../../components/lootips";
 import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 
 export default function HomePage() {
   return (
@@ -16,11 +15,11 @@ export default function HomePage() {
           Quiz
         </Link>
         <Icebreaker data-testid="icebreaker-component" />
-        <LooTips data-testid="lootips-component" />
         <Link to="/leaderboard" data-testid="leaderboard-button">
           Leaderboard
         </Link>
       </div>
+      <Footer />
     </>
   );
 }
