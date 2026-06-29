@@ -1,0 +1,22 @@
+.banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  background-color: #0d3b66;
+  color: #ffffff;
+  text-align: center;
+  font-size: 0.95rem;
+  border-top: 3px solid #f4d35e;
+  z-index: 100;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.tip {
+  font-style: italic;
+}
