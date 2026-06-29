@@ -17,6 +17,8 @@ body:
         - v1.8 user tests converted to player tests. all pass on backend
         - v1.9 added in submit button and li9nk to results page when quiz is finished 
         - v1.10 fixed v1.9 issue
+        - v2.0 added icebreaker component to the homepage displaying a single random icebreaker on each click
+        - v2.1 added frontend and backend unit tests for quiz and fixed test for update on QuizPage.jsx
         # - v3
         # - v4
   - type: dropdown

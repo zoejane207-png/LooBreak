@@ -1,7 +1,8 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import HomePage from "../../src/pages/Home/HomePage";
+import HomePage from "../../../src/pages/Home/HomePage";
+import { expect } from "vitest";
 
 describe("Home Page", () => {
   beforeEach(() => {
@@ -30,6 +31,10 @@ describe("Home Page", () => {
   test("Displays a quiz link", async () => {
     const quizLinks = screen.getAllByRole("link", { name: /quiz/i });
     expect(quizLinks[1].getAttribute("href")).toEqual("/quiz");
+  });
+
+  test("displays the icebreaker component", () =>{
+    expect(screen.getByTestId("icebreaker-component")).toBeInTheDocument();
   });
 
   test("Displays a leaderboard link", async () => {

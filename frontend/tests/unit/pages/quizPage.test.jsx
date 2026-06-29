@@ -4,8 +4,8 @@ import { vi, describe, test, beforeEach, expect } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
 
-import { QuizPage } from "../../src/pages/Quiz/QuizPage";
-import { getQuiz } from "../../src/services/quiz";
+import { QuizPage } from "../../../src/pages/Quiz/QuizPage";
+import { getQuiz } from "../../../src/services/quiz";
 
 vi.mock("react-router-dom", async (importOriginal) => {
   const actual = await importOriginal();
@@ -15,7 +15,7 @@ vi.mock("react-router-dom", async (importOriginal) => {
 });
 
 // Mocking the getQuiz service
-vi.mock("../../src/services/quiz", () => {
+vi.mock("../../../src/services/quiz", () => {
   return {
     getQuiz: vi.fn(),
   };
@@ -86,7 +86,7 @@ describe("Quiz Page", () => {
     ).toBeInTheDocument();
   });
 
-  test("Allows user to select an answer and submit it. Answer buttons disable after selected and submit changes to arrow button", async () => {
+  test("Allows user to select an answer and submit it. Answer buttons disable after submit and changes to arrow button", async () => {
     const user = userEvent.setup();
     renderWithRouter(<QuizPage />);
 
@@ -95,12 +95,12 @@ describe("Quiz Page", () => {
     const answerButton = screen.getByRole("button", { name: "Licorice" });
     await user.click(answerButton);
 
-    expect(answerButton).toBeDisabled();
-
+    
     const submitButton = screen.getByRole("button", { name: "Submit" });
     expect(submitButton).not.toBeDisabled();
-
+    
     await user.click(submitButton);
+    expect(answerButton).toBeDisabled();
     expect(
       screen.queryByRole("button", { name: "Submit" }),
     ).not.toBeInTheDocument();

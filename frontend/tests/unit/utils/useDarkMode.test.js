@@ -1,4 +1,4 @@
-import useDarkMode from "../../src/utils/useDarkMode";
+import useDarkMode from "../../../src/utils/useDarkMode";
 import { renderHook, act } from "@testing-library/react";
 
 describe("useDarkMode", () => {
