@@ -1103,7 +1103,9 @@ const icebreakers = [
   {"icebreaker": "Do you ever find yourself judging the cleanliness of a hotel by its bathroom?"},
   {"icebreaker": "Have you ever been in a public restroom with a very strange sink?"},
   {"icebreaker": "What is the one thing you always hope for in a public restroom?"},
-  {"icebreaker": "Do you think bathrooms are the most important room in a hotel?"}
+  {"icebreaker": "Do you think bathrooms are the most important room in a hotel?"},
+  {"icebreaker": "If you had to curate a 'Bathroom Hall of Fame' based on your travels, what would be the defining feature of the winning entry?"},
+  {"icebreaker": "If you could have any fictional character design your ideal bathroom, who would you choose and what would their signature design element be?"}
 ];
 
 async function seed() {
