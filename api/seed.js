@@ -5,6 +5,7 @@ const Player = require("./models/player");
 const Quiz = require("./models/quiz");
 const Tip = require("./models/tip");
 const Icebreaker = require("./models/icebreaker");
+const Lootip = require("./models/lootips");
 
 const players = [
   { playername: "alice", score: 10 },
@@ -228,6 +229,39 @@ const icebreakers = [
   { icebreaker: "If you could rename toilet paper, what would you call it?" },
 ];
 
+const lootips = [
+  {
+    lootip: "Flush once, not twice — Save water by avoiding double flushes. One good flush should do the job.",
+  },
+  {
+    lootip: "Keep a plunger nearby — Always have one accessible to handle clogs before they worsen.",
+  },
+  {
+    lootip: "Use the half-flush option — Modern toilets often have dual-flush buttons. Use the smaller button for liquids only.",
+  },
+  {
+    lootip: "Wash your hands for 20 seconds — Hum 'Happy Birthday' twice to make sure you scrub long enough.",
+  },
+  {
+    lootip: "Close the lid before flushing — It helps stop germs from spreading into the air.",
+  },
+  {
+    lootip: "Don't flush wipes — Even 'flushable' wipes can clog pipes. Bin them instead.",
+  },
+  {
+    lootip: "Check for leaks — A running toilet can waste hundreds of litres a day. Listen for hissing.",
+  },
+  {
+    lootip: "Keep a small bin in the bathroom — Avoid the temptation to flush things that shouldn't be flushed.",
+  },
+  {
+    lootip: "Refill the toilet roll — Be kind to the next person and replace the empty roll.",
+  },
+  {
+    lootip: "Open a window or use the fan — Good ventilation keeps the bathroom fresh and reduces mould.",
+  },
+];
+
 async function seed() {
   await connectToDatabase();
 
@@ -236,16 +270,19 @@ async function seed() {
   await Quiz.deleteMany({});
   await Tip.deleteMany({});
   await Icebreaker.deleteMany({});
+  await Lootip.deleteMany({});
 
   // Insert the seed data.
   await Player.insertMany(players);
   await Quiz.insertMany(quizzes);
   await Tip.insertMany(tips);
   await Icebreaker.insertMany(icebreakers);
+  await Lootip.insertMany(lootips);
 
   console.log(
     `Seeded ${players.length} players, ${quizzes.length} quizzes, ` +
-      `${tips.length} tips, and ${icebreakers.length} icebreakers.`
+      `${tips.length} tips, ${icebreakers.length} icebreakers, ` +
+      `and ${lootips.length} lootips.`
   );
 
   // Close the connection so the script exits cleanly.
