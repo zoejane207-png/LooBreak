@@ -28,7 +28,7 @@ export default function Results(props) {
       <h2>{score}/10</h2>
       <h3>{message}</h3>
       <p>
-        Submit your playername below to enter your score to the leaderboard:
+        Enter a playername to save your score to the leaderboard:
       </p>
     </>
   );
