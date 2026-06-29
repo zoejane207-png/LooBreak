@@ -8,6 +8,7 @@ parts, and how they fit together.
 ![Diagram of the structure of the api](./diagrams/api_overview.png)
 
 ## Contents
+
 - [index.js](#indexjs)
 - [app.js](#appjs)
 - [routes](#routes)
@@ -148,4 +149,5 @@ encoding and decoding tokens. This function is used by both the `tokenChecker`
 middleware, and in our tests.
 
 ### db
+
 This directory contains functions related to interaction with the database. It currently contains one file, which connects to the database based off of the `MONGODB_URL` environment variable.

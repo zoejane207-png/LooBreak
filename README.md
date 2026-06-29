@@ -1,6 +1,5 @@
 ## LooBreak
 
-
 ### Structure
 
 This repo contains two applications:
@@ -44,17 +43,19 @@ If you haven't already, make sure you have node and NVM installed.
 
 1. Every team member clone the fork to their local machine
 2. Install dependencies for both the `frontend` and `api` applications:
+
    ```
    cd frontend
    npm install
    cd ../api
    npm install
    ```
+
    **Note:** If you see peer dependency warnings during install, they should resolve automatically. If you encounter `ERESOLVE` errors, you can use `npm install --legacy-peer-deps` as a fallback.
 
-5. Install an ESLint plugin for your editor, for example
+3. Install an ESLint plugin for your editor, for example
    [ESLint for VSCode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-6. Install MongoDB - pick the latest version available, at the time of writing this, it's @8.0. 
+4. Install MongoDB - pick the latest version available, at the time of writing this, it's @8.0.
    ```
    brew tap mongodb/brew
    brew install mongodb-community@8.0
@@ -62,7 +63,7 @@ If you haven't already, make sure you have node and NVM installed.
    _Note:_ If you see a message that says
    `If you need to have mongodb-community@8.0 first in your PATH, run:`, follow
    the instruction. Restart your terminal after this.
-7. Start MongoDB
+5. Start MongoDB
 
    ```
    brew services start mongodb-community@8.0

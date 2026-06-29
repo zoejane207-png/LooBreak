@@ -1,6 +1,6 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export async function createPlayer({playername, score}) {
+export async function createPlayer({ playername, score }) {
   const formData = new FormData();
   formData.append("playername", playername);
   formData.append("score", score);

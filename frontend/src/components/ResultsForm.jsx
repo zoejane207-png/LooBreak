@@ -86,7 +86,9 @@ export default function ResultsForm(props) {
           value={formData.playername}
           onChange={handleChange}
         />
-        <button type="button" onClick={generatePlayerName}>Generate playername</button>
+        <button type="button" onClick={generatePlayerName}>
+          Generate playername
+        </button>
         <input type="hidden" name="score" value={score} />
         {errors.playername && <p>{errors.playername}</p>}
         <button type="submit">Submit</button>

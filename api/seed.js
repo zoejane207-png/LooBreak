@@ -136,7 +136,9 @@ const icebreakers = [
   { icebreaker: "What's the weirdest bathroom decoration you've seen?" },
   { icebreaker: "How many towels do you think are in this building?" },
   { icebreaker: "What's your go-to shower song?" },
-  { icebreaker: "Would you rather have heated floors or a heated toilet seat?" },
+  {
+    icebreaker: "Would you rather have heated floors or a heated toilet seat?",
+  },
   { icebreaker: "What's a household chore you secretly enjoy?" },
   { icebreaker: "What's your earliest bathroom-related memory?" },
 
@@ -169,7 +171,9 @@ const icebreakers = [
   { icebreaker: "What's the most organised room in your home?" },
   { icebreaker: "What's something you've lost and never found?" },
   { icebreaker: "What's your favourite season and why?" },
-  { icebreaker: "What's the strangest thing you've seen in a public restroom?" },
+  {
+    icebreaker: "What's the strangest thing you've seen in a public restroom?",
+  },
   { icebreaker: "What's a tiny thing that makes your day better?" },
   { icebreaker: "How many bathroom tiles do you estimate are in this room?" },
 
@@ -200,7 +204,9 @@ const icebreakers = [
   { icebreaker: "What's your favourite room in a house?" },
   { icebreaker: "What's something you've become better at recently?" },
   { icebreaker: "What's the most unusual thing you've seen on a shelf?" },
-  { icebreaker: "Would you rather have rainbow toilet paper or rainbow towels?" },
+  {
+    icebreaker: "Would you rather have rainbow toilet paper or rainbow towels?",
+  },
   { icebreaker: "What's a smell that instantly relaxes you?" },
   { icebreaker: "What's the best advice you've ever received?" },
   { icebreaker: "What's your favourite thing about weekends?" },
@@ -219,7 +225,10 @@ const icebreakers = [
 
   { icebreaker: "What's one thing you always keep stocked at home?" },
   { icebreaker: "What's the strangest product you've ever bought?" },
-  { icebreaker: "If this bathroom had a celebrity spokesperson, who would it be?" },
+  {
+    icebreaker:
+      "If this bathroom had a celebrity spokesperson, who would it be?",
+  },
   { icebreaker: "What's a small purchase that was totally worth it?" },
   { icebreaker: "What's your favourite thing to do while waiting?" },
   { icebreaker: "What's a household rule everyone should follow?" },
@@ -231,34 +240,44 @@ const icebreakers = [
 
 const lootips = [
   {
-    lootip: "Flush once, not twice — Save water by avoiding double flushes. One good flush should do the job.",
+    lootip:
+      "Flush once, not twice — Save water by avoiding double flushes. One good flush should do the job.",
   },
   {
-    lootip: "Keep a plunger nearby — Always have one accessible to handle clogs before they worsen.",
+    lootip:
+      "Keep a plunger nearby — Always have one accessible to handle clogs before they worsen.",
   },
   {
-    lootip: "Use the half-flush option — Modern toilets often have dual-flush buttons. Use the smaller button for liquids only.",
+    lootip:
+      "Use the half-flush option — Modern toilets often have dual-flush buttons. Use the smaller button for liquids only.",
   },
   {
-    lootip: "Wash your hands for 20 seconds — Hum 'Happy Birthday' twice to make sure you scrub long enough.",
+    lootip:
+      "Wash your hands for 20 seconds — Hum 'Happy Birthday' twice to make sure you scrub long enough.",
   },
   {
-    lootip: "Close the lid before flushing — It helps stop germs from spreading into the air.",
+    lootip:
+      "Close the lid before flushing — It helps stop germs from spreading into the air.",
   },
   {
-    lootip: "Don't flush wipes — Even 'flushable' wipes can clog pipes. Bin them instead.",
+    lootip:
+      "Don't flush wipes — Even 'flushable' wipes can clog pipes. Bin them instead.",
   },
   {
-    lootip: "Check for leaks — A running toilet can waste hundreds of litres a day. Listen for hissing.",
+    lootip:
+      "Check for leaks — A running toilet can waste hundreds of litres a day. Listen for hissing.",
   },
   {
-    lootip: "Keep a small bin in the bathroom — Avoid the temptation to flush things that shouldn't be flushed.",
+    lootip:
+      "Keep a small bin in the bathroom — Avoid the temptation to flush things that shouldn't be flushed.",
   },
   {
-    lootip: "Refill the toilet roll — Be kind to the next person and replace the empty roll.",
+    lootip:
+      "Refill the toilet roll — Be kind to the next person and replace the empty roll.",
   },
   {
-    lootip: "Open a window or use the fan — Good ventilation keeps the bathroom fresh and reduces mould.",
+    lootip:
+      "Open a window or use the fan — Good ventilation keeps the bathroom fresh and reduces mould.",
   },
 ];
 
@@ -282,7 +301,7 @@ async function seed() {
   console.log(
     `Seeded ${players.length} players, ${quizzes.length} quizzes, ` +
       `${tips.length} tips, ${icebreakers.length} icebreakers, ` +
-      `and ${lootips.length} lootips.`
+      `and ${lootips.length} lootips.`,
   );
 
   // Close the connection so the script exits cleanly.

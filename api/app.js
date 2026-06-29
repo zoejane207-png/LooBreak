@@ -4,8 +4,8 @@ const cors = require("cors");
 
 const playersRouter = require("./routes/players");
 const quizRouter = require("./routes/quiz");
-const iceBreakerRouter = require("./routes/icebreaker")
-const looTipRouter = require("./routes/lootips")
+const iceBreakerRouter = require("./routes/icebreaker");
+const looTipRouter = require("./routes/lootips");
 
 const app = express();
 
