@@ -23,7 +23,7 @@ export default function LooTips () {
         }
     };
     return (
-        <div className={styles.container}>
+        <div className={styles.container} data-testid="lootips-component">
             <LooTipsRevealButton
             show={show}
             handleClick={handleClick} />
