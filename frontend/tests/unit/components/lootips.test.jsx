@@ -1,11 +1,11 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { vi } from "vitest";
 
-import LooTips from "../../src/components/lootips";
-import { getLootip } from "../../src/services/lootips";
+import LooTips from "../../../src/components/lootips";
+import { getLootip } from "../../../src/services/lootips";
 
 // Mocking the getLootip service
-vi.mock("../../src/services/lootips", () => {
+vi.mock("../../../src/services/lootips", () => {
   const getLootipMock = vi.fn();
   return { getLootip: getLootipMock };
 });

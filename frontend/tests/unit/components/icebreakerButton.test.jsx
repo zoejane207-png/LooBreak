@@ -4,29 +4,47 @@ import { IceBreakerRevealButton } from "../../../src/components/icebreakerButton
 import "@testing-library/jest-dom/vitest";
 
 describe("IceBreakerRevealButton", () => {
-  it("renders the 'Show' text when show is false", () => {
-    render(<IceBreakerRevealButton show={false} handleClick={vi.fn()} />);
+    const setup = (props = {}) => {
+        const defaultProps = {
+            show: false,
+            handleClick: vi.fn(),
+            ...props
+        };
+        render(<IceBreakerRevealButton {...defaultProps} />);
+        return{
+            button: screen.getByTestId("icebreaker-reveal-btn"),
+            ...defaultProps
+        };
+    };
 
-    const button = screen.getByRole("button", {
-      name: /show me an icebreaker!/i,
+    it("renders the 'Show' text when show is false", () => {
+        setup({ show: false });
+        const button = screen.getByTestId("icebreaker-reveal-btn");
+        expect(button).toHaveTextContent(/show me the icebreakers! 🧊/i);
+    });
+
+    it("renders the 'Hide' text when show is true", () => {
+        setup({ show: true });
+        
+        const button = screen.getByTestId("icebreaker-reveal-btn");
+        expect(button).toHaveTextContent(/hide the icebreakers 🧊/i);
     });
     expect(button).toBeInTheDocument();
   });
 
-  it("renders the 'Hide' text when show is true", () => {
-    render(<IceBreakerRevealButton show={true} handleClick={vi.fn()} />);
+    it("calls the handleClick function when clicked", () => {
+        const mockClick = vi.fn();
+        render(<IceBreakerRevealButton show={false} handleClick={mockClick} />);
+        
+        const button = screen.getByTestId("icebreaker-reveal-btn");
+        fireEvent.click(button);
+        
+        expect(mockClick).toHaveBeenCalledTimes(1);
+    });
 
-    const button = screen.getByRole("button", { name: /hide the icebreaker/i });
-    expect(button).toBeInTheDocument();
-  });
-
-  it("calls the handleClick function when clicked", () => {
-    const mockClick = vi.fn();
-    render(<IceBreakerRevealButton show={false} handleClick={mockClick} />);
-
-    const button = screen.getByRole("button");
-    fireEvent.click(button);
-
-    expect(mockClick).toHaveBeenCalledTimes(1);
-  });
+    it("has type='button' to prevent form submission", () => {
+        setup();
+        const button = screen.getByTestId("icebreaker-reveal-btn");
+        expect(button).toHaveAttribute("type", "button");
+    });
 });
