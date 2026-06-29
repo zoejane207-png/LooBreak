@@ -1,4 +1,8 @@
-const {fetchExternalQuiz} = require("../../../services/externalQuizApi.js");
+const {
+  fetchExternalQuiz,
+  hasDuplicateIncorrectAnswers,
+  findQuestionsWithDuplicateIncorrectAnswers,
+} = require("../../../services/externalQuizApi.js");
 
 describe('externalQuizApi mocked data', () => {
   beforeEach(() => {
@@ -44,5 +48,57 @@ describe('externalQuizApi mocked data', () => {
     });
 
     await expect(fetchExternalQuiz()).rejects.toThrow('Response status: 429');
+  });
+});
+
+describe('hasDuplicateIncorrectAnswers', () => {
+  it('returns false when all incorrect answers are unique', () => {
+    const question = {
+      correct_answer: 'A',
+      incorrect_answers: ['B', 'C', 'D'],
+    };
+    expect(hasDuplicateIncorrectAnswers(question)).toBe(false);
+  });
+
+  it('returns true when an incorrect answer is repeated', () => {
+    const question = {
+      correct_answer: 'A',
+      incorrect_answers: ['B', 'C', 'B'],
+    };
+    expect(hasDuplicateIncorrectAnswers(question)).toBe(true);
+  });
+
+  it('returns true when an incorrect answer matches the correct answer', () => {
+    const question = {
+      correct_answer: 'A',
+      incorrect_answers: ['A', 'C', 'D'],
+    };
+    expect(hasDuplicateIncorrectAnswers(question)).toBe(true);
+  });
+
+  it('returns false when incorrect_answers is missing or not an array', () => {
+    expect(hasDuplicateIncorrectAnswers({ correct_answer: 'A' })).toBe(false);
+    expect(hasDuplicateIncorrectAnswers({})).toBe(false);
+    expect(hasDuplicateIncorrectAnswers(null)).toBe(false);
+  });
+});
+
+describe('findQuestionsWithDuplicateIncorrectAnswers', () => {
+  it('returns only the questions that contain duplicates', () => {
+    const data = {
+      results: [
+        { correct_answer: 'A', incorrect_answers: ['B', 'C', 'D'] },
+        { correct_answer: 'A', incorrect_answers: ['B', 'B', 'D'] },
+        { correct_answer: 'A', incorrect_answers: ['A', 'C', 'D'] },
+      ],
+    };
+    const flagged = findQuestionsWithDuplicateIncorrectAnswers(data);
+    expect(flagged).toHaveLength(2);
+    expect(flagged).toEqual([data.results[1], data.results[2]]);
+  });
+
+  it('returns an empty array when results is missing or not an array', () => {
+    expect(findQuestionsWithDuplicateIncorrectAnswers({})).toEqual([]);
+    expect(findQuestionsWithDuplicateIncorrectAnswers(null)).toEqual([]);
   });
 });
