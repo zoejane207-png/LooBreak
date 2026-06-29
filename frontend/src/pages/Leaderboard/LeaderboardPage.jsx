@@ -1,10 +1,12 @@
 import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 
 export default function LeaderboardPage() {
   return (
     <>
       <NavBar />
       <h2>Leaderboard</h2>
+      <Footer />
     </>
   );
 }
