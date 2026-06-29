@@ -26,7 +26,7 @@ export function QuizPage() {
     if (currentIndex < quiz.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
-    if (currentIndex === quiz.length - 1) {
+    if (currentIndex === quiz.length - 2) {
       setFinished(true);
       //when results page is finished we can navigate to it here!
     }
@@ -45,6 +45,31 @@ export function QuizPage() {
     } else {
       //turn button red
     }
+  }
+
+  function getButtonStyle(answer) {
+    let style = {};
+
+    if (isSelected && answer === playerAnswer) {
+      style.border = "3px solid #00cafc";
+    } else {
+      style.border = "1px solid #1E1E1E";
+    }
+
+    if (!hasSubmitted && isSelected) {
+      if (answer === playerAnswer) {
+        style.backgroundColor = "yellow";
+        style.color = "black";
+      }
+    } else if (hasSubmitted) {
+      if (answer === currentQuestion.correct_answer) {
+        style.backgroundColor = "green";
+      } else {
+        style.backgroundColor = "red";
+      }
+    }
+
+    return style;
   }
 
   if (!quiz.length) {
@@ -66,25 +91,30 @@ export function QuizPage() {
           <p>Score: {score}/10</p>
           <div className="feed" role="feed">
             <p>{currentQuestion.question}</p>
-            <div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.5rem",
+                marginBottom: "1rem",
+              }}
+            >
               {answers.map((answer) => (
                 <button
+                  style={{
+                    paddingInline: "2rem",
+                    paddingBlock: "0.5rem",
+                    borderRadius: "5px",
+                    ...getButtonStyle(answer),
+                  }}
                   key={answer}
                   onClick={() => handleAnswer(currentQuestion, answer)}
-                  disabled={isSelected}
+                  disabled={hasSubmitted}
                 >
                   {answer}
                 </button>
               ))}
             </div>
-            {!hasSubmitted && (
-              <button disabled={!isSelected} onClick={handleSubmit}>
-                Submit
-              </button>
-            )}
-            {!finished && hasSubmitted && (
-              <button onClick={handleNextQuestion}>→</button>
-            )}
           </div>
         </div>
       )}
