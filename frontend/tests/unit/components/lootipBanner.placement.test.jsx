@@ -2,10 +2,10 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { vi } from "vitest";
 
-import HomePage from "../../src/pages/Home/HomePage";
-import LeaderboardPage from "../../src/pages/Leaderboard/LeaderboardPage";
-import ResultsPage from "../../src/pages/Results/ResultsPage";
-import { QuizPage } from "../../src/pages/Quiz/QuizPage";
+import HomePage from "../../../src/pages/Home/HomePage";
+import LeaderboardPage from "../../../src/pages/Leaderboard/LeaderboardPage";
+import ResultsPage from "../../../src/pages/Results/ResultsPage";
+import { QuizPage } from "../../../src/pages/Quiz/QuizPage";
 
 // The footer banner fetches a tip on mount, so stub the service everywhere.
 vi.mock("../../src/services/lootips", () => ({

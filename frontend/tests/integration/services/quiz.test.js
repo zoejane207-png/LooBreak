@@ -51,7 +51,7 @@ describe("Quiz API Service integration", () => {
     const mockQuiz = {
       quiz: [
         {
-          question: "What\u0027s the name of the famous music duo\u003F",  //base64 encoding
+          question: "What\u0027s the name of the famous music duo\u003F", //base64 encoding
           correct_answer: "Simon \u0026 Garfunkel",
           incorrect_answers: [
             "The Beatles \u0026 Queen",
@@ -69,7 +69,7 @@ describe("Quiz API Service integration", () => {
         },
         {
           question: "V2hhdCdzIHRoZSBuYW1lIG9mIHRoZSBmYW1vdXMgbXVzaWMgZHVvPw==", // Unicode escape sequences
-          correct_answer: "U2ltb24gJiBHYXJmdW5rZWw=", 
+          correct_answer: "U2ltb24gJiBHYXJmdW5rZWw=",
           incorrect_answers: [
             "VGhlIEJlYXRsZXMgJiBRdWVlbg==",
             "TGVubm9uJ3MgcGFydG5lcg==",
@@ -85,16 +85,31 @@ describe("Quiz API Service integration", () => {
 
     const result = await getQuiz();
 
-    expect(result[0].question).toBe("What\u0027s the name of the famous music duo\u003F")
-    expect(result[1].question).toBe("What%27s%20the%20name%20of%20the%20famous%20music%20duo%3F")
-    expect(result[2].question).toBe("V2hhdCdzIHRoZSBuYW1lIG9mIHRoZSBmYW1vdXMgbXVzaWMgZHVvPw==")
+    expect(result[0].question).toBe(
+      "What\u0027s the name of the famous music duo\u003F",
+    );
+    expect(result[1].question).toBe(
+      "What%27s%20the%20name%20of%20the%20famous%20music%20duo%3F",
+    );
+    expect(result[2].question).toBe(
+      "V2hhdCdzIHRoZSBuYW1lIG9mIHRoZSBmYW1vdXMgbXVzaWMgZHVvPw==",
+    );
 
-    expect(result[0].correct_answer).toBe("Simon \u0026 Garfunkel")
-    expect(result[1].correct_answer).toBe("Simon%20%26%20Garfunkel")
-    expect(result[2].correct_answer).toBe("U2ltb24gJiBHYXJmdW5rZWw=")
+    expect(result[0].correct_answer).toBe("Simon \u0026 Garfunkel");
+    expect(result[1].correct_answer).toBe("Simon%20%26%20Garfunkel");
+    expect(result[2].correct_answer).toBe("U2ltb24gJiBHYXJmdW5rZWw=");
 
-    expect(result[0].incorrect_answers).toStrictEqual(["The Beatles \u0026 Queen", "Lennon\u0027s partner"])
-    expect(result[1].incorrect_answers).toStrictEqual(["The%20Beatles%20%26%20Queen", "Lennon%27s%20partner"])
-    expect(result[2].incorrect_answers).toStrictEqual(["VGhlIEJlYXRsZXMgJiBRdWVlbg==", "TGVubm9uJ3MgcGFydG5lcg=="])
+    expect(result[0].incorrect_answers).toStrictEqual([
+      "The Beatles \u0026 Queen",
+      "Lennon\u0027s partner",
+    ]);
+    expect(result[1].incorrect_answers).toStrictEqual([
+      "The%20Beatles%20%26%20Queen",
+      "Lennon%27s%20partner",
+    ]);
+    expect(result[2].incorrect_answers).toStrictEqual([
+      "VGhlIEJlYXRsZXMgJiBRdWVlbg==",
+      "TGVubm9uJ3MgcGFydG5lcg==",
+    ]);
   });
 });

@@ -1,5 +1,7 @@
 const { populateTodaysQuiz } = require("../../../services/dailyQuizService");
-const { fetchExternalQuiz } = require("../../../services/externalQuizApi");
+const {
+  fetchExternalQuizWithoutDuplicates,
+} = require("../../../services/externalQuizApi");
 const Quiz = require("../../../models/quiz");
 
 // replace the real dependencies with auto-mocks
@@ -26,7 +28,7 @@ const fakeQuizData = {
 describe("populateTodaysQuiz", () => {
   beforeEach(() => {
     jest.clearAllMocks();                       // reset call history between tests
-    fetchExternalQuiz.mockResolvedValue(fakeQuizData);
+    fetchExternalQuizWithoutDuplicates.mockResolvedValue(fakeQuizData);
     Quiz.deleteMany.mockResolvedValue({ deletedCount: 0 });
     Quiz.insertMany.mockResolvedValue([]);
   });
@@ -67,9 +69,17 @@ describe("populateTodaysQuiz", () => {
   });
 
   it("propagates an error if the fetch fails", async () => {
-    fetchExternalQuiz.mockRejectedValue(new Error("API down"));
+    fetchExternalQuizWithoutDuplicates.mockRejectedValue(new Error("API down"));
 
     await expect(populateTodaysQuiz()).rejects.toThrow("API down");
     expect(Quiz.insertMany).not.toHaveBeenCalled();   // never got to the insert
+  });
+
+  it("leaves the previous day's quiz untouched if the fetch fails", async () => {
+    fetchExternalQuizWithoutDuplicates.mockRejectedValue(new Error("API down"));
+
+    await expect(populateTodaysQuiz()).rejects.toThrow("API down");
+    expect(Quiz.deleteMany).not.toHaveBeenCalled();   // old quiz not wiped
+    expect(Quiz.insertMany).not.toHaveBeenCalled();
   });
 });

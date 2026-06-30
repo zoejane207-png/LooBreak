@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { getQuiz } from "../../services/quiz";
 import NavBar from "../../components/NavBar";
+import Results from "../../components/Results";
+import ResultsForm from "../../components/ResultsForm";
 
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
@@ -24,10 +25,8 @@ export function QuizPage() {
     setHasSubmitted(false);
     if (currentIndex < quiz.length - 1) {
       setCurrentIndex(currentIndex + 1);
-    }
-    if (currentIndex === quiz.length - 2) {
+    } else {
       setFinished(true);
-      //when results page is finished we can navigate to it here!
     }
   }
 
@@ -83,49 +82,54 @@ export function QuizPage() {
   return (
     <>
       <NavBar />
-      <h2>Quiz</h2>
-      <h3>Question {currentIndex + 1}:</h3>
-      <p>Score: {score}/10</p>
-      <div className="feed" role="feed">
-        <p>{currentQuestion.question}</p>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "0.5rem",
-            marginBottom: "1rem",
-          }}
-        >
-          {answers.map((answer) => (
-            <button
+      {!finished && (
+        <div data-test-id="quiz">
+          <h2>Quiz</h2>
+          <h3>Question {currentIndex + 1}:</h3>
+          <p>Score: {score}/10</p>
+          <div className="feed" role="feed">
+            <p>{currentQuestion.question}</p>
+            <div
               style={{
-                paddingInline: "2rem",
-                paddingBlock: "0.5rem",
-                borderRadius: "5px",
-                ...getButtonStyle(answer),
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.5rem",
+                marginBottom: "1rem",
               }}
-              key={answer}
-              onClick={() => handleAnswer(currentQuestion, answer)}
-              disabled={hasSubmitted}
             >
-              {answer}
+              {answers.map((answer, index) => (
+                <button
+                  style={{
+                    paddingInline: "2rem",
+                    paddingBlock: "0.5rem",
+                    borderRadius: "5px",
+                    ...getButtonStyle(answer),
+                  }}
+                  key={index}
+                  onClick={() => handleAnswer(currentQuestion, answer)}
+                  disabled={hasSubmitted}
+                >
+                  {answer}
+                </button>
+              ))}
+            </div>
+          </div>
+          {!hasSubmitted && (
+            <button disabled={!isSelected} onClick={handleSubmit}>
+              Submit
             </button>
-          ))}
+          )}
+          {!finished && hasSubmitted && (
+            <button onClick={handleNextQuestion}>→</button>
+          )}
         </div>
-        {!hasSubmitted && (
-          <button disabled={!isSelected} onClick={handleSubmit}>
-            Submit
-          </button>
-        )}
-        {!finished && hasSubmitted && (
-          <button onClick={handleNextQuestion}>→</button>
-        )}
-        {finished && hasSubmitted && (
-          <Link to="/results" data-testid="results-button">
-            Results
-          </Link>
-        )}
-      </div>
+      )}
+      {finished && (
+        <div data-testid="quiz-result">
+          <Results score={score} />
+          <ResultsForm score={score} />
+        </div>
+      )}
     </>
   );
 }

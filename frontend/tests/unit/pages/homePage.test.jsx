@@ -33,7 +33,7 @@ describe("Home Page", () => {
     expect(quizLinks[1].getAttribute("href")).toEqual("/quiz");
   });
 
-  test("displays the icebreaker component", () =>{
+  test("displays the icebreaker component", () => {
     expect(screen.getByTestId("icebreaker-component")).toBeInTheDocument();
   });
 

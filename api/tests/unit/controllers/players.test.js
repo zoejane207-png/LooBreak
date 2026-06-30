@@ -1,9 +1,20 @@
+const JWT = require("jsonwebtoken");
+const secret = process.env.JWT_SECRET;
 const request = require("supertest");
-
 const app = require("../../../app");
 const Player = require("../../../models/player");
-
 require("../../mongodb_helper");
+
+function createToken(player_id) {
+  return JWT.sign(
+    {
+      sub: player_id,
+      iat: Math.floor(Date.now() / 1000) - 5 * 60,
+      exp: Math.floor(Date.now() / 1000) + 10 * 60,
+    },
+    secret,
+  );
+}
 
 describe("/players", () => {
   beforeEach(async () => {
@@ -20,9 +31,7 @@ describe("/players", () => {
     });
 
     test("a player is created", async () => {
-      await request(app)
-        .post("/players")
-        .send({ playername: "someone" });
+      await request(app).post("/players").send({ playername: "someone" });
 
       const players = await Player.find();
       const newPlayer = players[players.length - 1];
@@ -43,7 +52,7 @@ describe("/players", () => {
         .send({ playername: "someone" });
 
       expect(response2.statusCode).toBe(400);
-      const players = await Player.find({playername: "someone"});
+      const players = await Player.find({ playername: "someone" });
       expect(players.length).toBe(1);
     });
   });
@@ -62,6 +71,31 @@ describe("/players", () => {
 
       const players = await Player.find();
       expect(players.length).toEqual(0);
+    });
+  });
+
+  describe("GET, fetch playername and score for results page", () => {
+    test("returns the player once they have submitted their playername", async () => {
+      const player = await Player.create({
+        playername: "nonchalant",
+        score: 10,
+      });
+
+      const token = createToken(player._id.toString());
+
+      const response = await request(app)
+        .get("/players/me")
+        .set("Authorization", `Bearer ${token}`);
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body.playername).toEqual("nonchalant");
+      expect(response.body.score).toEqual(10);
+    });
+
+    test("response with 401 when no token is provided", async () => {
+      const response = await request(app).get("/players/me");
+
+      expect(response.statusCode).toBe(401);
     });
   });
 });

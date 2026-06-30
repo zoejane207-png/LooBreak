@@ -107,12 +107,14 @@ const tips = [
 ];
 
 const icebreakers = [
-  {"icebreaker": ""},
+  {
+    "icebreaker": "tip"
+        }
 ];
 
 const lootips = [
   {
-    lootip: "",
+    lootip: "😀😃😄😁😆😅😂🤣🥲🥹😊😇🙂",
   },
 ];
 
