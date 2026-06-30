@@ -22,7 +22,6 @@ async function tokenChecker(req, res, next) {
     req.player_id = player._id;
     next();
   } catch (err) {
-    console.error("tokenChecker error:", err);
     return res.status(401).json({ message: "Invalid token" });
   }
 }

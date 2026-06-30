@@ -5,10 +5,11 @@ const app = require("../../../app");
 const Player = require("../../../models/player");
 require("../../mongodb_helper");
 
-function createToken(player_id) {
+function createToken(player_id, tokenVersion = 0) {
   return JWT.sign(
     {
       sub: player_id,
+      tokenVersion,
       iat: Math.floor(Date.now() / 1000) - 5 * 60,
       exp: Math.floor(Date.now() / 1000) + 10 * 60,
     },
@@ -74,14 +75,14 @@ describe("/players", () => {
     });
   });
 
-  describe("GET, fetch playername and score for results page", () => {
-    test("returns the player once they have submitted their playername", async () => {
+  describe("GET, fetch playername and score for results badge", () => {
+    test("returns the player once they have submitted their playername & score", async () => {
       const player = await Player.create({
         playername: "nonchalant",
         score: 10,
       });
 
-      const token = createToken(player._id.toString());
+      const token = createToken(player._id.toString(), player.tokenVersion);
 
       const response = await request(app)
         .get("/players/me")
