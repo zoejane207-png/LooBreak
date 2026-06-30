@@ -15,7 +15,7 @@ body:
         - v1.6 Fixed issue with second click and disabled answer buttons after selected.
         - v1.7 navbar added to all pages + basic light/dark mode
         - v1.8 user tests converted to player tests. all pass on backend
-        - v1.9 added in submit button and li9nk to results page when quiz is finished 
+        - v1.9 added in submit button and li9nk to results page when quiz is finished
         - v1.10 fixed v1.9 issue
         - v2.0 added icebreaker component to the homepage displaying a single random icebreaker on each click
         - v2.1 added frontend and backend unit tests for quiz and fixed test for update on QuizPage.jsx
@@ -24,7 +24,8 @@ body:
         - v2.4 increased icebreaker component to display 3 random icebreakers on each click
         - v2.5 fixed ticket for footer lootips
         - v2.6 completed tests for decoding HTML entities
-        
+        - v2.7 completed results page and score saving to database
+
   - type: dropdown
     id: severity
     attributes:
@@ -59,4 +60,4 @@ body:
       value: |
         1. 
         2. 
-        3. 
+        3.

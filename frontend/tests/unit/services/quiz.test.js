@@ -22,8 +22,6 @@ describe("Quiz API Service", () => {
   });
 
   test("does not resolve with data when backend returns an error payload", async () => {
-    await expect(getQuiz()).rejects.toThrow(
-      "Unable to fetch quiz",
-    );
+    await expect(getQuiz()).rejects.toThrow("Unable to fetch quiz");
   });
 });

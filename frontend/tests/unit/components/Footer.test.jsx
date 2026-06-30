@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 
-import Footer from "../../src/components/Footer";
-import { getLootip } from "../../src/services/lootips";
+import Footer from "../../../src/components/Footer";
+import { getLootip } from "../../../src/services/lootips";
 
 // Mocking the getLootip service
 vi.mock("../../src/services/lootips", () => {
