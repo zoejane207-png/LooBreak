@@ -6,17 +6,21 @@ const medals = ["🥇", "🥈", "🥉"];
 export default function MiniLeaderboard() {
   const [players, setPlayers] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    getPlayers()
-      .then((data) => {
+    const fetchPlayers = async () => {
+      try {
+        const data = await getPlayers();
         setPlayers(data.players.slice(0, 3));
+      } catch (err) {
+        setError(err.message);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [players]);
+      }
+    };
+    fetchPlayers();
+  }, []);
 
   return (
     <>
@@ -30,11 +34,17 @@ export default function MiniLeaderboard() {
           </thead>
           <tbody>
             {loading ? (
-              <p>Loading...</p>
+              <td colSpan={3}>Loading...</td>
+            ) : error ? (
+              <tr>
+                <td colSpan={3}>{error}</td>
+              </tr>
             ) : (
               players.map((player, i) => (
-                <tr key={player.index}>    
-                  <td>{medals[i]} {player.playername}</td>
+                <tr key={player._id}>
+                  <td>
+                    {medals[i]} {player.playername}
+                  </td>
                   <td>{player.score}/10</td>
                 </tr>
               ))

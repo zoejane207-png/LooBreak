@@ -1,7 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { vi, describe, test, beforeEach, expect } from "vitest";
+import { vi } from "vitest";
 import "@testing-library/jest-dom";
-
 import MiniLeaderboard from "../../../src/components/MiniLeaderBoard";
 import { getPlayers } from "../../../src/services/results";
 
@@ -22,6 +21,18 @@ describe("MiniLeaderBoard", () => {
     vi.mocked(getPlayers).mockResolvedValue(mockPlayersData); // Default mock
   });
 
+  test("shows loading state before data resolves", () => {
+    getPlayers.mockReturnValueOnce(new Promise(() => {}));
+    render(<MiniLeaderboard />);
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
+  });
+  
+  test("displays the players in a table", async () => {
+    render(<MiniLeaderboard />);
+    const table = await screen.findByRole("table");
+    expect(table).toBeInTheDocument();
+  });
+
   test("displays player and score headers in a table", async () => {
     render(<MiniLeaderboard />);
 
@@ -39,10 +50,26 @@ describe("MiniLeaderBoard", () => {
     render(<MiniLeaderboard />);
 
     await waitFor(() => {
-      expect(screen.getByText("Alice")).toBeInTheDocument();
-      expect(screen.getByText("Bob")).toBeInTheDocument();
-      expect(screen.getByText("Charlie")).toBeInTheDocument();
-      expect(screen.queryByText("Dave")).not.toBeInTheDocument();
+      expect(screen.getByText(/Alice/i)).toBeInTheDocument();
+      expect(screen.getByText(/Bob/i)).toBeInTheDocument();
+      expect(screen.getByText(/Charlie/i)).toBeInTheDocument();
+      expect(screen.queryByText(/Dave/i)).not.toBeInTheDocument();
     });
   });
+
+  test("displays medals with each name", async () => {
+      render(<MiniLeaderboard />);
+      await screen.findByText(/alice/i);
+      const rows = screen.getAllByRole("row");
+      expect(rows).toHaveLength(4);
+      expect(rows[1]).toHaveTextContent("🥇");
+      expect(rows[2]).toHaveTextContent("🥈");
+      expect(rows[3]).toHaveTextContent("🥉");
+    });
+
+  test("shows an error message if players fail to load", async () => {
+      getPlayers.mockRejectedValueOnce(new Error("Network error"));
+      render(<MiniLeaderboard />);
+      expect(await screen.findByText(/network error/i)).toBeInTheDocument();
+    });
 });
