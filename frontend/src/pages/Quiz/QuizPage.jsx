@@ -25,8 +25,7 @@ export function QuizPage() {
     setHasSubmitted(false);
     if (currentIndex < quiz.length - 1) {
       setCurrentIndex(currentIndex + 1);
-    }
-    if (currentIndex === quiz.length - 2) {
+    } else {
       setFinished(true);
     }
   }
@@ -126,7 +125,7 @@ export function QuizPage() {
         </div>
       )}
       {finished && (
-        <div data-test-id="quiz-result">
+        <div data-testid="quiz-result">
           <Results score={score} />
           <ResultsForm score={score} />
         </div>

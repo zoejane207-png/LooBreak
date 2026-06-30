@@ -1,5 +1,5 @@
 import createFetchMock from "vitest-fetch-mock";
-import { createPlayer } from "../../src/services/results";
+import { createPlayer } from "../../../src/services/results";
 import { describe, vi } from "vitest";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -18,14 +18,14 @@ describe("results service", () => {
           status: 200,
         },
       );
-      await createPlayer("testPlayer", "testScore");
+      await createPlayer({playername: "testPlayer", score: "testScore"});
       const fetchArguments = fetch.mock.lastCall;
       const url = fetchArguments[0];
       const options = fetchArguments[1];
 
       expect(url).toEqual(`${BACKEND_URL}/players`);
       expect(options.method).toEqual("POST");
-      expect(options.body).toBeInstanceOf(FormData);
+      expect(JSON.parse(options.body)).toEqual({ playername: "testPlayer", score: "testScore" });
     });
 
     test("it throws an error if the request failed", async () => {

@@ -3,31 +3,32 @@ const Player = require("../models/player");
 const JWT = require("jsonwebtoken");
 
 async function createPlayer(req, res) {
-  const playername = req.body.playername;
-  const existingPlayername = await Player.findOne({ playername: playername });
-  const score = req.body.score;
-  const player = new Player({ playername, score });
+  try {
+    const playername = req.body.playername?.trim();
+    const score = req.body.score;
 
-  if (playername === existingPlayername.playername)
-    return res.status(400).json({
-      message: "Playername already exists",
-    });
+    if (!playername) {
+      return res.status(400).json({ message: "Playername is required" });
+    }
 
-  player
-    .save()
-    .then((player) => {
-      console.log("player created, id:", player._id.toString());
-      const token = JWT.sign(
-        { sub: player._id.toString() },
-        process.env.JWT_SECRET,
-        { expiresIn: "1d" },
-      );
-      res.status(201).json({ message: "OK", token, player });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(400).json({ message: "Something went wrong" });
-    });
+    const existingPlayer = await Player.findOne({ playername });
+    if (existingPlayer) {
+      return res.status(400).json({ message: "Playername already exists" });
+    }
+
+    const player = new Player({ playername, score });
+    const savedPlayer = await player.save();
+
+    const token = JWT.sign(
+      { sub: savedPlayer._id.toString() },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" },
+    );
+    res.status(201).json({ message: "OK", token, player: savedPlayer });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: "Something went wrong" });
+  }
 }
 
 async function getPlayer(req, res) {

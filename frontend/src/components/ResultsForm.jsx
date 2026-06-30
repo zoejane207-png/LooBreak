@@ -77,7 +77,7 @@ export default function ResultsForm(props) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} aria-label="results-form">
+      <form onSubmit={handleSubmit} data-testid="results-form" aria-label="results-form">
         <label htmlFor="playername">Playername</label>
         <input
           type="text"

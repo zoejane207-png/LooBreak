@@ -149,6 +149,7 @@ describe("Quiz Page", () => {
     expect(screen.getByText(mockQuiz[1].question)).toBeInTheDocument();
     expect(screen.getByText("Question 2:")).toBeInTheDocument();
   });
+
   test("Displays loading message when waiting for data from backend", async () => {
     renderWithRouter(<QuizPage />);
 
@@ -156,4 +157,26 @@ describe("Quiz Page", () => {
 
     expect(screen.getByText("Loading questions...")).toBeInTheDocument();
   });
+
+  test("Displays result and result form once finished", async () => {
+    const user = userEvent.setup();
+    renderWithRouter(<QuizPage />);
+
+    await screen.findByText(mockQuiz[0].question);
+    await user.click(screen.getByRole("button", { name: /licorice/i }));
+    await user.click(screen.getByRole("button", { name: /submit/i }));
+    await user.click(screen.getByRole("button", { name: "→" }));
+    await screen.findByText(mockQuiz[1].question);
+    await user.click(screen.getByRole("button", { name: /jupiter/i }));
+    await user.click(screen.getByRole("button", { name: /submit/i }));
+    await user.click(screen.getByRole("button", { name: "→" }));
+    await screen.findByText(mockQuiz[2].question);
+    await user.click(screen.getByRole("button", { name: /carbon dioxide/i }));
+    await user.click(screen.getByRole("button", { name: /submit/i }));
+    await user.click(screen.getByRole("button", { name: "→" }));
+
+    expect(screen.getByTestId("results")).toBeInTheDocument();
+    expect(screen.getByTestId("results-form")).toBeInTheDocument();
+  });
+
 });

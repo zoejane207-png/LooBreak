@@ -24,10 +24,12 @@ export default function Results(props) {
 
   return (
     <>
-      <h1>Game Over!</h1>
-      <h2>{score}/10</h2>
-      <h3>{message}</h3>
-      <p>Enter a playername to save your score to the leaderboard:</p>
+      <div data-testid="results">
+        <h1>Game Over!</h1>
+        <h2>{score}/10</h2>
+        <h3>{message}</h3>
+        <p>Enter a playername to save your score to the leaderboard:</p>
+      </div>
     </>
   );
 }
