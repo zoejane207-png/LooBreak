@@ -4,10 +4,10 @@ import NavBar from "../../components/NavBar";
 import Results from "../../components/Results";
 import ResultsForm from "../../components/ResultsForm";
 
-export function QuizPage() {
+export function QuizPage({ quizStatus }) {
   const [quiz, setQuiz] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [finished, setFinished] = useState(false);
+  const [finished, setFinished] = useState(quizStatus?.quizCompleted ?? false);
   const currentQuestion = quiz[currentIndex];
   const [score, setScore] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
@@ -15,10 +15,11 @@ export function QuizPage() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
+    if (finished) return; // Will auto show results if already completed today's quiz
     getQuiz().then((data) => {
       setQuiz(data);
     });
-  }, []);
+  }, [finished]);
 
   function handleNextQuestion() {
     setIsSelected(false);
@@ -86,7 +87,9 @@ export function QuizPage() {
         <div data-test-id="quiz">
           <h2>Quiz</h2>
           <h3>Question {currentIndex + 1}:</h3>
-          <p>Score: {score}/{quiz.length}</p>
+          <p>
+            Score: {score}/{quiz.length}
+          </p>
           <div className="feed" role="feed">
             <p>{currentQuestion.question}</p>
             <div

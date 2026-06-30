@@ -28,13 +28,13 @@ export default function Results(props) {
         const quizData = await getQuiz();
         setQuiz(quizData);
         setMessage(messages[score]);
-      } catch(err) {
+      } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-    fetchResult
+    fetchResult;
   }, [score, error]);
 
   return (
@@ -47,7 +47,9 @@ export default function Results(props) {
           <p>Loading...</p>
         ) : (
           <div>
-            <h1>{score}/{quiz.length}</h1>
+            <h1>
+              {score}/{quiz.length}
+            </h1>
             <h3>{message}</h3>
             <p>Enter a playername to save your score to the leaderboard:</p>
           </div>
