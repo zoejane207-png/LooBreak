@@ -22,7 +22,7 @@ export default function MiniLeaderboard() {
         <table className="table-auto">
           <thead>
             <tr>
-              <th>Playername</th>
+              <th>Player</th>
               <th>Score</th>
             </tr>
           </thead>
