@@ -19,7 +19,7 @@ describe("Icebreaker Component", () => {
     vi.clearAllMocks();
   });
 
-  it("displays loading message while fetching", async () => {
+  it("displays loading skeleton while fetching", async () => {
     let resolvePromise;
     const pendingPromise = new Promise((resolve) => {
       resolvePromise = resolve;
@@ -29,7 +29,7 @@ describe("Icebreaker Component", () => {
 
     fireEvent.click(button);
 
-    expect(screen.getByText(/icebreakers loading/i)).toBeInTheDocument();
+    expect(screen.getByTestId("icebreaker-skeleton")).toBeInTheDocument();
     await act(async () => {
       resolvePromise({ iceBreakers: [] });
     });

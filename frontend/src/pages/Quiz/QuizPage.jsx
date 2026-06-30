@@ -5,6 +5,27 @@ import Results from "../../components/Results";
 import ResultsForm from "../../components/ResultsForm";
 import { Skeleton } from "@/components/ui/skeleton";
 
+// Shared shell so the skeleton and the real quiz can't drift apart.
+const QUIZ_CONTAINER_CLASS = "mx-auto flex w-full max-w-md flex-col gap-3 p-6";
+
+// Co-located with the real quiz below; mirrors its exact layout:
+// title, question heading, score line, question body, four answer buttons.
+function QuizSkeleton() {
+  return (
+    <div data-testid="quiz-skeleton" className={QUIZ_CONTAINER_CLASS}>
+      <Skeleton className="h-8 w-32" />
+      <Skeleton className="h-7 w-40" />
+      <Skeleton className="h-5 w-24" />
+      <Skeleton className="h-16 w-full" />
+      <div className="flex flex-col gap-2">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <Skeleton key={index} className="h-11 w-full rounded-md" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -75,20 +96,7 @@ export function QuizPage() {
     return (
       <>
         <NavBar />
-        <div
-          data-testid="quiz-skeleton"
-          className="mx-auto flex w-full max-w-md flex-col gap-4 p-6"
-        >
-          <Skeleton className="h-8 w-32" />
-          <Skeleton className="h-5 w-40" />
-          <Skeleton className="h-5 w-24" />
-          <Skeleton className="h-16 w-full" />
-          <div className="flex flex-col gap-3">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <Skeleton key={index} className="h-11 w-full rounded-md" />
-            ))}
-          </div>
-        </div>
+        <QuizSkeleton />
       </>
     );
   }
@@ -102,10 +110,7 @@ export function QuizPage() {
     <>
       <NavBar />
       {!finished && (
-        <div
-          data-test-id="quiz"
-          className="mx-auto flex w-full max-w-md flex-col gap-3 p-6"
-        >
+        <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
           <h2 className="text-2xl font-bold">Quiz</h2>
           <h3 className="text-lg font-semibold">Question {currentIndex + 1}:</h3>
           <p className="text-muted-foreground">Score: {score}/10</p>
