@@ -131,12 +131,16 @@ describe("/players", () => {
       expect(data.players[2].playername).toBe("John");
       expect(data.players[2].score).toBe(3);
     });
-
-    test("returns error message when no players in database", async () => {
+  });
+  describe("GET, fetch players errors", () => {
+    test("Returns 404 when no players in database", async () => {
       const response = await request(app).get("/players");
 
-      expect(response.statusCode).toBe(404);
-      expect()
+      expect(response.status).toBe(404);
+      
+      const data = response.body;
+      
+      expect(data.message).toBe("Players not found");
     })
-  });
+  })
 });

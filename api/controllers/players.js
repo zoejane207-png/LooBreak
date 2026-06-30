@@ -49,7 +49,7 @@ async function getPlayer(req, res) {
 async function getAllPlayers(req, res) {
   try {
     const players = await Player.find();
-    if (!players) {
+    if (players.length === 0) {
       return res.status(404).json({ message: "Players not found" });
     }
     res
