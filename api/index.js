@@ -4,7 +4,6 @@ require("dotenv").config();
 const app = require("./app.js");
 const { connectToDatabase } = require("./db/db.js");
 const { startDailyJobs } = require("./jobs/startDailyJobs.js");
-const { startDailyLeaderboard } = require("./jobs/startDailyLeaderboard.js")
 
 function listenForRequests() {
   const port = process.env.PORT || 3000;
@@ -15,6 +14,5 @@ function listenForRequests() {
 
 connectToDatabase().then(() => {
   startDailyJobs();
-  startDailyLeaderboard();
   listenForRequests();
 });
