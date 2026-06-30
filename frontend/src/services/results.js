@@ -20,7 +20,7 @@ export async function getPlayers() {
   };
   const response = await fetch(`${BACKEND_URL}/players`, requestOptions);
   if (response.status !== 200) {
-    throw new Error("Unable to fetch players");
+    throw new Error("Unable to fetch players and their scores");
   }
 
   const data = await response.json();
