@@ -83,7 +83,7 @@ export function QuizPage() {
     <>
       <NavBar />
       {!finished && (
-        <div data-test-id="quiz">
+        <div data-testid="quiz">
           <h2>Quiz</h2>
           <h3>Question {currentIndex + 1}:</h3>
           <p>Score: {score}/10</p>
