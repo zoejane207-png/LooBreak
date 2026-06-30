@@ -1,4 +1,10 @@
 const cron = require("node-cron");
+const Player = require("../../../models/player");
+const { populateTodaysQuiz } = require("../../../services/dailyQuizService");
+const {
+  startDailyJobs,
+  resetAllTokens,
+} = require("../../../jobs/startDailyJobs");
 
 jest.mock("node-cron", () => ({
   schedule: jest.fn(),
@@ -6,15 +12,7 @@ jest.mock("node-cron", () => ({
 jest.mock("../../../services/dailyQuizService", () => ({
   populateTodaysQuiz: jest.fn().mockResolvedValue(),
 }));
-// jest.mock("../../services/dailyLooTipService", () => ({
-//   populateTodaysLooTip: jest.fn().mockResolvedValue(),
-// }));
-// jest.mock("../../services/dailyIcebreakerService", () => ({
-//   populateTodaysIcebreaker: jest.fn().mockResolvedValue(),
-// }));
-
-const { populateTodaysQuiz } = require("../../../services/dailyQuizService");
-const { startDailyJobs } = require("../../../jobs/startDailyJobs");
+jest.mock("../../../models/player");
 
 describe("startDailyJobs", () => {
   beforeEach(() => {
@@ -38,8 +36,6 @@ describe("startDailyJobs", () => {
     await callback();
 
     expect(populateTodaysQuiz).toHaveBeenCalledTimes(2); // one for start up and one for CRON
-    // expect(populateTodaysLooTip).toHaveBeenCalledTimes(1); // group TBC delete?
-    // expect(populateTodaysIcebreaker).toHaveBeenCalledTimes(1); // group TBC delete?
     expect(logSpy).toHaveBeenCalledWith("Daily jobs completed");
   });
 
@@ -54,8 +50,31 @@ describe("startDailyJobs", () => {
     await callback();
 
     expect(errorSpy).toHaveBeenCalledWith(
-      "Daily jobs failed:",
+      "populateTodaysQuiz failed:",
       "whatever the error message is",
     );
+  });
+});
+
+describe("resetAllTokens", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("increments tokenVersion for all players", async () => {
+    Player.updateMany.mockResolvedValueOnce({ modifiedCount: 5 });
+
+    await resetAllTokens();
+
+    expect(Player.updateMany).toHaveBeenCalledWith(
+      {},
+      { $inc: { tokenVersion: 1 } },
+    );
+  });
+
+  test("propagates an error if the update fails", async () => {
+    Player.updateMany.mockRejectedValueOnce(new Error("DB connection lost"));
+
+    await expect(resetAllTokens()).rejects.toThrow("DB connection lost");
   });
 });

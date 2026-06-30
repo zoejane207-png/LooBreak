@@ -2,6 +2,14 @@ const e = require("express");
 const Player = require("../models/player");
 const JWT = require("jsonwebtoken");
 
+function generateToken(player) {
+  return JWT.sign(
+    { sub: player._id.toString(), tokenVersion: player.tokenVersion },
+    process.env.JWT_SECRET,
+    { expiresIn: "1d" },
+  );
+}
+
 async function createPlayer(req, res) {
   try {
     const playername = req.body.playername?.trim();
@@ -19,11 +27,7 @@ async function createPlayer(req, res) {
     const player = new Player({ playername, score });
     const savedPlayer = await player.save();
 
-    const token = JWT.sign(
-      { sub: savedPlayer._id.toString() },
-      process.env.JWT_SECRET,
-      { expiresIn: "1d" },
-    );
+    const token = generateToken(savedPlayer);
     res.status(201).json({ message: "OK", token, player: savedPlayer });
   } catch (err) {
     console.error(err);
@@ -37,9 +41,10 @@ async function getPlayer(req, res) {
     if (!player) {
       return res.status(404).json({ message: "Player not found" });
     }
+    const token = generateToken(player);
     res
       .status(200)
-      .json({ playername: player.playername, score: player.score });
+      .json({ playername: player.playername, score: player.score, token });
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: "Something went wrong" });
