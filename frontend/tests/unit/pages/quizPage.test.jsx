@@ -150,12 +150,12 @@ describe("Quiz Page", () => {
     expect(screen.getByText("Question 2:")).toBeInTheDocument();
   });
 
-  test("Displays loading message when waiting for data from backend", async () => {
-    renderWithRouter(<QuizPage />);
-
+  test("Displays loading skeleton when waiting for data from backend", async () => {
     getQuiz.mockImplementation(() => new Promise(() => {}));
 
-    expect(screen.getByText("Loading questions...")).toBeInTheDocument();
+    renderWithRouter(<QuizPage />);
+
+    expect(screen.getByTestId("quiz-skeleton")).toBeInTheDocument();
   });
 
   test("Displays result and result form once finished", async () => {

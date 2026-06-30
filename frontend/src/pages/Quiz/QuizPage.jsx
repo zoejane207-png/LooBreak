@@ -3,6 +3,7 @@ import { getQuiz } from "../../services/quiz";
 import NavBar from "../../components/NavBar";
 import Results from "../../components/Results";
 import ResultsForm from "../../components/ResultsForm";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
@@ -71,7 +72,25 @@ export function QuizPage() {
   }
 
   if (!quiz.length) {
-    return <h3>Loading questions...</h3>;
+    return (
+      <>
+        <NavBar />
+        <div
+          data-testid="quiz-skeleton"
+          className="mx-auto flex w-full max-w-md flex-col gap-4 p-6"
+        >
+          <Skeleton className="h-8 w-32" />
+          <Skeleton className="h-5 w-40" />
+          <Skeleton className="h-5 w-24" />
+          <Skeleton className="h-16 w-full" />
+          <div className="flex flex-col gap-3">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <Skeleton key={index} className="h-11 w-full rounded-md" />
+            ))}
+          </div>
+        </div>
+      </>
+    );
   }
 
   const answers = [
@@ -83,10 +102,13 @@ export function QuizPage() {
     <>
       <NavBar />
       {!finished && (
-        <div data-test-id="quiz">
-          <h2>Quiz</h2>
-          <h3>Question {currentIndex + 1}:</h3>
-          <p>Score: {score}/10</p>
+        <div
+          data-test-id="quiz"
+          className="mx-auto flex w-full max-w-md flex-col gap-3 p-6"
+        >
+          <h2 className="text-2xl font-bold">Quiz</h2>
+          <h3 className="text-lg font-semibold">Question {currentIndex + 1}:</h3>
+          <p className="text-muted-foreground">Score: {score}/10</p>
           <div className="feed" role="feed">
             <p>{currentQuestion.question}</p>
             <div
