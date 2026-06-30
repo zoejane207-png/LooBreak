@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPlayers } from "../../services/results";
+import { getPlayers } from "../services/results";
 
 export default function Leaderboard() {
   const [players, setPlayers] = useState({});
@@ -22,7 +22,7 @@ export default function Leaderboard() {
         <table className="table-auto">
           <thead>
             <tr>
-              <th>Playername</th>
+              <th>Player</th>
               <th>Score</th>
             </tr>
           </thead>
