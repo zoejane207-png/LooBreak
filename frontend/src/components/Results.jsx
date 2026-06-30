@@ -34,8 +34,8 @@ export default function Results(props) {
         setLoading(false);
       }
     };
-    fetchResult;
-  }, [score, error]);
+    fetchResult();
+  }, [score]);
 
   return (
     <>

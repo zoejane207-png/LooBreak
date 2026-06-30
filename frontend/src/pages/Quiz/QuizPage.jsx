@@ -3,11 +3,14 @@ import { getQuiz } from "../../services/quiz";
 import NavBar from "../../components/NavBar";
 import Results from "../../components/Results";
 import ResultsForm from "../../components/ResultsForm";
+import { useLocation } from "react-router-dom";
 
-export function QuizPage({ quizStatus }) {
+export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [finished, setFinished] = useState(quizStatus?.quizCompleted ?? false);
+  const location = useLocation();
+  const quizStatus = location.state?.quizStatus;
+  const [finished, setFinished] = useState(quizStatus === true);
   const currentQuestion = quiz[currentIndex];
   const [score, setScore] = useState(0);
   const [isSelected, setIsSelected] = useState(false);

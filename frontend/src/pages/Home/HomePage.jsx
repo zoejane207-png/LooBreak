@@ -22,7 +22,7 @@ export default function HomePage() {
         return;
       }
       try {
-        const data = await getMyScore();
+        const data = await getMyScore(token);
         setScoreData(data);
         setQuizCompleted(true);
       } catch {
