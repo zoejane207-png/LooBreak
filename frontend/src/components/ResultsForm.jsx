@@ -86,6 +86,7 @@ export default function ResultsForm(props) {
         <input
           type="text"
           placeholder="Enter playername"
+          id="playername"
           name="playername"
           value={formData.playername}
           onChange={handleChange}
