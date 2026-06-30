@@ -5,8 +5,8 @@ const mongoose = require("mongoose");
 const IcebreakerSchema = new mongoose.Schema({
   icebreaker: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 // We use the Schema to create the Icebreaker model. Models are classes which we can

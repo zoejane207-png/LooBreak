@@ -96,13 +96,13 @@ import MyClass from "./path/to/other/file.js";
 To export multiple values, we can use the `export` keyword more than once:
 
 ```js
-export function add (a, b){
+export function add(a, b) {
   return a + b;
-};
+}
 
-export function multiply (a, b){
+export function multiply(a, b) {
   return a * b;
-};
+}
 ```
 
 which can then be imported using [destructuring](destructuring-link):
@@ -111,5 +111,4 @@ which can then be imported using [destructuring](destructuring-link):
 import { add, multiply } from "./path/to/other/file.js";
 ```
 
-[destructuring-link]:
-  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+[destructuring-link]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
