@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { getPlayers } from "../services/results";
 
+const medals = ["🥇", "🥈", "🥉"];
+
 export default function MiniLeaderboard() {
   const [players, setPlayers] = useState({});
   const [loading, setLoading] = useState(true);
@@ -30,9 +32,9 @@ export default function MiniLeaderboard() {
             {loading ? (
               <p>Loading...</p>
             ) : (
-              players.map((player) => (
-                <tr key={player.index}>
-                  <td>{player.playername}</td>
+              players.map((player, i) => (
+                <tr key={player.index}>    
+                  <td>{medals[i]} {player.playername}</td>
                   <td>{player.score}/10</td>
                 </tr>
               ))

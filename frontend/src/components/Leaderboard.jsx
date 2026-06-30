@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { getPlayers } from "../services/results";
 
+const medals = ["🥇", "🥈", "🥉"];
+
 export default function Leaderboard() {
   const [players, setPlayers] = useState({});
   const [loading, setLoading] = useState(true);
@@ -18,10 +20,11 @@ export default function Leaderboard() {
 
   return (
     <>
-      <div data-testId="leaderboard">
+      <div data-testid="leaderboard">
         <table className="table-auto">
           <thead>
             <tr>
+              <th>Rank</th>
               <th>Player</th>
               <th>Score</th>
             </tr>
@@ -30,8 +33,9 @@ export default function Leaderboard() {
             {loading ? (
               <p>Loading...</p>
             ) : (
-              players.map((player) => (
+              players.map((player, i) => (
                 <tr key={player.index}>
+                  {i < 3 ? <td>{medals[i]}</td> : <td>{i + 1}</td>}
                   <td>{player.playername}</td>
                   <td>{player.score}/10</td>
                 </tr>
