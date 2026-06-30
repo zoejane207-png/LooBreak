@@ -6,6 +6,7 @@ async function fetchExternalQuiz() {
   return res.json();
 }
 
+
 // Detect whether a single question's incorrect_answers contain duplicates.
 // A duplicate is an incorrect answer that appears more than once, or one that
 // matches the correct answer (which would leave the question with no real
