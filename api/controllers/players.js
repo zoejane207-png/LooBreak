@@ -46,9 +46,25 @@ async function getPlayer(req, res) {
   }
 }
 
+async function getAllPlayers(req, res) {
+  try {
+    const players = await Player.find();
+    if (!players) {
+      return res.status(404).json({ message: "Players not found" });
+    }
+    res
+      .status(200)
+      .json({ players: players.sort((a, b) => b.score - a.score) });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: "Something went wrong" });
+  }
+}
+
 const PlayersController = {
   createPlayer: createPlayer,
   getPlayer: getPlayer,
+  getAllPlayers: getAllPlayers,
 };
 
 module.exports = PlayersController;
