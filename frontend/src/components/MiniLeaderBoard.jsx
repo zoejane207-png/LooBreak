@@ -20,7 +20,7 @@ export default function MiniLeaderboard() {
 
   return (
     <>
-      <div data-testId="mini-leaderboard">
+      <div data-testid="mini-leaderboard">
         <table className="table-auto">
           <thead>
             <tr>
