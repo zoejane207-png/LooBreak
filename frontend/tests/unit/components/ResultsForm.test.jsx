@@ -105,4 +105,17 @@ describe("ResultsForm", () => {
 
     expect(navigateMock).toHaveBeenCalledWith("/leaderboard");
   });
+
+  test("that it shows error message when playername already exists", async () => {
+    createPlayer.mockRejectedValueOnce(new Error("Playername already exists. Playername must be unique."));
+
+    const user = userEvent.setup();
+    const playername = screen.getByLabelText("Playername");
+    const submit = screen.getByRole("button", { name: /submit/i });
+
+    await user.type(playername, "chris1");
+    await user.click(submit);
+
+    expect(screen.getByText("Playername already exists. Playername must be unique.")).toBeInTheDocument();
+  });
 });
