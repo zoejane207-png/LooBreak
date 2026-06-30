@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getQuiz } from "../services/quiz";
 
 const messages = [
   "That's almost impressively wrong.",
@@ -16,19 +17,41 @@ const messages = [
 
 export default function Results(props) {
   const score = props.score;
+  const [quiz, setQuiz] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    setMessage(messages[score]);
-  }, [score]);
+    const fetchResult = async () => {
+      try {
+        const quizData = await getQuiz();
+        setQuiz(quizData);
+        setMessage(messages[score]);
+      } catch(err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchResult
+  }, [score, error]);
 
   return (
     <>
       <div data-testid="results">
-        <h1>Game Over!</h1>
-        <h2>{score}/10</h2>
-        <h3>{message}</h3>
-        <p>Enter a playername to save your score to the leaderboard:</p>
+        <h2>Game Over!</h2>
+        {error ? (
+          <p role="alert">{error}</p>
+        ) : loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <h1>{score}/{quiz.length}</h1>
+            <h3>{message}</h3>
+            <p>Enter a playername to save your score to the leaderboard:</p>
+          </div>
+        )}
       </div>
     </>
   );
