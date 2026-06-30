@@ -18,7 +18,10 @@ describe("results service", () => {
           status: 200,
         },
       );
-      const result = await createPlayer({ playername: "testPlayer", score: "testScore" });
+      const result = await createPlayer({
+        playername: "testPlayer",
+        score: "testScore",
+      });
       const fetchArguments = fetch.mock.lastCall;
       const url = fetchArguments[0];
       const options = fetchArguments[1];
@@ -44,17 +47,17 @@ describe("results service", () => {
         },
       );
       try {
-        await createPlayer({playername: "testPlayer", score: "testScore"});
+        await createPlayer({ playername: "testPlayer", score: "testScore" });
       } catch (err) {
         expect(err.message).toEqual("Unable to create player and record score");
       }
     });
 
     test("network fetch failure", async () => {
-      expect.assertions(1)
+      expect.assertions(1);
       fetch.mockRejectOnce(new Error("Network error"));
       try {
-        await createPlayer({playername: "testPlayer", score: "testScore"});
+        await createPlayer({ playername: "testPlayer", score: "testScore" });
       } catch (err) {
         expect(err.message).toEqual("Network error");
       }
@@ -78,11 +81,11 @@ describe("results service", () => {
 
       expect(url).toEqual(`${BACKEND_URL}/players`);
       expect(options.method).toEqual("GET");
-      expect(result).toEqual({requests: []});
+      expect(result).toEqual({ requests: [] });
     });
 
     test("it throws an error if status is not 200", async () => {
-      expect.assertions(1)
+      expect.assertions(1);
       fetch.mockResponseOnce(
         JSON.stringify({
           message: "Unable to fetch players and their scores",
@@ -99,7 +102,7 @@ describe("results service", () => {
     });
 
     test("network fetch failure", async () => {
-      expect.assertions(1)
+      expect.assertions(1);
       fetch.mockRejectOnce(new Error("Network error"));
       try {
         await getPlayers();

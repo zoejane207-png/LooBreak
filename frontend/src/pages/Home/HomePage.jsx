@@ -13,8 +13,8 @@ export default function HomePage() {
       <div className="home">
         <h1>Welcome to LooBreak!</h1>
         <h3>Top 3 Players Today:</h3>
-        <div style={{ paddingLeft: "190px"}}>
-          <MiniLeaderboard data-testid="mini-leaderboard"/>
+        <div style={{ paddingLeft: "190px" }}>
+          <MiniLeaderboard data-testid="mini-leaderboard" />
         </div>
         <br></br>
         <br></br>
