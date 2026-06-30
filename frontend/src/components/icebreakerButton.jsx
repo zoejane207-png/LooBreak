@@ -4,10 +4,11 @@ export const IceBreakerRevealButton = ({ handleClick, show }) => {
 
     return (
         <button 
+        type="button"
         data-testid="icebreaker-reveal-btn"
         className={styles.revealBtn} 
         onClick={handleClick}>
-            {show ? "Hide the icebreaker" : "Show me an icebreaker!"}
+            {show ? "Hide the icebreakers 🧊 " : "Show me the icebreakers! 🧊 "}
         </button>
     );
 };
