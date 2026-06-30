@@ -18,14 +18,17 @@ describe("results service", () => {
           status: 200,
         },
       );
-      await createPlayer({playername: "testPlayer", score: "testScore"});
+      await createPlayer({ playername: "testPlayer", score: "testScore" });
       const fetchArguments = fetch.mock.lastCall;
       const url = fetchArguments[0];
       const options = fetchArguments[1];
 
       expect(url).toEqual(`${BACKEND_URL}/players`);
       expect(options.method).toEqual("POST");
-      expect(JSON.parse(options.body)).toEqual({ playername: "testPlayer", score: "testScore" });
+      expect(JSON.parse(options.body)).toEqual({
+        playername: "testPlayer",
+        score: "testScore",
+      });
     });
 
     test("it throws an error if the request failed", async () => {
