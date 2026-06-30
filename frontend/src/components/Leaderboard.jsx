@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPlayers } from "../../services/Players";
+import { getPlayers } from "../../services/results";
 
 export default function Leaderboard() {
   const [players, setPlayers] = useState({});
@@ -30,9 +30,9 @@ export default function Leaderboard() {
             {loading ? (
               <p>Loading...</p>
             ) : (
-              players.map((player, i) => (
+              players.map((player) => (
                 <tr key={player.index}>
-                  <td data-testId={player.index}>{player.playername}</td>
+                  <td>{player.playername}</td>
                   <td>{player.score}/10</td>
                 </tr>
               ))

@@ -13,3 +13,16 @@ export async function createPlayer({ playername, score }) {
   const data = await response.json();
   return data;
 }
+
+export async function getPlayers() {
+  const requestOptions = {
+    method: "GET",
+  };
+  const response = await fetch(`${BACKEND_URL}/players`, requestOptions);
+  if (response.status !== 200) {
+    throw new Error("Unable to fetch players");
+  }
+
+  const data = await response.json();
+  return data;
+}
