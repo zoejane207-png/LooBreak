@@ -1,5 +1,5 @@
 const express = require("express");
-const PlayersController = require("../controllers/Players");
+const PlayersController = require("../controllers/players");
 const router = express.Router();
 const { tokenChecker } = require("../middleware/tokenChecker");
 
