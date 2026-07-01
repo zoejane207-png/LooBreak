@@ -13,7 +13,7 @@ const messages = [
   "You've clearly been paying attention.",
   "That's the sort of score worth mentioning.",
   "Agonisingly close. You'll be thinking about that one.",
-  "Flawless. Go on, have a smug smile—you've earned it.",
+  "Flawless. Go on, have a smug smile you've earned it.",
 ];
 
 export default function Results(props) {
