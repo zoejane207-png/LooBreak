@@ -10,12 +10,12 @@
   h1, h2, h3, h4, h5 {
     font-family: "Fredoka", sans-serif;
     font-optical-sizing: auto;
-    font-weight: <weight>;
+    font-weight: auto;
     font-style: normal;
     font-variation-settings:
       "wdth" 100;
   }
-  /* .light {
+.light {
   --background: 40 20% 99%;        /* #FAFAF9 warm off-white */
   --foreground: 20 14% 10%;        /* #1C1917 near-black */
   --card: 0 0% 100%;
@@ -43,7 +43,7 @@
   --input: 20 6% 90%;
   --ring: 173 80% 40%;             /* teal-500 */
   --radius: 0.75rem;
-} */
+} 
 
 .dark {
   --background: 180 15% 7%;        /* #0F1513 warm-dark, teal-tinted */
@@ -70,7 +70,7 @@
 
   --border: 20 6% 16%;             /* #292524 */
   --input: 20 6% 16%;
-  --ring: 172 66% 50%;
+  --ring: 172 66% 50%; 
 }
 
 @theme inline {
@@ -96,4 +96,5 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+}
 }
