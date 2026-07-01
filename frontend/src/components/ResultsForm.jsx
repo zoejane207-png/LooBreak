@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { createPlayer } from "../services/results";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function ResultsForm(props) {
   const score = props.score;
@@ -87,28 +90,45 @@ export default function ResultsForm(props) {
   }
 
   return (
-    <>
-      <form
-        onSubmit={handleSubmit}
-        data-testid="results-form"
-        aria-label="results-form"
-      >
-        <label htmlFor="playername">Playername</label>
-        <input
-          type="text"
-          placeholder="Enter playername"
-          id="playername"
-          name="playername"
-          value={formData.playername}
-          onChange={handleChange}
-        />
-        <button type="button" onClick={generatePlayerName}>
-          Generate playername
-        </button>
-        <input type="hidden" name="score" value={score} />
-        {errors.playername && <p>{errors.playername}</p>}
-        <button type="submit">Submit</button>
-      </form>
-    </>
+    <Card className="px-4 w-full max-w-md mx-auto mt-4">
+      <CardContent className="pt-6">
+        <form
+          onSubmit={handleSubmit}
+          data-testid="results-form"
+          aria-label="results-form"
+          className="flex flex-col gap-4"
+        >
+          <div className="flex flex-col gap-2">
+            <label htmlFor="playername" className="text-sm font-medium">
+              Playername
+            </label>
+            <Input
+              type="text"
+              placeholder="Enter playername"
+              id="playername"
+              name="playername"
+              value={formData.playername}
+              onChange={handleChange}
+            />
+            {errors.playername && (
+              <p className="text-sm text-red-500">{errors.playername}</p>
+            )}
+          </div>
+
+          <input type="hidden" name="score" value={score} />
+
+          <div className="flex flex-col gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={generatePlayerName}
+            >
+              Generate playername
+            </Button>
+            <Button type="submit">Submit</Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   );
 }

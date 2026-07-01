@@ -9,7 +9,7 @@ describe("Results", () => {
       <BrowserRouter
         future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
       >
-        <Results />
+        <Results score={7} />
       </BrowserRouter>,
     );
     const heading1 = screen.getByRole("heading", { name: /game over/i });

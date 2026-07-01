@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { ArrowDown } from "lucide-react";
 
 const messages = [
   "That's almost impressively wrong.",
@@ -23,13 +25,27 @@ export default function Results(props) {
   }, [score]);
 
   return (
-    <>
-      <div data-testid="results">
-        <h1>Game Over!</h1>
-        <h2 data-testid="score">{score}/10</h2>
-        <h3 data-testid="results-message">{message}</h3>
-        <p>Enter a playername to save your score to the leaderboard:</p>
-      </div>
-    </>
+    <Card data-testid="results" className="w-full max-w-md mx-auto mt-6 mx-4">
+      <CardHeader>
+        <h1 className="text-3xl font-bold text-center">Game Over!</h1>
+      </CardHeader>
+      <CardContent className="flex flex-col items-center gap-4 text-center">
+        <h2 data-testid="score" className="text-5xl font-bold">
+          {score}/10
+        </h2>
+        <h3
+          data-testid="results-message"
+          className="text-lg italic text-muted-foreground"
+        >
+          {message}
+        </h3>
+        <p className="text-sm">
+          Enter a playername to save your score to the leaderboard
+        </p>
+        <div className="flex justify-center my-2">
+          <ArrowDown />
+        </div>
+      </CardContent>
+    </Card>
   );
 }
