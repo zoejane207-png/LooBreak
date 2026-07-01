@@ -21,7 +21,7 @@ async function populateTodaysQuiz() {
 
   // Only now that we have good data, replace the previous day's quiz.
   await Quiz.deleteMany({});
-  await Quiz.insertMany(docs);   // single array argument
+  await Quiz.insertMany(docs); // single array argument
 }
 
 module.exports = { populateTodaysQuiz };

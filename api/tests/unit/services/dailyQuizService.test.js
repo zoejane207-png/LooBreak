@@ -27,7 +27,7 @@ const fakeQuizData = {
 
 describe("populateTodaysQuiz", () => {
   beforeEach(() => {
-    jest.clearAllMocks();                       // reset call history between tests
+    jest.clearAllMocks(); // reset call history between tests
     fetchExternalQuizWithoutDuplicates.mockResolvedValue(fakeQuizData);
     Quiz.deleteMany.mockResolvedValue({ deletedCount: 0 });
     Quiz.insertMany.mockResolvedValue([]);
@@ -37,7 +37,7 @@ describe("populateTodaysQuiz", () => {
     await populateTodaysQuiz();
 
     expect(Quiz.deleteMany).toHaveBeenCalledTimes(1);
-    expect(Quiz.deleteMany).toHaveBeenCalledWith({});   // {} = delete all
+    expect(Quiz.deleteMany).toHaveBeenCalledWith({}); // {} = delete all
   });
 
   it("inserts the fetched questions in the right shape", async () => {
@@ -60,8 +60,12 @@ describe("populateTodaysQuiz", () => {
 
   it("deletes before it inserts (order matters)", async () => {
     const order = [];
-    Quiz.deleteMany.mockImplementation(async () => { order.push("delete"); });
-    Quiz.insertMany.mockImplementation(async () => { order.push("insert"); });
+    Quiz.deleteMany.mockImplementation(async () => {
+      order.push("delete");
+    });
+    Quiz.insertMany.mockImplementation(async () => {
+      order.push("insert");
+    });
 
     await populateTodaysQuiz();
 
@@ -72,14 +76,14 @@ describe("populateTodaysQuiz", () => {
     fetchExternalQuizWithoutDuplicates.mockRejectedValue(new Error("API down"));
 
     await expect(populateTodaysQuiz()).rejects.toThrow("API down");
-    expect(Quiz.insertMany).not.toHaveBeenCalled();   // never got to the insert
+    expect(Quiz.insertMany).not.toHaveBeenCalled(); // never got to the insert
   });
 
   it("leaves the previous day's quiz untouched if the fetch fails", async () => {
     fetchExternalQuizWithoutDuplicates.mockRejectedValue(new Error("API down"));
 
     await expect(populateTodaysQuiz()).rejects.toThrow("API down");
-    expect(Quiz.deleteMany).not.toHaveBeenCalled();   // old quiz not wiped
+    expect(Quiz.deleteMany).not.toHaveBeenCalled(); // old quiz not wiped
     expect(Quiz.insertMany).not.toHaveBeenCalled();
   });
 });
