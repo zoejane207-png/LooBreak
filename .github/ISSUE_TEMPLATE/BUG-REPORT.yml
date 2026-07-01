@@ -29,6 +29,7 @@ body:
         - v2.8 fixed duplicate answers bleeding into next question and added detection/retry for duplicate answers from quiz API
         - v2.9 implemented leaderboard, mini leaderboard and daily reset
         - v3.0 fixed act warnings
+        - v3.1 fixed react router warning
 
   - type: dropdown
     id: severity
