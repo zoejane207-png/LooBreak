@@ -53,16 +53,13 @@ export default function Icebreaker() {
       {error && <p>{error}</p>}
 
       {show && !loading && icebreakers.length > 0 && (
-
         <ul style={{ marginTop: "1rem" }} data-testid="icebreaker-list">
           {icebreakers.map((item) => (
             <li key={item._id} className={styles.icebreakerText}>
               {item.icebreaker}
             </li>
           ))}
-
         </ul>
-
       )}
     </div>
   );

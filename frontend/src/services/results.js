@@ -6,7 +6,7 @@ export async function createPlayer({ playername, score }) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ playername, score }),
   };
-  
+
   const response = await fetch(`${BACKEND_URL}/players`, requestOptions);
   const data = await response.json();
 

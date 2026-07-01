@@ -96,9 +96,7 @@ describe("ResultsForm", () => {
     await user.type(playername, "chris1");
     await user.click(submit);
 
-    expect(
-      await createPlayer
-    ).toHaveBeenCalledWith({
+    expect(await createPlayer).toHaveBeenCalledWith({
       playername: "chris1",
       score: 7,
     });
@@ -113,13 +111,13 @@ describe("ResultsForm", () => {
     await user.type(playername, "chris1");
     await user.click(submit);
 
-    expect(
-      await navigateMock
-    ).toHaveBeenCalledWith("/leaderboard");
+    expect(await navigateMock).toHaveBeenCalledWith("/leaderboard");
   });
 
   test("that it shows error message when playername already exists", async () => {
-    createPlayer.mockRejectedValueOnce(new Error("Playername already exists. Playername must be unique."));
+    createPlayer.mockRejectedValueOnce(
+      new Error("Playername already exists. Playername must be unique."),
+    );
 
     const user = userEvent.setup();
     const playername = screen.getByLabelText("Playername");
@@ -129,7 +127,9 @@ describe("ResultsForm", () => {
     await user.click(submit);
 
     expect(
-      await screen.findByText("Playername already exists. Playername must be unique.")
+      await screen.findByText(
+        "Playername already exists. Playername must be unique.",
+      ),
     ).toBeInTheDocument();
   });
 });

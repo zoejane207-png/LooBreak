@@ -17,9 +17,9 @@ export default function NavBar({ quizStatus }) {
         Home
       </Link>
       {!quizStatus && (
-      <Link to="/quiz" data-testid="quiz-button" state={{ quizStatus }}>
-        Quiz
-      </Link>
+        <Link to="/quiz" data-testid="quiz-button" state={{ quizStatus }}>
+          Quiz
+        </Link>
       )}
       <Link to="/leaderboard" data-testid="leaderboard-button">
         Leaderboard

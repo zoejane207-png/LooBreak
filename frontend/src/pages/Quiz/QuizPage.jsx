@@ -28,23 +28,19 @@ function QuizSkeleton() {
 }
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const location = useLocation();
-  const quizStatus = location.state?.quizStatus;
-  const [finished, setFinished] = useState(quizStatus === true);
-  const currentQuestion = quiz[currentIndex];
   const [score, setScore] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
   const [playerAnswer, setPlayerAnswer] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
-
+  const location = useLocation();
+  const quizStatus = location.state?.quizStatus;
   // THIS MUST BE BEFORE currentQuestion is used
   const [currentIndex, setCurrentIndex] = useState(() => {
     const saved = localStorage.getItem("quizProgress");
     return saved ? parseInt(saved) : 0;
   });
-
   const currentQuestion = quiz[currentIndex]; // Now it can access currentIndex
+  const [finished, setFinished] = useState(quizStatus === true);
 
   useEffect(() => {
     if (finished) return; // Will auto show results if already completed today's quiz
@@ -103,23 +99,10 @@ export function QuizPage() {
         style.backgroundColor = "red";
       }
     }
-
     return style;
   }
 
-  // if (!quiz.length) {
-  //   return <h3>Loading questions...</h3>;
-  // }
-
-  // const answers = [
-  //   currentQuestion.correct_answer,
-  //   ...currentQuestion.incorrect_answers,
-  // ].sort();
-
   if (!finished && !quiz.length) {
-    return <h3>Loading questions...</h3>;
-    
-  if (!quiz.length) {
     return (
       <>
         <NavBar />

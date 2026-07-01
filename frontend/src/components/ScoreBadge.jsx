@@ -22,7 +22,9 @@ export default function ScoreBadge({ data }) {
       ) : (
         <div>
           <p>Keep it up {data.playername}!</p>
-          <h2>{data.score}/{quiz.length}</h2>
+          <h2>
+            {data.score}/{quiz.length}
+          </h2>
           <p>New quiz tomorrow</p>
         </div>
       )}
