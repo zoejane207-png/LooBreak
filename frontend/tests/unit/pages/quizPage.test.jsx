@@ -120,7 +120,7 @@ describe("Quiz Page", () => {
       screen.queryByRole("button", { name: "Submit" }),
     ).not.toBeInTheDocument();
 
-    expect(screen.queryByRole("button", { name: "→" })).toBeInTheDocument();
+    expect(screen.getByTestId("arrow-button")).toBeInTheDocument();
   });
 
   test("Score increments after submit when answer is correct", async () => {
@@ -165,7 +165,7 @@ describe("Quiz Page", () => {
 
     await clickAndWait(screen.getByRole("button", { name: "Chocolate" }));
     await clickAndWait(screen.getByRole("button", { name: "Submit" }));
-    await clickAndWait(screen.getByRole("button", { name: "→" }));
+    await clickAndWait(screen.getByTestId("arrow-button"));
 
     expect(screen.getByText(mockQuiz[1].question)).toBeInTheDocument();
     expect(screen.getByText("Question 2:")).toBeInTheDocument();
@@ -185,15 +185,15 @@ describe("Quiz Page", () => {
     await screen.findByText(mockQuiz[0].question);
     await clickAndWait(screen.getByRole("button", { name: /licorice/i }));
     await clickAndWait(screen.getByRole("button", { name: /submit/i }));
-    await clickAndWait(screen.getByRole("button", { name: "→" }));
+    await clickAndWait(screen.getByTestId("arrow-button"));
     await screen.findByText(mockQuiz[1].question);
     await clickAndWait(screen.getByRole("button", { name: /jupiter/i }));
     await clickAndWait(screen.getByRole("button", { name: /submit/i }));
-    await clickAndWait(screen.getByRole("button", { name: "→" }));
+    await clickAndWait(screen.getByTestId("arrow-button"));
     await screen.findByText(mockQuiz[2].question);
     await clickAndWait(screen.getByRole("button", { name: /carbon dioxide/i }));
     await clickAndWait(screen.getByRole("button", { name: /submit/i }));
-    await clickAndWait(screen.getByRole("button", { name: "→" }));
+    await clickAndWait(screen.getByTestId("arrow-button"));
 
     expect(screen.getByTestId("results")).toBeInTheDocument();
     expect(screen.getByTestId("results-form")).toBeInTheDocument();

@@ -4,9 +4,18 @@ import NavBar from "../../components/NavBar";
 import Results from "../../components/Results";
 import ResultsForm from "../../components/ResultsForm";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from "@/components/ui/item";
+import { Button } from "@/components/ui/button";
+import { CircleArrowRight } from "lucide-react";
 
 // Shared shell so the skeleton and the real quiz can't drift apart.
-const QUIZ_CONTAINER_CLASS = "mx-auto flex w-full max-w-md flex-col gap-3 p-6";
+const QUIZ_CONTAINER_CLASS =
+  "mx-auto flex w-full max-w-md flex-col gap-3 p-6 items-center";
 
 // Co-located with the real quiz below; mirrors its exact layout:
 // title, question heading, score line, question body, four answer buttons.
@@ -34,7 +43,6 @@ export function QuizPage() {
   const [playerAnswer, setPlayerAnswer] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-
 
   const currentQuestion = quiz[currentIndex];
 
@@ -73,21 +81,32 @@ export function QuizPage() {
     let style = {};
 
     if (isSelected && answer === playerAnswer) {
-      style.border = "3px solid #00cafc";
+      style.border = "3px solid hsl(var(--ring))";
     } else {
-      style.border = "1px solid #1E1E1E";
+      style.border = "1px solid hsl(var(--border))";
     }
 
     if (!hasSubmitted && isSelected) {
       if (answer === playerAnswer) {
-        style.backgroundColor = "yellow";
+        style.backgroundColor = "hsl(var(--accent))";
         style.color = "black";
       }
     } else if (hasSubmitted) {
       if (answer === currentQuestion.correct_answer) {
-        style.backgroundColor = "green";
+        style.backgroundColor = "hsl(var(--success))";
+        style.color = "hsl(var(--success-foreground))";
+        style.opacity = "1"; // Keep bright, don't fade
+        style.fontWeight = "600"; // Make correct answer stand out
+      } else if (answer === playerAnswer) {
+        style.backgroundColor = "hsl(var(--destructive))";
+        style.color = "hsl(var(--destructive-foreground))";
+        style.opacity = "1"; // Keep bright
+        style.fontWeight = "600"; // Make selected answer stand out
       } else {
-        style.backgroundColor = "red";
+        // Other answers, go slightly frosted
+        style.opacity = "0.5";
+        style.backgroundColor = "hsl(var(--muted))";
+        style.color = "hsl(var(--muted-foreground))";
       }
     }
 
@@ -114,26 +133,26 @@ export function QuizPage() {
       {!finished && (
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
           <h2 className="text-2xl font-bold">Quiz</h2>
-          <h3 className="text-lg font-semibold">Question {currentIndex + 1}:</h3>
-          <p className="text-muted-foreground">
+          <p className="text-accent">
             Score: {score}/{quiz.length}
           </p>
-          <div className="feed" role="feed">
-            <p>{currentQuestion.question}</p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.5rem",
-                marginBottom: "1rem",
-              }}
-            >
+          <div className="quiz">
+            <Item className="border-border border-orange">
+              <ItemContent>
+                <ItemTitle className="text-xs text-muted-foreground">
+                  Question {currentIndex + 1}:
+                </ItemTitle>
+                <ItemDescription className="text-">
+                  {currentQuestion.question}
+                </ItemDescription>
+              </ItemContent>
+            </Item>
+            <br></br>
+            <div className="flex flex-col gap-0.5">
               {answers.map((answer, index) => (
-                <button
+                <Button
+                  variant="outline"
                   style={{
-                    paddingInline: "2rem",
-                    paddingBlock: "0.5rem",
-                    borderRadius: "5px",
                     ...getButtonStyle(answer),
                   }}
                   key={index}
@@ -141,17 +160,37 @@ export function QuizPage() {
                   disabled={hasSubmitted}
                 >
                   {answer}
-                </button>
+                  {hasSubmitted && (
+                    <span style={{ marginLeft: "0.5rem" }}>
+                      {answer === currentQuestion.correct_answer
+                        ? "✓ Correct"
+                        : "✗ Incorrect"}
+                    </span>
+                  )}
+                </Button>
               ))}
             </div>
           </div>
           {!hasSubmitted && (
-            <button disabled={!isSelected} onClick={handleSubmit}>
+            <Button
+              variant="default"
+              disabled={!isSelected}
+              onClick={handleSubmit}
+              className="w-20 h-8"
+            >
               Submit
-            </button>
+            </Button>
           )}
           {!finished && hasSubmitted && (
-            <button onClick={handleNextQuestion}>→</button>
+            <Button
+              variant="default"
+              disabled={!isSelected}
+              onClick={handleNextQuestion}
+              className="w-20 h-8"
+              data-testid="arrow-button"
+            >
+              <CircleArrowRight />
+            </Button>
           )}
         </div>
       )}

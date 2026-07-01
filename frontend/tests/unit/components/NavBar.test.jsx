@@ -46,8 +46,7 @@ describe("NavBar", () => {
 
   test("Navbar shows the light/dark mode button", () => {
     expect(
-      screen.getByRole("button", { name: /dark mode|light mode/i }),
-    ).toBeInTheDocument();
+      screen.getByTestId("theme-toggle")).toBeInTheDocument();
   });
 
   test("home button redirects to homepage", async () => {
