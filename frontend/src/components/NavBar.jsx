@@ -16,9 +16,11 @@ export default function NavBar({ quizStatus }) {
       <Link to="/" data-testid="home-button">
         Home
       </Link>
+      {!quizStatus && (
       <Link to="/quiz" data-testid="quiz-button" state={{ quizStatus }}>
         Quiz
       </Link>
+      )}
       <Link to="/leaderboard" data-testid="leaderboard-button">
         Leaderboard
       </Link>
