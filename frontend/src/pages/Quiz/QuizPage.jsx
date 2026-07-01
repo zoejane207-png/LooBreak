@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getQuiz } from "../../services/quiz";
-import NavBar from "../../components/NavBar";
+import PageLayout from "../../components/PageLayout";
 import Results from "../../components/Results";
 import ResultsForm from "../../components/ResultsForm";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -92,10 +92,9 @@ export function QuizPage() {
 
   if (!finished && !quiz.length) {
     return (
-      <>
-        <NavBar />
+      <PageLayout showFooter={false}>
         <QuizSkeleton />
-      </>
+      </PageLayout>
     );
   }
 
@@ -108,8 +107,7 @@ export function QuizPage() {
       : [];
 
   return (
-    <>
-      <NavBar />
+    <PageLayout showFooter={false}>
       {!finished && (
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
           <h2 className="text-2xl font-bold">Quiz</h2>
@@ -162,6 +160,6 @@ export function QuizPage() {
           <ResultsForm score={score} />
         </div>
       )}
-    </>
+    </PageLayout>
   );
 }
