@@ -25,7 +25,7 @@ function startDailyJobs() {
       ]);
 
       results.forEach((result, i) => {
-        const jobName = ["populateTodaysQuiz", "resetAllTokens"][i];
+        const jobName = ["populateTodaysQuiz", "resetTodaysLeaderboard", "resetAllTokens"][i];
         if (result.status === "rejected") {
           console.error(`${jobName} failed:`, result.reason.message);
         }

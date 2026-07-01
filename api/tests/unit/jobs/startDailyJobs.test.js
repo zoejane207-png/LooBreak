@@ -73,7 +73,7 @@ describe("startDailyJobs", () => {
     await callback();
 
     expect(errorSpy).toHaveBeenCalledWith(
-      "Daily jobs failed:",
+      "resetTodaysLeaderboard failed:",
       "whatever the error message is",
     );
   });
