@@ -23,7 +23,13 @@ vi.mock("../../../src/services/quiz", () => ({
   ]),
 }));
 
-const renderWithRouter = (ui) => render(<BrowserRouter>{ui}</BrowserRouter>);
+const renderWithRouter = (ui) => render(
+  <BrowserRouter
+    future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+  >
+    {ui}
+  </BrowserRouter>
+);
 
 describe("Loo tip footer banner placement", () => {
   test("shows on the home page", () => {
