@@ -31,6 +31,7 @@ body:
         - v3.0 fixed act warnings
         - v3.1 fixed react router warning
         - v3.2 Feature to add shadcn and and skeleton to components
+        - v3.7
 
   - type: dropdown
     id: severity
