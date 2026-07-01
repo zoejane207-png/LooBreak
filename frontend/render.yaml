@@ -1,8 +1,0 @@
-builds:
-  - type: static
-    dir: dist
-
-routes:
-  - path: /*
-    method: GET
-    dest: /index.html
