@@ -41,7 +41,13 @@ const mockQuiz = [
 ];
 
 const renderWithRouter = (component) => {
-  return render(<BrowserRouter>{component}</BrowserRouter>);
+  return render(
+    <BrowserRouter
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
+      {component}
+    </BrowserRouter>
+  );
 };
 
 describe("Quiz Page", () => {
