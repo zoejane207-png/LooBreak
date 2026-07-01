@@ -2,7 +2,7 @@ import ResultsForm from "../../../src/components/ResultsForm";
 import "@testing-library/jest-dom";
 import { createPlayer } from "../../../src/services/results";
 import userEvent from "@testing-library/user-event";
-
+import { act } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { screen, render } from "@testing-library/react";
 import { beforeEach, vi } from "vitest";
@@ -23,6 +23,7 @@ describe("ResultsForm", () => {
     render(
       <MemoryRouter
         future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        initialEntries={["/"]}
       >
         <ResultsForm score={7} />
       </MemoryRouter>,
@@ -52,7 +53,9 @@ describe("ResultsForm", () => {
     const submit = screen.getByRole("button", { name: /submit/i });
 
     await user.type(playername, "al");
-    await user.click(submit);
+    await act(async () => {
+      await user.click(submit);
+    });
     expect(
       screen.getByText("Playername must be more than 3 characters long"),
     ).toBeInTheDocument();
@@ -65,7 +68,9 @@ describe("ResultsForm", () => {
     const submit = screen.getByRole("button", { name: /submit/i });
 
     await user.type(playername, "thisnameiswaytoolong");
-    await user.click(submit);
+    await act(async () => {
+      await user.click(submit);
+    });
     expect(
       screen.getByText("Playername must be less than 12 characters long"),
     ).toBeInTheDocument();
@@ -77,11 +82,14 @@ describe("ResultsForm", () => {
     const generateButton = screen.getByRole("button", {
       name: /Generate playername/i,
     });
-    await user.click(generateButton);
+    await act(async () => {
+      await user.click(generateButton);
+    });
     expect(playername).not.toHaveValue("");
   });
 
   test("creates player successfully with playername and score when submit is valid", async () => {
+    createPlayer.mockResolvedValueOnce({ token: "fake-token" });
     const user = userEvent.setup();
     const playername = screen.getByLabelText("Playername");
     const submit = screen.getByRole("button", { name: /submit/i });
@@ -89,13 +97,14 @@ describe("ResultsForm", () => {
     await user.type(playername, "chris1");
     await user.click(submit);
 
-    expect(createPlayer).toHaveBeenCalledWith({
+    expect(await createPlayer).toHaveBeenCalledWith({
       playername: "chris1",
       score: 7,
     });
   });
 
   test("navigates to leaderboard on successful submit", async () => {
+    createPlayer.mockResolvedValueOnce({ token: "fake-token" });
     const user = userEvent.setup();
     const playername = screen.getByLabelText("Playername");
     const submit = screen.getByRole("button", { name: /submit/i });
@@ -103,11 +112,13 @@ describe("ResultsForm", () => {
     await user.type(playername, "chris1");
     await user.click(submit);
 
-    expect(navigateMock).toHaveBeenCalledWith("/leaderboard");
+    expect(await navigateMock).toHaveBeenCalledWith("/leaderboard");
   });
 
   test("that it shows error message when playername already exists", async () => {
-    createPlayer.mockRejectedValueOnce(new Error("Playername already exists. Playername must be unique."));
+    createPlayer.mockRejectedValueOnce(
+      new Error("Playername already exists. Playername must be unique."),
+    );
 
     const user = userEvent.setup();
     const playername = screen.getByLabelText("Playername");
@@ -116,6 +127,10 @@ describe("ResultsForm", () => {
     await user.type(playername, "chris1");
     await user.click(submit);
 
-    expect(screen.getByText("Playername already exists. Playername must be unique.")).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        "Playername already exists. Playername must be unique.",
+      ),
+    ).toBeInTheDocument();
   });
 });
