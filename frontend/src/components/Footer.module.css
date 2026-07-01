@@ -20,3 +20,79 @@
 .tip {
   font-style: italic;
 }
+
+.tipText {
+  display: inline-block;
+  transform-origin: center center;
+}
+
+/* Swirl the old tip down the drain: spin + shrink + drop while fading out. */
+@keyframes lootipFlushDown {
+  0% {
+    transform: rotate(0) scale(1) translateY(0);
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(720deg) scale(0.15) translateY(14px);
+    opacity: 0;
+  }
+}
+
+/* Reverse it for the freshly fetched tip: rise back up spinning the other way. */
+@keyframes lootipFlushUp {
+  0% {
+    transform: rotate(-720deg) scale(0.15) translateY(14px);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0) scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.flushing {
+  animation: lootipFlushDown 0.6s ease-in forwards;
+}
+
+.filling {
+  animation: lootipFlushUp 0.5s ease-out forwards;
+}
+
+.flushBtn {
+  margin-left: 10px;
+  padding: 2px 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0d3b66;
+  background-color: #f4d35e;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    filter 0.2s,
+    transform 0.1s;
+}
+
+.flushBtn:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+.flushBtn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.flushBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Respect users who prefer reduced motion: swap instantly, no swirl. */
+@media (prefers-reduced-motion: reduce) {
+  .flushing,
+  .filling {
+    animation: none;
+  }
+}

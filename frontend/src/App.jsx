@@ -28,7 +28,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider 
+      <RouterProvider
         future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
         router={router}
       />

@@ -34,7 +34,6 @@ function QuizSkeleton() {
     </div>
   );
 }
-
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
   const [finished, setFinished] = useState(false);
@@ -45,6 +44,7 @@ export function QuizPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const currentQuestion = quiz[currentIndex];
+
 
   useEffect(() => {
     getQuiz().then((data) => {
@@ -109,11 +109,10 @@ export function QuizPage() {
         style.color = "hsl(var(--muted-foreground))";
       }
     }
-
     return style;
   }
 
-  if (!quiz.length) {
+  if (!finished && !quiz.length) {
     return (
       <>
         <NavBar />
@@ -122,10 +121,13 @@ export function QuizPage() {
     );
   }
 
-  const answers = [
-    currentQuestion.correct_answer,
-    ...currentQuestion.incorrect_answers,
-  ].sort();
+  const answers =
+    !finished && currentQuestion
+      ? [
+          currentQuestion.correct_answer,
+          ...currentQuestion.incorrect_answers,
+        ].sort()
+      : [];
 
   return (
     <>
