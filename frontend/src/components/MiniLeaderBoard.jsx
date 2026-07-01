@@ -3,7 +3,7 @@ import { getPlayers } from "../services/results";
 
 const medals = ["🥇", "🥈", "🥉"];
 
-export default function Leaderboard() {
+export default function MiniLeaderboard() {
   const [players, setPlayers] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -12,7 +12,7 @@ export default function Leaderboard() {
     const fetchPlayers = async () => {
       try {
         const data = await getPlayers();
-        setPlayers(data.players);
+        setPlayers(data.players.slice(0, 3));
       } catch (err) {
         setError(err.message);
       } finally {
@@ -24,20 +24,17 @@ export default function Leaderboard() {
 
   return (
     <>
-      <div data-testid="leaderboard">
+      <div data-testid="mini-leaderboard">
         <table className="table-auto">
           <thead>
             <tr>
-              <th>Rank</th>
               <th>Player</th>
               <th>Score</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
-              <tr>
-                <td colSpan={3}>Loading...</td>
-              </tr>
+              <td colSpan={3}>Loading...</td>
             ) : error ? (
               <tr>
                 <td colSpan={3}>{error}</td>
@@ -45,8 +42,9 @@ export default function Leaderboard() {
             ) : (
               players.map((player, i) => (
                 <tr key={player._id}>
-                  {i < 3 ? <td>{medals[i]}</td> : <td>{i + 1}</td>}
-                  <td>{player.playername}</td>
+                  <td>
+                    {medals[i]} {player.playername}
+                  </td>
                   <td>{player.score}/10</td>
                 </tr>
               ))
