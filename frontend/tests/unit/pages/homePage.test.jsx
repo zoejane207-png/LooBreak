@@ -97,4 +97,20 @@ describe("Home Page", () => {
 
     expect(await screen.findByTestId("score-badge")).toBeInTheDocument();
   });
+
+  test("displays the quiz navigation button", () => {
+    renderHomePage();
+    
+    const quizButton = screen.getByTestId("homepage-quiz-button");
+    expect(quizButton).toBeInTheDocument();
+  });  
+
+  test("the quiz button redirects to quiz page", async () => {
+    renderHomePage();
+    const linkElement = screen.getByTestId("homepage-quiz-button");
+
+    expect(linkElement).toBeInTheDocument();
+    expect(linkElement).toHaveAttribute('href', '/quiz');
+
+  });
 });
