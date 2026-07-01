@@ -6,6 +6,8 @@ import { getToken, removeToken } from "../../../src/services/auth";
 import { getMyScore } from "../../../src/services/results";
 import { getQuiz } from "../../../src/services/quiz";
 import { expect, vi, beforeEach } from "vitest";
+import userEvent from "@testing-library/user-event";
+import { act } from "react";
 
 vi.mock("../../../src/services/auth", () => ({
   getToken: vi.fn(),
@@ -57,8 +59,13 @@ describe("Home Page", () => {
     expect(quizLinks[1].getAttribute("href")).toEqual("/quiz");
   });
 
-  test("displays the icebreaker component", () => {
+  test("displays the icebreaker component", async () => {
     renderHomePage();
+    const button = screen.getByTestId("icebreaker-reveal-btn");
+    expect(button).toBeInTheDocument();
+    await act(async () => {
+      await userEvent.click(screen.getByRole("button", { name: /show me the icebreakers! 🧊/i }));
+    });
     expect(screen.getByTestId("icebreaker-component")).toBeInTheDocument();
   });
 

@@ -1,18 +1,13 @@
 "use client";
 import { useState } from "react";
-// import { IceBreakerRevealButton } from "./icebreakerButton";
 import { getIcebreaker } from "../services/icebreaker";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Drawer,
   DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerDescription,
   DrawerTrigger,
   DrawerClose,
   DrawerFooter,
-  DrawerOverlay,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 
@@ -31,10 +26,9 @@ import { Button } from "@/components/ui/button";
 //   );
 // }
 
-export default function Icebreaker({ "data-testid": dataTestId = "icebreaker-component" }) {
+export default function Icebreaker() {
   const [icebreakers, setIcebreakers] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const [show, setShow] = useState(false);
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -64,22 +58,19 @@ export default function Icebreaker({ "data-testid": dataTestId = "icebreaker-com
         </Button>
       </DrawerTrigger>
 
-      <DrawerContent data-testid="icebreaker-drawer">
-        <DrawerOverlay className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
-        <div className="mx-auto w-full max-w-sm relative z-10">
-          <DrawerHeader>
-            <DrawerTitle>Icebreakers</DrawerTitle>
-            <DrawerDescription>Need a conversation starter?</DrawerDescription>
-          </DrawerHeader>
+        <DrawerContent 
+        data-testid="icebreaker-component"
+        className="bg-background text-foreground flex h-auto flex-col rounded-t-[10px]">
+          <div className="mx-auto w-full max-w-sm overflow-y-auto pb-34 md:pb-24">
 
-        <div className="p-4 flex flex-col items-center justify-center min-h-[200px]">
-          {loading && (
-            <div className="space-y-3" data-testid="icebreaker-skeleton">
-              <Skeleton className="h-4 w-full" />
-              <Skeleton className="h-4 w-5/6" />
-              <Skeleton className="h-4 w-4/6" />
-            </div>
-          )}
+            <div className="p-4 flex flex-col items-center justify-center min-h-50">
+              {loading && (
+                <div className="space-y-3" aria-busy="true" data-testid="icebreaker-skeleton">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-5/6" />
+                  <Skeleton className="h-4 w-4/6" />
+                </div>
+              )}
 
             {error && (
               <p className="text-destructive text-center p-4" data-testid="icebreaker-error">
@@ -100,7 +91,7 @@ export default function Icebreaker({ "data-testid": dataTestId = "icebreaker-com
           </div>
           <DrawerFooter >
             <DrawerClose asChild>
-              <Button variant="outline">Close</Button>
+              <Button variant="outline">Hide the icebreakers 🧊</Button>
             </DrawerClose>
           </DrawerFooter>
         </div>  

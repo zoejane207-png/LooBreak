@@ -1,5 +1,4 @@
 import "./HomePage.css";
-// import "../../components/icebreaker.module.css";
 import Icebreaker from "../../components/icebreaker";
 import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar";
@@ -53,17 +52,12 @@ export default function HomePage() {
         </div>
         <br></br>
         <br></br>
-        <Link to="/quiz" data-testid="quiz-button">
-          Quiz
-        </Link>
+        <Link to="/leaderboard" data-testid="leaderboard-button">
+          Leaderboard
+        </Link>        
         <br></br>
         <br></br>
         <Icebreaker />
-        <br></br>
-        <br></br>
-        <Link to="/leaderboard" data-testid="leaderboard-button">
-          Leaderboard
-        </Link>
       </div>
       <Footer />
     </>
