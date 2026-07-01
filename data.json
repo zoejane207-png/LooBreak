@@ -5,115 +5,173 @@
             "type": "not a type",
             "difficulty": "easy",
             "category": "General Knowledge",
-            "question": "Testing if correct is shuffled",
-            "correct_answer": "correct",
-            "incorrect_answers": [
-                "incorrect1",
-                "incorrect2",
-                "incorrect3"
-            ]
+            "question": "Can you get this question wrong?",
+            "correct_answer": "no",
+            "incorrect_answers": []
         },
         {
-            "type": "multiple",
-            "difficulty": "not a difficulty",
-            "category": "General Knowledge",
-            "question": "Testing if correct is shuffled",
-            "correct_answer": "correct",
-            "incorrect_answers": [
-                "incorrect1",
-                "incorrect2",
-                "incorrect3"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "easy",
-            "category": "not a category",
-            "question": "Testing if correct is shuffled",
-            "correct_answer": "correct",
-            "incorrect_answers": [
-                "incorrect1",
-                "incorrect2",
-                "incorrect3"
-            ]
-        },
-        {
-            "type": "wrong",
-            "difficulty": "wrong",
-            "category": "wrong",
-            "question": "Testing if correct is shuffled",
-            "correct_answer": "correct",
-            "incorrect_answers": [
-                "incorrect1",
-                "incorrect2",
-                "incorrect3"
-            ]
-        },
-        {
-            "type": "",
-            "difficulty": "",
-            "category": "",
-            "question": "Testing if no correct",
-            "correct_answer": "",
-            "incorrect_answers": [
-                "incorrect1",
-                "incorrect2",
-                "incorrect3"
-            ]
-        },
-        {
-            "type": "multiple",
+            "type": "not a type",
             "difficulty": "easy",
             "category": "General Knowledge",
-            "question": "Testing if no incorrect",
-            "correct_answer": "correct",
+            "question": "What number comes next? 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55...",
+            "correct_answer": "89",
             "incorrect_answers": [
+                "88",
+                "87",
+                "90"
             ]
         },
         {
-            "type": "multiple",
+            "type": "not a type",
             "difficulty": "easy",
             "category": "General Knowledge",
-            "question": "Testing if no questions",
-            "correct_answer": "",
+            "question": "What's the capital of Mozambique?",
+            "correct_answer": "Maputo",
             "incorrect_answers": [
+                "Dakar",
+                "Gaborone",
+                "Windhoek"
             ]
         },
         {
-            "type": "multiple",
+            "type": "not a type",
             "difficulty": "easy",
             "category": "General Knowledge",
-            "question": "Testing if correct is shuffled",
-            "correct_answer": "correct",
+            "question": "Are there too many answers?",
+            "correct_answer": "Yes",
             "incorrect_answers": [
-                "0incorrect1",
-                "0incorrect2",
-                "0incorrect3"
+                "Maybe",
+                "No",
+                "Definitely not",
+                "Perhaps",
+                "I don't know",
+                "Phone a friend",
+                "Sharktapus",
+                "I don't understand",
+                "Oui chef",
+                "Mayhaps",
+                "I couldn't possibly comment"
             ]
         },
         {
-            "type": "multiple",
+            "type": "not a type",
             "difficulty": "easy",
             "category": "General Knowledge",
-            "question": "Testing if correct is shuffled",
-            "correct_answer": "correct",
+            "question": "Why are Quality Engineers considered entry level compared to developers?",
+            "correct_answer": "They aren't: QE's form an essential part of teams",
             "incorrect_answers": [
-                "0incorrect1",
-                "0incorrect2",
-                "0incorrect3"
+                "They lack the skills of developers",
+                "They are there to delay releases",
+                "They are developers who didn't get the qualifications needed"
             ]
         },
         {
-            "type": "multiple",
+            "type": "not a type",
             "difficulty": "easy",
             "category": "General Knowledge",
-            "question": "Testing if correct is shuffled",
+            "question": "Was the last question a trick?",
+            "correct_answer": "No",
+            "incorrect_answers": [
+                "Yes",
+                "This one is a trick instead",
+                "All questions are tricks"
+            ]
+        },
+        {
+            "type": "not a type",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "What did Sam have for breakfast?",
+            "correct_answer": "Rice Krispies Multigrain Shapes",
+            "incorrect_answers": [
+                "A croissant with peanut butter",
+                "McDonald's Hash Browns and Jam",
+                "He didn't have breakfast this morning :("
+            ]
+        },
+        {
+            "type": "not a type",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "In 'Total Eclipse of the Heart', which word is NOT mentioned?",
+            "correct_answer": "lightness",
+            "incorrect_answers": [
+                "darkness",
+                "shadow",
+                "bright"
+            ]
+        },
+        {
+            "type": "not a type",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "Which team won in last night's World Cup matches?",
+            "correct_answer": "Mexico",
+            "incorrect_answers": [
+                "Ecuador",
+                "Sweden",
+                "Ivory Coast"
+            ]
+        },
+        {
+            "type": "not a type",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "Are there going to be more than 10 questions?",
+            "correct_answer": "Yes",
+            "incorrect_answers": [
+                "No"
+            ]
+        },
+        {
+            "type": "not a type",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "totally not a test question",
             "correct_answer": "correct",
             "incorrect_answers": [
-                "0incorrect1",
-                "0incorrect2",
-                "0incorrect3"
+                "incorrect 1",
+                "incorrect 2",
+                "incorrect 3",
+                "incorrect 4",
+                "incorrect 5",
+                "incorrect 6",
+                "incorrect 7",
+                "incorrect 8"
             ]
+        },
+        {
+            "type": "not a type",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "Who was the 13th President of the United States?",
+            "correct_answer": "Millard Fillmore",
+            "incorrect_answers": [
+                "Grover Cleveland",
+                "Benjamin Franklin",
+                "Henry Hoover",
+                "Hetty Hoover"
+            ]
+        },
+        {
+            "type": "not a type",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "How much ice cream should you have on a hot day?",
+            "correct_answer": "Never enough",
+            "incorrect_answers": [
+                "Consult your dietitian",
+                "Drink water instead",
+                "I don't like ice cream :("
+            ]
+        },
+        {
+            "type": "not a type",
+            "difficulty": "easy",
+            "category": "General Knowledge",
+            "question": "Did you enjoy my quiz?",
+            "correct_answer": "Yes",
+            "incorrect_answers": []
         }
     ]
 }
