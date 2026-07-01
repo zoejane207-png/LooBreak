@@ -42,7 +42,7 @@ export default function MiniLeaderboard() {
             ) : (
               players.map((player, i) => (
                 <tr key={player._id}>
-                  <td>
+                  <td data-testid="{i}" aria-label="{i}">
                     {medals[i]} {player.playername}
                   </td>
                   <td>{player.score}/10</td>

@@ -34,11 +34,7 @@ export function QuizPage() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const location = useLocation();
   const quizStatus = location.state?.quizStatus;
-  // THIS MUST BE BEFORE currentQuestion is used
-  const [currentIndex, setCurrentIndex] = useState(() => {
-    const saved = localStorage.getItem("quizProgress");
-    return saved ? parseInt(saved) : 0;
-  });
+  const [currentIndex, setCurrentIndex] = useState(0);
   const currentQuestion = quiz[currentIndex]; // Now it can access currentIndex
   const [finished, setFinished] = useState(quizStatus === true);
 
@@ -48,10 +44,6 @@ export function QuizPage() {
       setQuiz(data);
     });
   }, [finished]);
-
-  useEffect(() => {
-    localStorage.setItem("quizProgress", currentIndex);
-  }, [currentIndex]);
 
   function handleNextQuestion() {
     setIsSelected(false);
