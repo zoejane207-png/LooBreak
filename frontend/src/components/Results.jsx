@@ -26,8 +26,8 @@ export default function Results(props) {
     <>
       <div data-testid="results">
         <h1>Game Over!</h1>
-        <h2>{score}/10</h2>
-        <h3>{message}</h3>
+        <h2 data-testid="score">{score}/10</h2>
+        <h3 data-testid="results-message">{message}</h3>
         <p>Enter a playername to save your score to the leaderboard:</p>
       </div>
     </>

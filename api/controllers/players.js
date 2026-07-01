@@ -13,7 +13,11 @@ async function createPlayer(req, res) {
 
     const existingPlayer = await Player.findOne({ playername });
     if (existingPlayer) {
-      return res.status(400).json({ message: "Playername already exists" });
+      return res
+        .status(400)
+        .json({
+          message: "Playername already exists. Playername must be unique.",
+        });
     }
 
     const player = new Player({ playername, score });
