@@ -4,7 +4,6 @@ import useDarkMode from "../utils/useDarkMode";
 import { Switch } from "@/components/ui/switch";
 import { MoonStar } from "lucide-react";
 import { Sun } from "lucide-react";
-import { useState } from "react";
 import { Label } from "./ui/label";
 
 export default function NavBar() {
