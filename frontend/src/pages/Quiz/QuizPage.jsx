@@ -28,19 +28,29 @@ function QuizSkeleton() {
 
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [finished, setFinished] = useState(false);
-  const currentQuestion = quiz[currentIndex];
   const [score, setScore] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
   const [playerAnswer, setPlayerAnswer] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  // THIS MUST BE BEFORE currentQuestion is used
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    const saved = localStorage.getItem("quizProgress");
+    return saved ? parseInt(saved) : 0;
+  });
+
+  const currentQuestion = quiz[currentIndex]; // Now it can access currentIndex
 
   useEffect(() => {
     getQuiz().then((data) => {
       setQuiz(data);
     });
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("quizProgress", currentIndex);
+  }, [currentIndex]);
 
   function handleNextQuestion() {
     setIsSelected(false);
