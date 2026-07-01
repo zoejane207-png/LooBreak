@@ -89,6 +89,7 @@ describe("ResultsForm", () => {
   });
 
   test("creates player successfully with playername and score when submit is valid", async () => {
+    createPlayer.mockResolvedValueOnce({ token: "fake-token" });
     const user = userEvent.setup();
     const playername = screen.getByLabelText("Playername");
     const submit = screen.getByRole("button", { name: /submit/i });

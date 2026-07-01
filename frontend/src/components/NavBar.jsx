@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/toilet-vector.png";
 import useDarkMode from "../utils/useDarkMode";
 
-export default function NavBar({ quizStatus }) {
+export default function NavBar() {
   const [isDark, setIsDark] = useDarkMode();
 
   return (
@@ -16,11 +16,9 @@ export default function NavBar({ quizStatus }) {
       <Link to="/" data-testid="home-button">
         Home
       </Link>
-      {!quizStatus && (
-        <Link to="/quiz" data-testid="quiz-button" state={{ quizStatus }}>
-          Quiz
-        </Link>
-      )}
+      <Link to="/quiz" data-testid="quiz-button">
+        Quiz
+      </Link>
       <Link to="/leaderboard" data-testid="leaderboard-button">
         Leaderboard
       </Link>

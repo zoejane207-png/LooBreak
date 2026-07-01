@@ -3,7 +3,6 @@ import { getQuiz } from "../../services/quiz";
 import NavBar from "../../components/NavBar";
 import Results from "../../components/Results";
 import ResultsForm from "../../components/ResultsForm";
-import { useLocation } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
 
 // Shared shell so the skeleton and the real quiz can't drift apart.
@@ -32,18 +31,15 @@ export function QuizPage() {
   const [isSelected, setIsSelected] = useState(false);
   const [playerAnswer, setPlayerAnswer] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const location = useLocation();
-  const quizStatus = location.state?.quizStatus;
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentQuestion = quiz[currentIndex]; // Now it can access currentIndex
-  const [finished, setFinished] = useState(quizStatus === true);
+  const [finished, setFinished] = useState(false);
 
   useEffect(() => {
-    if (finished) return; // Will auto show results if already completed today's quiz
     getQuiz().then((data) => {
       setQuiz(data);
     });
-  }, [finished]);
+  }, []);
 
   function handleNextQuestion() {
     setIsSelected(false);

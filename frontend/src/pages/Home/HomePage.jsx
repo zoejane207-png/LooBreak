@@ -44,16 +44,9 @@ export default function HomePage() {
       <div className="home flex flex-col items-center gap-4 p-6">
         <h1 className="text-4xl font-bold">Welcome to LooBreak!</h1>
         {quizCompleted && <ScoreBadge data={scoreData} />}
-        {!quizCompleted && (
-          <Link
-            to="/quiz"
-            data-testid="quiz-button"
-            state={{ quizStatus: quizCompleted }}
-          >
-            Quiz
-          </Link>
-        )}
-
+        <Link to="/quiz" data-testid="quiz-button">
+          Quiz
+        </Link>
         <h3>Top 3 Players Today:</h3>
         <div style={{ paddingLeft: "190px" }}>
           <MiniLeaderboard data-testid="mini-leaderboard" />
