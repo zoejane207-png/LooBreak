@@ -5,7 +5,7 @@ import Footer from "../../../src/components/Footer";
 import { getLootip } from "../../../src/services/lootips";
 
 // Mocking the getLootip service
-vi.mock("../../src/services/lootips", () => {
+vi.mock("../../../src/services/lootips", () => {
   const getLootipMock = vi.fn();
   return { getLootip: getLootipMock };
 });
