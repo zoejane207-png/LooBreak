@@ -1,11 +1,11 @@
 const cron = require("node-cron");
-
+const Player = require("../models/player");
 const { populateTodaysQuiz } = require("../services/dailyQuizService");
 const { resetTodaysLeaderboard } = require("../services/dailyLeaderboardService");
-// const { populateTodaysLooTip } = require("../services/dailyLooTipService");
-// const {
-//   populateTodaysIcebreaker,
-// } = require("../services/dailyIcebreakerService");
+
+async function resetAllTokens() {
+  await Player.updateMany({}, { $inc: { tokenVersion: 1 } });
+}
 
 function startDailyJobs() {
   populateTodaysQuiz().catch((e) =>
@@ -14,22 +14,27 @@ function startDailyJobs() {
       console.error("initial leaderboard reset failed:", e.message)
     ),
   );
+
   cron.schedule(
     "15 * * * *", // currently changed to refresh each 15 mins, can change back to 1 0 * * *
     async () => {
-      try {
-        await Promise.all([
-          populateTodaysQuiz(),
-          resetTodaysLeaderboard(),
-          //   populateTodaysLooTip(),
-          //   populateTodaysIcebreaker(),
-        ]);
-        console.log("Daily jobs completed");
-      } catch (err) {
-        console.error("Daily jobs failed:", err.message);
-      }
+      const results = await Promise.allSettled([
+        populateTodaysQuiz(),
+        resetTodaysLeaderboard(),
+        resetAllTokens(),
+      ]);
+
+      results.forEach((result, i) => {
+        const jobName = ["populateTodaysQuiz", "resetTodaysLeaderboard", "resetAllTokens"][i];
+        if (result.status === "rejected") {
+          console.error(`${jobName} failed:`, result.reason.message);
+        }
+      });
+
+      console.log("Daily jobs completed");
     },
     { timezone: "Europe/London" },
   );
 }
-module.exports = { startDailyJobs };
+
+module.exports = { startDailyJobs, resetAllTokens };
