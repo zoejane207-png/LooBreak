@@ -30,6 +30,9 @@ body:
         - v2.9 implemented leaderboard, mini leaderboard and daily reset
         - v3.0 fixed act warnings
         - v3.1 fixed react router warning
+        - v3.2 Feature to add shadcn and and skeleton to components
+        - v3.3 fixed quiz reload issue
+        - v3.4 reset index being set in local storage. added test id's leaderboards
 
   - type: dropdown
     id: severity

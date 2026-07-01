@@ -28,13 +28,15 @@ function QuizSkeleton() {
 
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [finished, setFinished] = useState(false);
-  const currentQuestion = quiz[currentIndex];
   const [score, setScore] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
   const [playerAnswer, setPlayerAnswer] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+
+  const currentQuestion = quiz[currentIndex];
 
   useEffect(() => {
     getQuiz().then((data) => {
