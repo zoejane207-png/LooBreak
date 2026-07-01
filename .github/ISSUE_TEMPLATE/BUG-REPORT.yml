@@ -30,6 +30,7 @@ body:
         - v2.9 implemented leaderboard, mini leaderboard and daily reset
         - v3.0 fixed act warnings
         - v3.1 fixed react router warning
+        - v3.4 fixed quiz reload issue
 
   - type: dropdown
     id: severity
