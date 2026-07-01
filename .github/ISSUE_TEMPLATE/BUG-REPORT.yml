@@ -28,6 +28,7 @@ body:
         - v2.7.1 fixed issue for not showing error message when player name already exists
         - v2.8 fixed duplicate answers bleeding into next question and added detection/retry for duplicate answers from quiz API
         - v2.9 implemented leaderboard, mini leaderboard and daily reset
+        - v3.0 fixed act warnings
 
   - type: dropdown
     id: severity
