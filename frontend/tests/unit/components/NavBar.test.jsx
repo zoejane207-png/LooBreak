@@ -3,14 +3,15 @@ import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { act } from "react";
 
 describe("NavBar", () => {
   beforeEach(() => {
     render(
       <MemoryRouter
-        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-      >
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }} 
         initialEntries={["/"]}
+      >
         <NavBar />
         <Routes>
           <Route path="/" element={<div>Home Page</div>} />
@@ -50,17 +51,23 @@ describe("NavBar", () => {
   });
 
   test("home button redirects to homepage", async () => {
-    await userEvent.click(screen.getByRole("link", { name: /home/i }));
-    expect(screen.getByText("Home")).toBeInTheDocument();
+    await act(async () => {
+      await userEvent.click(screen.getByRole("link", { name: /home/i }));
+    });
+    expect(await screen.findByText(/home page/i)).toBeInTheDocument();
   });
 
   test("quiz button redirects to quizpage", async () => {
-    await userEvent.click(screen.getByRole("link", { name: /quiz/i }));
-    expect(screen.getByText("Quiz")).toBeInTheDocument();
+    await act(async () => {
+        await userEvent.click(screen.getByRole("link", { name: /quiz/i }));
+    });
+    expect(await screen.findByText(/quiz page/i)).toBeInTheDocument();
   });
 
   test("leaderboard button redirects to leaderboardpage", async () => {
-    await userEvent.click(screen.getByRole("link", { name: /leaderboard/i }));
-    expect(screen.getByText("Leaderboard")).toBeInTheDocument();
+    await act(async () => {
+      await userEvent.click(screen.getByRole("link", { name: /leaderboard/i }));
+    });
+    expect(await screen.findByText(/leaderboard page/i)).toBeInTheDocument();
   });
 });
