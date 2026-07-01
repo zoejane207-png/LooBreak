@@ -1,7 +1,23 @@
 import { useState } from "react";
 import { IceBreakerRevealButton } from "./icebreakerButton";
 import { getIcebreaker } from "../services/icebreaker";
+import { Skeleton } from "@/components/ui/skeleton";
 import styles from "./icebreaker.module.css";
+
+// Co-located with the revealed list below; mirrors its shell — the same
+// top margin and centered column the real `.icebreakerText` lines render in.
+function IcebreakerSkeleton() {
+  return (
+    <div
+      data-testid="icebreaker-skeleton"
+      className="mt-4 flex flex-col items-center gap-3"
+    >
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-5/6" />
+      <Skeleton className="h-4 w-2/3" />
+    </div>
+  );
+}
 
 export default function Icebreaker() {
   const [icebreakers, setIcebreakers] = useState([]);
@@ -32,7 +48,7 @@ export default function Icebreaker() {
     <div className={styles.container} data-testid="icebreaker-component">
       <IceBreakerRevealButton show={show} handleClick={handleClick} />
 
-      {loading && <p>Icebreakers loading...</p>}
+      {loading && <IcebreakerSkeleton />}
 
       {error && <p>{error}</p>}
 

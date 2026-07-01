@@ -128,12 +128,16 @@ describe("Quiz Page", () => {
 
     await screen.findByText(mockQuiz[0].question);
 
-    expect(screen.getByText("Score: 0/10")).toBeInTheDocument();
+    expect(
+      screen.getByText(`Score: 0/${mockQuiz.length}`),
+    ).toBeInTheDocument();
 
     await clickAndWait(screen.getByRole("button", { name: "Licorice" }));
     await clickAndWait(screen.getByRole("button", { name: "Submit" }));
 
-    expect(screen.getByText("Score: 1/10")).toBeInTheDocument();
+    expect(
+      screen.getByText(`Score: 1/${mockQuiz.length}`),
+    ).toBeInTheDocument();
   });
 
   test("Score does not increment after submit when answer is wrong", async () => {
@@ -141,12 +145,16 @@ describe("Quiz Page", () => {
 
     await screen.findByText(mockQuiz[0].question);
 
-    expect(screen.getByText("Score: 0/10")).toBeInTheDocument();
+    expect(
+      screen.getByText(`Score: 0/${mockQuiz.length}`),
+    ).toBeInTheDocument();
 
     await clickAndWait(screen.getByRole("button", { name: "Chocolate" }));
     await clickAndWait(screen.getByRole("button", { name: "Submit" }));
 
-    expect(screen.getByText("Score: 0/10")).toBeInTheDocument();
+    expect(
+      screen.getByText(`Score: 0/${mockQuiz.length}`),
+    ).toBeInTheDocument();
   });
 
   test("Navigates to next question when → button is clicked", async () => {
@@ -163,12 +171,12 @@ describe("Quiz Page", () => {
     expect(screen.getByText("Question 2:")).toBeInTheDocument();
   });
 
-  test("Displays loading message when waiting for data from backend", async () => {
+  test("Displays loading skeleton when waiting for data from backend", async () => {
     getQuiz.mockImplementation(() => new Promise(() => {}));
 
     renderWithRouter(<QuizPage />);
 
-    expect(screen.getByText("Loading questions...")).toBeInTheDocument();
+    expect(screen.getByTestId("quiz-skeleton")).toBeInTheDocument();
   });
 
   test("Displays result and result form once finished", async () => {

@@ -8,12 +8,12 @@ import ResultsPage from "../../../src/pages/Results/ResultsPage";
 import { QuizPage } from "../../../src/pages/Quiz/QuizPage";
 
 // The footer banner fetches a tip on mount, so stub the service everywhere.
-vi.mock("../../src/services/lootips", () => ({
+vi.mock("../../../src/services/lootips", () => ({
   getLootip: vi.fn().mockResolvedValue({ looTip: { lootip: "Test tip" } }),
 }));
 
 // QuizPage loads questions on mount.
-vi.mock("../../src/services/quiz", () => ({
+vi.mock("../../../src/services/quiz", () => ({
   getQuiz: vi.fn().mockResolvedValue([
     {
       question: "Test question?",

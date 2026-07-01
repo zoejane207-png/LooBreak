@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getLootip } from "../services/lootips";
+import { Skeleton } from "@/components/ui/skeleton";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -19,7 +20,14 @@ export default function Footer() {
     >
       <span className={styles.label}>💡 Loo tip of the day: </span>
       <span className={styles.tip} aria-live="polite">
-        {lootip ? lootip.lootip : "Loading today's loo tip…"}
+        {lootip ? (
+          lootip.lootip
+        ) : (
+          <Skeleton
+            data-testid="lootip-skeleton"
+            className="inline-block h-4 w-48 max-w-full align-middle"
+          />
+        )}
       </span>
     </footer>
   );
