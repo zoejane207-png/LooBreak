@@ -74,14 +74,22 @@ export function QuizPage() {
     return style;
   }
 
-  if (!quiz.length) {
+  // if (!quiz.length) {
+  //   return <h3>Loading questions...</h3>;
+  // }
+
+  // const answers = [
+  //   currentQuestion.correct_answer,
+  //   ...currentQuestion.incorrect_answers,
+  // ].sort();
+
+  if (!finished && !quiz.length) {
     return <h3>Loading questions...</h3>;
   }
 
-  const answers = [
-    currentQuestion.correct_answer,
-    ...currentQuestion.incorrect_answers,
-  ].sort();
+  const answers = !finished && currentQuestion
+    ? [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers].sort()
+    : [];
 
   return (
     <>

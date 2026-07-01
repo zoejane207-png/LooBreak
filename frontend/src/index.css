@@ -40,3 +40,61 @@ button {
   background: grey;
   color: white;
 }
+
+:root {
+  /* Light mode */
+  --background: 40 20% 99%;        /* #FAFAF9 warm off-white */
+  --foreground: 20 14% 10%;        /* #1C1917 near-black */
+  --card: 0 0% 100%;
+  --card-foreground: 20 14% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14% 10%;
+
+  --primary: 173 80% 32%;          /* #0D9488 teal-600 */
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 168 85% 96%;        /* #F0FDFA teal-50 tint */
+  --secondary-foreground: 175 84% 22%; /* dark teal text */
+
+  --accent: 24 95% 53%;            /* #F97316 orange-500 */
+  --accent-foreground: 0 0% 100%;
+
+  --muted: 60 5% 96%;              /* #F5F5F4 */
+  --muted-foreground: 24 5% 45%;   /* #78716C */
+
+  --destructive: 0 84% 60%;        /* #EF4444 */
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 20 6% 90%;             /* #E7E5E4 */
+  --input: 20 6% 90%;
+  --ring: 173 80% 40%;             /* teal-500 */
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 180 15% 7%;        /* #0F1513 warm-dark, teal-tinted */
+  --foreground: 60 9% 96%;         /* #F5F5F4 */
+  --card: 180 12% 10%;             /* #171F1D */
+  --card-foreground: 60 9% 96%;
+  --popover: 180 12% 10%;
+  --popover-foreground: 60 9% 96%;
+
+  --primary: 172 66% 50%;          /* #2DD4BF teal-400, brighter for dark bg */
+  --primary-foreground: 175 90% 10%; /* near-black teal, better AA than white here */
+
+  --secondary: 174 60% 15%;        /* #113B36 */
+  --secondary-foreground: 166 76% 79%; /* #99F6E4 */
+
+  --accent: 27 96% 61%;            /* #FB923C orange-400 */
+  --accent-foreground: 15 90% 14%; /* #431407 dark orange for contrast on the accent fill */
+
+  --muted: 20 6% 15%;              /* #262625 */
+  --muted-foreground: 24 5% 65%;   /* #A8A29E */
+
+  --destructive: 0 63% 51%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 20 6% 16%;             /* #292524 */
+  --input: 20 6% 16%;
+  --ring: 172 66% 50%;
+}
