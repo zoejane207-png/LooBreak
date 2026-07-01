@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import ScoreBadge from "../../components/ScoreBadge";
 import { getToken, removeToken } from "../../services/auth";
 import { getMyScore } from "../../services/results";
+import MiniLeaderboard from "../../components/MiniLeaderBoard";
 
 export default function HomePage() {
   const [quizCompleted, setQuizCompleted] = useState(false);
@@ -52,7 +53,15 @@ export default function HomePage() {
             Quiz
           </Link>
         )}
+        <h3>Top 3 Players Today:</h3>
+        <div style={{ paddingLeft: "190px" }}>
+          <MiniLeaderboard data-testid="mini-leaderboard" />
+        </div>
+        <br></br>
+        <br></br>
         <Icebreaker data-testid="icebreaker-component" />
+        <br></br>
+        <br></br>
         <Link to="/leaderboard" data-testid="leaderboard-button">
           Leaderboard
         </Link>

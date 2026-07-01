@@ -99,4 +99,49 @@ describe("/players", () => {
       expect(response.statusCode).toBe(401);
     });
   });
+
+  describe("GET, fetch all players and scores for leaderboard", () => {
+    test("returned in order of score value - highest to lowest", async () => {
+      const player1 = new Player ({
+        playername: "John",
+        score: 3,
+      });
+      const player2 = new Player ({
+        playername: "Paul",
+        score: 10,
+      });
+      const player3 = new Player ({
+        playername: "Ringo",
+        score: 5,
+      });
+
+      await player1.save();
+      await player2.save();
+      await player3.save();
+
+      const response = await request(app).get("/players");
+
+      expect(response.statusCode).toBe(200);
+
+      const data = JSON.parse(response.text);
+
+      expect(data.players[0].playername).toBe("Paul");
+      expect(data.players[0].score).toBe(10);
+      expect(data.players[1].playername).toBe("Ringo");
+      expect(data.players[1].score).toBe(5);
+      expect(data.players[2].playername).toBe("John");
+      expect(data.players[2].score).toBe(3);
+    });
+  });
+  describe("GET, fetch players errors", () => {
+    test("Returns 404 when no players in database", async () => {
+      const response = await request(app).get("/players");
+
+      expect(response.status).toBe(404);
+      
+      const data = response.body;
+      
+      expect(data.message).toBe("Players not found");
+    })
+  })
 });

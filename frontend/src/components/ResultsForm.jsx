@@ -22,7 +22,17 @@ export default function ResultsForm(props) {
       "dry",
       "hot",
       "odd",
-      "wet",
+      "new",
+      "pop",
+      "pro",
+      "sly",
+      "fab",
+      "icy",
+      "ace",
+      "top",
+      "fun",
+      "apt",
+      "few",
     ];
     const nouns = [
       "Einstein",
@@ -74,6 +84,7 @@ export default function ResultsForm(props) {
       navigate("/leaderboard");
     } catch (err) {
       console.error(err);
+      setErrors({ playername: err.message });
     }
   }
 
@@ -88,6 +99,7 @@ export default function ResultsForm(props) {
         <input
           type="text"
           placeholder="Enter playername"
+          id="playername"
           name="playername"
           value={formData.playername}
           onChange={handleChange}

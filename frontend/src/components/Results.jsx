@@ -47,10 +47,10 @@ export default function Results(props) {
           <p>Loading...</p>
         ) : (
           <div>
-            <h1>
+            <h1 data-testid="score">
               {score}/{quiz.length}
             </h1>
-            <h3>{message}</h3>
+            <h3 data-testid="results-message">{message}</h3>
             <p>Enter a playername to save your score to the leaderboard:</p>
           </div>
         )}

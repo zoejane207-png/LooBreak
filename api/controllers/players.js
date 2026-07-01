@@ -21,7 +21,11 @@ async function createPlayer(req, res) {
 
     const existingPlayer = await Player.findOne({ playername });
     if (existingPlayer) {
-      return res.status(400).json({ message: "Playername already exists" });
+      return res
+        .status(400)
+        .json({
+          message: "Playername already exists. Playername must be unique.",
+        });
     }
 
     const player = new Player({ playername, score });
@@ -51,9 +55,25 @@ async function getPlayer(req, res) {
   }
 }
 
+async function getAllPlayers(req, res) {
+  try {
+    const players = await Player.find();
+    if (players.length === 0) {
+      return res.status(404).json({ message: "Players not found" });
+    }
+    res
+      .status(200)
+      .json({ players: players.sort((a, b) => b.score - a.score) });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: "Something went wrong" });
+  }
+}
+
 const PlayersController = {
   createPlayer: createPlayer,
   getPlayer: getPlayer,
+  getAllPlayers: getAllPlayers,
 };
 
 module.exports = PlayersController;

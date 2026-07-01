@@ -1,6 +1,7 @@
 const cron = require("node-cron");
 const Player = require("../models/player");
 const { populateTodaysQuiz } = require("../services/dailyQuizService");
+const { resetTodaysLeaderboard } = require("../services/dailyLeaderboardService");
 
 async function resetAllTokens() {
   await Player.updateMany({}, { $inc: { tokenVersion: 1 } });
@@ -9,6 +10,9 @@ async function resetAllTokens() {
 function startDailyJobs() {
   populateTodaysQuiz().catch((e) =>
     console.error("initial run failed:", e.message),
+  resetTodaysLeaderboard().catch((e) =>
+      console.error("initial leaderboard reset failed:", e.message)
+    ),
   );
 
   cron.schedule(
@@ -16,6 +20,7 @@ function startDailyJobs() {
     async () => {
       const results = await Promise.allSettled([
         populateTodaysQuiz(),
+        resetTodaysLeaderboard(),
         resetAllTokens(),
       ]);
 
