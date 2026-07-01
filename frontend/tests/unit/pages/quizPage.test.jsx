@@ -184,5 +184,4 @@ describe("Quiz Page", () => {
     expect(screen.getByTestId("results")).toBeInTheDocument();
     expect(screen.getByTestId("results-form")).toBeInTheDocument();
   });
-
 });

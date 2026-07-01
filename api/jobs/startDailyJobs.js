@@ -1,6 +1,7 @@
 const cron = require("node-cron");
 
 const { populateTodaysQuiz } = require("../services/dailyQuizService");
+const { resetTodaysLeaderboard } = require("../services/dailyLeaderboardService");
 // const { populateTodaysLooTip } = require("../services/dailyLooTipService");
 // const {
 //   populateTodaysIcebreaker,
@@ -9,6 +10,9 @@ const { populateTodaysQuiz } = require("../services/dailyQuizService");
 function startDailyJobs() {
   populateTodaysQuiz().catch((e) =>
     console.error("initial run failed:", e.message),
+  resetTodaysLeaderboard().catch((e) =>
+      console.error("initial leaderboard reset failed:", e.message)
+    ),
   );
   cron.schedule(
     "15 * * * *", // currently changed to refresh each 15 mins, can change back to 1 0 * * *
@@ -16,6 +20,7 @@ function startDailyJobs() {
       try {
         await Promise.all([
           populateTodaysQuiz(),
+          resetTodaysLeaderboard(),
           //   populateTodaysLooTip(),
           //   populateTodaysIcebreaker(),
         ]);
