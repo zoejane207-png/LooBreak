@@ -25,7 +25,11 @@ body:
         - v2.5 fixed ticket for footer lootips
         - v2.6 completed tests for decoding HTML entities
         - v2.7 completed results page and score saving to database
+        - v2.7.1 fixed issue for not showing error message when player name already exists
         - v2.8 fixed duplicate answers bleeding into next question and added detection/retry for duplicate answers from quiz API
+        - v2.9 implemented leaderboard, mini leaderboard and daily reset
+        - v3.0 fixed act warnings
+        - v3.1 fixed react router warning
 
   - type: dropdown
     id: severity

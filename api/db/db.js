@@ -10,7 +10,12 @@ async function connectToDatabase() {
     throw new Error("No connection string provided");
   }
 
-  await mongoose.connect(mongoDbUrl);
+  await mongoose.connect(mongoDbUrl, {
+    maxPoolSize: 10,
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+    retryWrites: true,
+  });
 
   if (process.env.NODE_ENV !== "test") {
     console.log("Successfully connected to MongoDB");
