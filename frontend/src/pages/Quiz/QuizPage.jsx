@@ -99,9 +99,13 @@ export function QuizPage() {
     );
   }
 
-  const answers = !finished && currentQuestion
-    ? [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers].sort()
-    : [];
+  const answers =
+    !finished && currentQuestion
+      ? [
+          currentQuestion.correct_answer,
+          ...currentQuestion.incorrect_answers,
+        ].sort()
+      : [];
 
   return (
     <>
@@ -109,7 +113,9 @@ export function QuizPage() {
       {!finished && (
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
           <h2 className="text-2xl font-bold">Quiz</h2>
-          <h3 className="text-lg font-semibold">Question {currentIndex + 1}:</h3>
+          <h3 className="text-lg font-semibold">
+            Question {currentIndex + 1}:
+          </h3>
           <p className="text-muted-foreground">
             Score: {score}/{quiz.length}
           </p>

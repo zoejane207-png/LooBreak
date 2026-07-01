@@ -1,5 +1,6 @@
 import { getQuiz } from "../services/quiz";
 import { useState, useEffect } from "react";
+import { Badge } from "@/components/ui/badge";
 
 export default function ScoreBadge({ data }) {
   const [quiz, setQuiz] = useState([]);
@@ -14,19 +15,22 @@ export default function ScoreBadge({ data }) {
   }, []);
 
   return (
-    <div data-testid="score-badge">
+    <div
+      data-testid="score-badge"
+      className="flex w-full flex-wrap justify-center gap-2"
+    >
       {error ? (
-        <p role="alert">{error}</p>
+        <Badge role="alert" variant="destructive">
+          {error}
+        </Badge>
       ) : loading ? (
-        <p>Loading...</p>
+        <Badge variant="destructive">Loading...</Badge>
       ) : (
-        <div>
-          <p>Keep it up {data.playername}!</p>
-          <h2>
-            {data.score}/{quiz.length}
-          </h2>
-          <p>New quiz tomorrow</p>
-        </div>
+        <Badge variant="destructive">
+          Keep it up {data.playername}!
+          <br />
+          {data.score}/{quiz.length}
+        </Badge>
       )}
     </div>
   );
