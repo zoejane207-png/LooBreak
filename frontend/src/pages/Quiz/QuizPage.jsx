@@ -33,24 +33,16 @@ export function QuizPage() {
   const [isSelected, setIsSelected] = useState(false);
   const [playerAnswer, setPlayerAnswer] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // THIS MUST BE BEFORE currentQuestion is used
-  const [currentIndex, setCurrentIndex] = useState(() => {
-    const saved = localStorage.getItem("quizProgress");
-    return saved ? parseInt(saved) : 0;
-  });
 
-  const currentQuestion = quiz[currentIndex]; // Now it can access currentIndex
+  const currentQuestion = quiz[currentIndex];
 
   useEffect(() => {
     getQuiz().then((data) => {
       setQuiz(data);
     });
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("quizProgress", currentIndex);
-  }, [currentIndex]);
 
   function handleNextQuestion() {
     setIsSelected(false);
