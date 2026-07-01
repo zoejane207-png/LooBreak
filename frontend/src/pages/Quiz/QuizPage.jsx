@@ -86,7 +86,9 @@ export function QuizPage() {
         <div data-test-id="quiz">
           <h2>Quiz</h2>
           <h3>Question {currentIndex + 1}:</h3>
-          <p>Score: {score}/10</p>
+          <p>
+            Score: {score}/{quiz.length}
+          </p>
           <div className="feed" role="feed">
             <p>{currentQuestion.question}</p>
             <div
