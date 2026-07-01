@@ -1,14 +1,16 @@
-import styles from "./icebreaker.module.css";
+import { Button } from "@/components/ui/button";
 
-export const IceBreakerRevealButton = ({ handleClick, show }) => {
+export const IceBreakerRevealButton = ({ handleClick, show, ...props }) => {
   return (
-    <button
+    <Button
       type="button"
-      data-testid="icebreaker-reveal-btn"
-      className={styles.revealBtn}
+      variant="secondary"
+      // data-testid="icebreaker-reveal-btn"
+      // className={styles.revealBtn}
       onClick={handleClick}
+      {...props}
     >
       {show ? "Hide the icebreakers 🧊 " : "Show me the icebreakers! 🧊 "}
-    </button>
+    </Button>
   );
 };

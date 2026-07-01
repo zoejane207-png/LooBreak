@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 // import { IceBreakerRevealButton } from "./icebreakerButton";
 import { getIcebreaker } from "../services/icebreaker";
@@ -10,7 +11,8 @@ import {
   DrawerDescription,
   DrawerTrigger,
   DrawerClose,
-  DrawerFooter
+  DrawerFooter,
+  DrawerOverlay,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 
@@ -34,51 +36,75 @@ export default function Icebreaker({ "data-testid": dataTestId = "icebreaker-com
   const [loading, setLoading] = useState(false);
   // const [show, setShow] = useState(false);
   const [error, setError] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = async () => {
-    if (show) {
-      setShow(false);
-    } else {
+  const fetchIcebreakers = async () => {
       setLoading(true);
       setError(null);
       try {
         const icebreakerData = await getIcebreaker();
         setIcebreakers(icebreakerData.iceBreakers);
-        setShow(true);
-        // setError(null);
       } catch (err) {
         console.error("Could not fetch icebreaker:", err);
         setError("Could not fetch icebreaker");
       } finally {
         setLoading(false);
       }
-    }
   };
   return (
-    <div 
-    className="max-w-[400px] mx-auto my-[10px] p-5 border border-slate-200 rounded-lg text-center"
-    data-testid={dataTestId}
-    >
-      <IceBreakerRevealButton 
-        show={show} 
-        handleClick={handleClick}
-        data-testid="icebreaker-reveal-btn"
-      />
+    <Drawer 
+      open={isOpen}
+      onOpenChange={(open) => {
+      setIsOpen(open);
+      if (open) fetchIcebreakers();
+    }}>
+      <DrawerTrigger asChild>
+        <Button variant="outline" data-testid="icebreaker-reveal-btn">
+          {isOpen ? "Hide the icebreakers 🧊 " : "Show me the icebreakers! 🧊 "}
+        </Button>
+      </DrawerTrigger>
 
-      {loading && <IcebreakerSkeleton />}
+      <DrawerContent data-testid="icebreaker-drawer">
+        <DrawerOverlay className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
+        <div className="mx-auto w-full max-w-sm relative z-10">
+          <DrawerHeader>
+            <DrawerTitle>Icebreakers</DrawerTitle>
+            <DrawerDescription>Need a conversation starter?</DrawerDescription>
+          </DrawerHeader>
 
-      {error && <p className="text-destructive mt-2">{error}</p>}
+        <div className="p-4 flex flex-col items-center justify-center min-h-[200px]">
+          {loading && (
+            <div className="space-y-3" data-testid="icebreaker-skeleton">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-5/6" />
+              <Skeleton className="h-4 w-4/6" />
+            </div>
+          )}
 
-      {show && !loading && icebreakers.length > 0 && (
+            {error && (
+              <p className="text-destructive text-center p-4" data-testid="icebreaker-error">
+                {error}
+              </p>
+            )}
 
-        <ul className="mt-4" data-testid="icebreaker-list">
-          {icebreakers.map((item) => (
-            <li key={item._id} className="text-base font-normal mb-[15px]">
-              {item.icebreaker}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+            {!loading && icebreakers.length > 0 && (
+
+              <ul className="space-y-4" data-testid="icebreaker-list">
+                {icebreakers.map((item) => (
+                  <li key={item._id} className="text-base font-normal">
+                    {item.icebreaker}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <DrawerFooter >
+            <DrawerClose asChild>
+              <Button variant="outline">Close</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </div>  
+      </DrawerContent>
+    </Drawer>
   );
 }
