@@ -154,7 +154,7 @@ export function QuizPage() {
         </div>
       )}
       {finished && (
-        <div data-testid="quiz-result">
+        <div data-testid="quiz-result" className="px-4 py-6 flex flex-col gap-4">
           <Results score={score} />
           <ResultsForm score={score} />
         </div>

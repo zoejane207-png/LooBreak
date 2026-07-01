@@ -25,7 +25,7 @@ export default function Results(props) {
   }, [score]);
 
   return (
-    <Card data-testid="results" className="w-full max-w-md mx-auto mt-6 mx-4">
+    <Card data-testid="results" className="w-full max-w-md mx-auto">
       <CardHeader>
         <h1 className="text-3xl font-bold text-center">Game Over!</h1>
       </CardHeader>
