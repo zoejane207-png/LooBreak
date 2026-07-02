@@ -65,8 +65,8 @@ export default function NavBar() {
             onCheckedChange={setIsDark}
             data-testid="theme-toggle"
           />
-          <Label htmlFor="theme-toggle" aria-label="dark/light mode">
-            {isDark ? <MoonStar size={16} /> : <Sun size={16} />}
+          <Label htmlFor="theme-toggle" aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
+            {isDark ? <MoonStar size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />}
           </Label>
         </div>
       </div>

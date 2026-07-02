@@ -42,7 +42,7 @@ export default function HomePage() {
   // rather than the ad-hoc padding/spacer hacks main's standalone version used.
   return (
     <PageLayout>
-      <h1 className="text-4xl font-bold">Welcome to LooBreak!</h1>
+      <h1 className="text-4xl font-bold" data-testid="homepage-header">Welcome to LooBreak!</h1>
       {quizCompleted && <ScoreBadge data={scoreData} />}
       <Link to="/quiz" data-testid="homepage-quiz-button">
         <Button variant="default">Take the Quiz</Button>
@@ -53,7 +53,6 @@ export default function HomePage() {
           <Button variant="default">Check out the full leaderboard</Button>
       </Link>
       <Icebreaker />
-      <Footer />
     </PageLayout>
   );
 }
