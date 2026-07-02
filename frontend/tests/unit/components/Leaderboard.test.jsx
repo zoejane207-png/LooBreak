@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
 import Leaderboard from "../../../src/components/Leaderboard";
@@ -70,11 +70,11 @@ describe("Leaderboard", () => {
     await screen.findByText("Alice");
     const rows = screen.getAllByRole("row");
     expect(rows).toHaveLength(5);
-    expect(rows[1]).toHaveTextContent("🥇");
-    expect(rows[2]).toHaveTextContent("🥈");
-    expect(rows[3]).toHaveTextContent("🥉");
+    expect(within(rows[1]).getByAltText("1st place")).toBeInTheDocument();
+    expect(within(rows[2]).getByAltText("2nd place")).toBeInTheDocument();
+    expect(within(rows[3]).getByAltText("3rd place")).toBeInTheDocument();
     expect(rows[4]).toHaveTextContent("4");
-    expect(rows[4]).not.toHaveTextContent("🥇");
+    expect(within(rows[4]).queryByRole("img")).not.toBeInTheDocument();
   });
 
   test("shows an error message if players fail to load", async () => {

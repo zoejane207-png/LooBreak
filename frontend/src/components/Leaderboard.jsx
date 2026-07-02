@@ -14,6 +14,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 
 const medals = [medal1, medal2, medal3];
+const medalAlt = ["1st place", "2nd place", "3rd place"];
 
 // Gold / silver / bronze tints for the podium rows (index 0–2).
 const podiumRowClass = [
@@ -93,9 +94,9 @@ export default function Leaderboard() {
                   {i < 3 ? (
                     <img
                       src={medals[i]}
-                      alt={`Medal rank ${i + 1}`}
-                      className="w-6 h-6"
+                      alt={medalAlt[i]}
                       data-testid={`rank-${i}`}
+                      className="mx-auto h-8 w-8"
                     />
                   ) : (
                     <span className="text-muted-foreground font-medium">

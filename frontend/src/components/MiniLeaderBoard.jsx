@@ -14,6 +14,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 
 const medals = [medal1, medal2, medal3];
+const medalAlt = ["1st place", "2nd place", "3rd place"];
 
 // Gold / silver / bronze tints for the podium rows (index 0–2).
 const podiumRowClass = [
@@ -88,8 +89,8 @@ export default function MiniLeaderboard() {
                 <TableCell className="font-medium flex items-center gap-2">
                   <img
                     src={medals[i]}
-                    alt={`Medal rank ${i + 1}`}
-                    className="w-5 h-5"
+                    alt={medalAlt[i]}
+                    className="mr-2 inline-block h-6 w-6 align-middle"
                   />
                   {player.playername}
                 </TableCell>
