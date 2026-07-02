@@ -20,7 +20,6 @@ const quizNumbers = [no1, no2, no3, no4, no5, no6, no7, no8, no9, no10];
 import {
   Item,
   ItemContent,
-  ItemMedia,
   ItemDescription,
   ItemTitle,
 } from "@/components/ui/item";
@@ -36,23 +35,15 @@ const QUIZ_CONTAINER_CLASS =
 function QuizSkeleton() {
   return (
     <div data-testid="quiz-skeleton" className={QUIZ_CONTAINER_CLASS}>
-            
       <Skeleton className="h-8 w-32" />
-            
       <Skeleton className="h-7 w-40" />
-            
       <Skeleton className="h-5 w-24" />
-            
       <Skeleton className="h-16 w-full" />
-            
       <div className="flex flex-col gap-2">
-                
         {Array.from({ length: 4 }).map((_, index) => (
           <Skeleton key={index} className="h-11 w-full rounded-md" />
         ))}
-              
       </div>
-          
     </div>
   );
 }
@@ -158,7 +149,8 @@ export function QuizPage() {
           </p>
           <div className="quiz">
             <div aria-live="polite" className="sr-only">
-              Question {currentIndex + 1} of {quiz.length}: {currentQuestion.question}
+              Question {currentIndex + 1} of {quiz.length}:{" "}
+              {currentQuestion.question}
             </div>
             <Item className="border-border">
               <ItemContent className="text-center">
@@ -194,9 +186,10 @@ export function QuizPage() {
                     <span style={{ marginLeft: "0.5rem" }}>
                       <span aria-hidden="true">
                         {answer === currentQuestion.correct_answer ? "✓" : "✗"}
-                      </span>
-                      {" "}
-                      {answer === currentQuestion.correct_answer ? "Correct" : "Incorrect"}
+                      </span>{" "}
+                      {answer === currentQuestion.correct_answer
+                        ? "Correct"
+                        : "Incorrect"}
                     </span>
                   )}
                 </Button>
@@ -210,10 +203,9 @@ export function QuizPage() {
               onClick={handleSubmit}
               className="w-20 h-8"
             >
-                            Submit             
+              Submit
             </Button>
           )}
-                    
           {!finished && hasSubmitted && (
             <Button
               variant="default"
@@ -223,22 +215,15 @@ export function QuizPage() {
               data-testid="arrow-button"
               aria-label="Next question"
             >
-                            
               <CircleArrowRight aria-hidden="true" />
-                          
             </Button>
           )}
-                  
         </div>
       )}
-            
       {finished && (
         <div data-testid="quiz-result">
-                    
           <Results score={score} total={quiz.length} />
-                    
           <ResultsForm score={score} />
-                  
         </div>
       )}
     </PageLayout>
