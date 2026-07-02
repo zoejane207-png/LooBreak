@@ -11,7 +11,7 @@ vi.mock("../../src/services/icebreaker", () => ({
 describe("Icebreaker Component", () => {
   const setup = () => {
     render(<Icebreaker />);
-    const button = screen.getByTestId("icebreaker-reveal-btn");
+    const button = screen.getByTestId("icebreaker-reveal-button");
     return { button };
   };
 
