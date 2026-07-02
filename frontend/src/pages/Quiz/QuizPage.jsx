@@ -146,7 +146,7 @@ export function QuizPage() {
       <NavBar />
       {!finished && (
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
-          <h2 className="text-2xl font-bold">Quiz</h2>
+          <h1 className="text-2xl font-bold">Quiz</h1>
           <img src="{quizNumbers}" alt="" />
           <p className="text-accent">
             Score: {score}/{quiz.length}

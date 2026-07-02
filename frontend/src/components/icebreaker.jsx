@@ -91,7 +91,7 @@ export default function Icebreaker() {
           </div>
           <DrawerFooter >
             <DrawerClose asChild>
-              <Button variant="outline">Hide the icebreakers 🧊</Button>
+              <Button variant="outline" aria-label="hide-icebreakers-btn">Hide the icebreakers 🧊</Button>
             </DrawerClose>
           </DrawerFooter>
         </div>  

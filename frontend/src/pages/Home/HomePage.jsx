@@ -41,13 +41,13 @@ export default function HomePage() {
   return (
     <>
       <NavBar />
-      <div className="home flex flex-col items-center gap-4 p-6">
+      <div className="home flex flex-col items-center gap-4 p-6" data-testid="main homepage-content">
         <h1 className="text-4xl font-bold">Welcome to LooBreak!</h1>
         {quizCompleted && <ScoreBadge data={scoreData} />}
         <Link to="/quiz" data-testid="homepage-quiz-button">
           <Button variant="default">Take the Quiz</Button>
         </Link>
-        <h3>Top 3 Players Today:</h3>
+        <h2>Top 3 Players Today:</h2>
         <div style={{ paddingLeft: "190px" }}>
           <MiniLeaderboard data-testid="mini-leaderboard" />
         </div>

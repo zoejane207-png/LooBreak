@@ -18,6 +18,7 @@ export default function ScoreBadge({ data }) {
     <div
       data-testid="score-badge"
       className="flex w-full flex-wrap justify-center gap-2"
+      aria-live="polite"
     >
       {error ? (
         <Badge role="alert" variant="destructive">
