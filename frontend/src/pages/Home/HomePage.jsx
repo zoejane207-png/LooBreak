@@ -49,10 +49,11 @@ export default function HomePage() {
       </Link>
       <h3>Top 3 Players Today:</h3>
       <MiniLeaderboard data-testid="mini-leaderboard" />
-      <Icebreaker />
-      <Link to="/leaderboard" data-testid="leaderboard-button">
-        Leaderboard
+      <Link to="/leaderboard" data-testid="homepage-leaderboard-button">
+          <Button variant="default">Check out the full leaderboard</Button>
       </Link>
+      <Icebreaker />
+      <Footer />
     </PageLayout>
   );
 }
