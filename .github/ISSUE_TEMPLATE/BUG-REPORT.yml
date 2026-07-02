@@ -35,7 +35,9 @@ body:
         - v3.4 reset index being set in local storage. added test id's leaderboards
         - v3.5 added flush animation to footer
         - v3.7 coverage report
+        - v3.8 leaderboard styling
         - v3.9 quiz page styling, light/dark mode fixed, toggle switch implemented for theme change
+
   - type: dropdown
     id: severity
     attributes:
