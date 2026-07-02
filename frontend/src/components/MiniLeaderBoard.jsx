@@ -86,7 +86,7 @@ export default function MiniLeaderboard() {
                 key={player._id}
                 className={i < 3 ? podiumRowClass[i] : undefined}
               >
-                <TableCell className="font-medium">
+                <TableCell className="font-medium flex items-center gap-2">
                   <img
                     src={medals[i]}
                     alt={medalAlt[i]}

@@ -4,9 +4,22 @@ import PageLayout from "../../components/PageLayout";
 import Results from "../../components/Results";
 import ResultsForm from "../../components/ResultsForm";
 import { Skeleton } from "@/components/ui/skeleton";
+import no1 from "../../assets/loobreak-number-1.svg";
+import no2 from "../../assets/loobreak-number-2.svg";
+import no3 from "../../assets/loobreak-number-3.svg";
+import no4 from "../../assets/loobreak-number-4.svg";
+import no5 from "../../assets/loobreak-number-5.svg";
+import no6 from "../../assets/loobreak-number-6.svg";
+import no7 from "../../assets/loobreak-number-7.svg";
+import no8 from "../../assets/loobreak-number-8.svg";
+import no9 from "../../assets/loobreak-number-9.svg";
+import no10 from "../../assets/loobreak-number-10.svg";
+
+const quizNumbers = [no1, no2, no3, no4, no5, no6, no7, no8, no9, no10];
 import {
   Item,
   ItemContent,
+  ItemMedia,
   ItemDescription,
   ItemTitle,
 } from "@/components/ui/item";
@@ -44,7 +57,6 @@ export function QuizPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const currentQuestion = quiz[currentIndex];
-
 
   useEffect(() => {
     getQuiz().then((data) => {
@@ -137,14 +149,19 @@ export function QuizPage() {
             Score: {score}/{quiz.length}
           </p>
           <div className="quiz">
-            <Item className="border-border border-orange">
-              <ItemContent>
-                <ItemTitle className="text-xs text-muted-foreground">
-                  Question {currentIndex + 1}:
-                </ItemTitle>
-                <ItemDescription className="text-">
-                  {currentQuestion.question}
-                </ItemDescription>
+            <Item className="border-border">
+              <ItemContent className="text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <img
+                    src={quizNumbers[currentIndex]}
+                    alt={`Question ${currentIndex + 1}`}
+                    className="w-8 h-8"
+                  />
+                  <ItemTitle className="text-xs text-muted-foreground">
+                    Question {currentIndex + 1}:
+                  </ItemTitle>
+                </div>
+                <ItemDescription>{currentQuestion.question}</ItemDescription>
               </ItemContent>
             </Item>
             <br></br>

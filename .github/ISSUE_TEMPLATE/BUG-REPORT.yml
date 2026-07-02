@@ -41,6 +41,7 @@ body:
         - v4.1 added custom images
         - v4.2 Site aligment and image placements
         - v4.3 leaderboard button added onto homepage
+        - v4.4 added in icons on quiz, leaderboard, mini leaderboard and score badge
 
   - type: dropdown
     id: severity
