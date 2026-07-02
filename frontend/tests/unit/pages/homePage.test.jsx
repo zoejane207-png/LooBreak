@@ -61,11 +61,11 @@ describe("Home Page", () => {
 
   test("displays the icebreaker component", async () => {
     renderHomePage();
-    const button = screen.getByTestId("icebreaker-reveal-btn");
+    const button = screen.getByTestId("icebreaker-reveal-button");
     expect(button).toBeInTheDocument();
     await act(async () => {
       await userEvent.click(
-        screen.getByRole("button", { name: /show me the icebreakers! 🧊/i }),
+        screen.getByRole("button", { name: /show me the icebreakers!/i }),
       );
     });
     expect(screen.getByTestId("icebreaker-component")).toBeInTheDocument();
