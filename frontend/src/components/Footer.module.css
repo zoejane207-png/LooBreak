@@ -63,17 +63,22 @@
 
 .flushBtn {
   margin-left: 10px;
-  padding: 2px 10px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #0d3b66;
-  background-color: #f4d35e;
+  padding: 0;
+  background: none;
   border: none;
-  border-radius: 999px;
+  line-height: 0;
   cursor: pointer;
   transition:
     filter 0.2s,
     transform 0.1s;
+}
+
+/* Fixed height keeps the banner from jumping when the wide "long" graphic
+   swaps to the narrow "tall" one mid-flush; width follows each aspect ratio. */
+.flushImg {
+  display: block;
+  height: 40px;
+  width: auto;
 }
 
 .flushBtn:hover:not(:disabled) {
