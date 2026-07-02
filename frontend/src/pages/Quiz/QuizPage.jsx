@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getQuiz } from "../../services/quiz";
-import NavBar from "../../components/NavBar";
+import PageLayout from "../../components/PageLayout";
 import Results from "../../components/Results";
 import ResultsForm from "../../components/ResultsForm";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -133,13 +133,9 @@ export function QuizPage() {
 
   if (!finished && !quiz.length) {
     return (
-      <>
-                
-        <NavBar />
-                
+      <PageLayout showFooter={false}>
         <QuizSkeleton />
-              
-      </>
+      </PageLayout>
     );
   }
 
@@ -152,42 +148,29 @@ export function QuizPage() {
       : [];
 
   return (
-    <>
-            
-      <NavBar />
-            
+    <PageLayout showFooter={false}>
       {!finished && (
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
-                    <h2 className="text-2xl font-bold">Quiz</h2>
-                    
+          <h2 className="text-2xl font-bold">Quiz</h2>
           <p className="text-accent">
                         Score: {score}/{quiz.length}
                       
           </p>
                     
           <div className="quiz">
-                        
             <Item className="border-border">
-                            
               <ItemContent className="text-center">
-                                
                 <div className="flex items-center justify-center gap-2 mb-2">
-                                    
                   <img
                     src={quizNumbers[currentIndex]}
                     alt={`Question ${currentIndex + 1}`}
                     className="w-8 h-8"
                   />
-                                    
                   <ItemTitle className="text-xs text-muted-foreground">
-                                        Question {currentIndex + 1}:
-                                      
+                    Question {currentIndex + 1}:
                   </ItemTitle>
-                                  
                 </div>
-                                
                 <ItemDescription>{currentQuestion.question}</ItemDescription>
-                              
               </ItemContent>
                           
             </Item>
@@ -261,7 +244,6 @@ export function QuizPage() {
                   
         </div>
       )}
-          
-    </>
+    </PageLayout>
   );
 }

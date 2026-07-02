@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import { vi } from "vitest";
 import "@testing-library/jest-dom";
 import MiniLeaderboard from "../../../src/components/MiniLeaderBoard";
@@ -64,9 +64,9 @@ describe("MiniLeaderBoard", () => {
     await screen.findByText(/alice/i);
     const rows = screen.getAllByRole("row");
     expect(rows).toHaveLength(4);
-    expect(rows[1]).toHaveTextContent("🥇");
-    expect(rows[2]).toHaveTextContent("🥈");
-    expect(rows[3]).toHaveTextContent("🥉");
+    expect(within(rows[1]).getByAltText("1st place")).toBeInTheDocument();
+    expect(within(rows[2]).getByAltText("2nd place")).toBeInTheDocument();
+    expect(within(rows[3]).getByAltText("3rd place")).toBeInTheDocument();
   });
 
   test("shows an error message if players fail to load", async () => {
