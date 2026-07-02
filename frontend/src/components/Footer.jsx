@@ -64,7 +64,7 @@ export default function Footer() {
       data-testid="lootip-banner"
       aria-label="Loo tip of the day"
     >
-      <span className={styles.label}>💡 Loo tip of the day: </span>
+      <span className={styles.label}>💡 Loo tip: </span>
       <span className={styles.tip} aria-live="polite">
         {lootip ? (
           <span className={tipTextClass} onAnimationEnd={handleAnimationEnd}>
@@ -79,7 +79,7 @@ export default function Footer() {
       </span>
       <button
         type="button"
-        className={styles.flushBtn}
+        className={styles.flushButton}
         onClick={handleFlush}
         disabled={busy || !lootip}
         aria-label="Flush for a new loo tip"
