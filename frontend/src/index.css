@@ -2,6 +2,7 @@
 @custom-variant dark (&:is(.dark *));
 
 body {
+  @apply bg-background text-foreground;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));

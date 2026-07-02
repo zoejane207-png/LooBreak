@@ -20,7 +20,7 @@ export default function NavBar() {
       <Link to="/" data-testid="home-button">
         Home
       </Link>
-      <Link to="/quiz" data-testid="quiz-button">
+      <Link to="/quiz" data-testid="navbar-quiz-button">
         Quiz
       </Link>
       <Link to="/leaderboard" data-testid="leaderboard-button">
