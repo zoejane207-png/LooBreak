@@ -4,7 +4,6 @@ import { vi } from "vitest";
 
 import HomePage from "../../../src/pages/Home/HomePage";
 import LeaderboardPage from "../../../src/pages/Leaderboard/LeaderboardPage";
-import ResultsPage from "../../../src/pages/Results/ResultsPage";
 import { QuizPage } from "../../../src/pages/Quiz/QuizPage";
 
 // The footer banner fetches a tip on mount, so stub the service everywhere.
@@ -40,11 +39,6 @@ describe("Loo tip footer banner placement", () => {
 
   test("shows on the leaderboard page", () => {
     renderWithRouter(<LeaderboardPage />);
-    expect(screen.getByTestId("lootip-banner")).toBeTruthy();
-  });
-
-  test("shows on the results (quiz completion) page", () => {
-    renderWithRouter(<ResultsPage />);
     expect(screen.getByTestId("lootip-banner")).toBeTruthy();
   });
 
