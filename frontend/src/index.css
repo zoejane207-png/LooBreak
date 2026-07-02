@@ -40,7 +40,7 @@ h5 {
   --muted: 60 5% 96%; /* #F5F5F4 */
   --muted-foreground: 24 5% 45%; /* #78716C */
 
-  --destructive: 24 95% 53%; /* Orange instead of red */
+  --destructive: 18 90% 40%; /* Orange instead of red */
   --destructive-foreground: 0 0% 100%;
 
   --success: 172 66% 50%; /* Blue instead of green */
