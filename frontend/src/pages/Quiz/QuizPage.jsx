@@ -1,21 +1,9 @@
 import { useState, useEffect } from "react";
 import { getQuiz } from "../../services/quiz";
-import NavBar from "../../components/NavBar";
+import PageLayout from "../../components/PageLayout";
 import Results from "../../components/Results";
 import ResultsForm from "../../components/ResultsForm";
 import { Skeleton } from "@/components/ui/skeleton";
-import no1 from "../assets/loobreak-number-1.svg";
-import no2 from "../assets/loobreak-number-2.svg";
-import no3 from "../assets/loobreak-number-3.svg";
-import no4 from "../assets/loobreak-number-4.svg";
-import no5 from "../assets/loobreak-number-5.svg";
-import no6 from "../assets/loobreak-number-6.svg";
-import no7 from "../assets/loobreak-number-7.svg";
-import no8 from "../assets/loobreak-number-8.svg";
-import no9 from "../assets/loobreak-number-9.svg";
-import no10 from "../assets/loobreak-number-10.svg";
-
-const quizNumbers = [{no1}, {no2}, (no3), {no4}, {no5}, (no6), {no7}, {no8}, (no9), {no10}];
 import {
   Item,
   ItemContent,
@@ -126,10 +114,9 @@ export function QuizPage() {
 
   if (!finished && !quiz.length) {
     return (
-      <>
-        <NavBar />
+      <PageLayout showFooter={false}>
         <QuizSkeleton />
-      </>
+      </PageLayout>
     );
   }
 
@@ -142,12 +129,10 @@ export function QuizPage() {
       : [];
 
   return (
-    <>
-      <NavBar />
+    <PageLayout showFooter={false}>
       {!finished && (
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
           <h2 className="text-2xl font-bold">Quiz</h2>
-          <img src="{quizNumbers}" alt="" />
           <p className="text-accent">
             Score: {score}/{quiz.length}
           </p>
@@ -215,6 +200,6 @@ export function QuizPage() {
           <ResultsForm score={score} />
         </div>
       )}
-    </>
+    </PageLayout>
   );
 }

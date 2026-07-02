@@ -1,12 +1,9 @@
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
+import PageLayout from "../../components/PageLayout";
 
 export default function ResultsPage() {
   return (
-    <>
-      <NavBar />
-      <h2 className="mx-auto p-6 text-2xl font-bold">Your Results</h2>
-      <Footer />
-    </>
+    <PageLayout>
+      <h2 className="text-3xl font-bold">Your Results</h2>
+    </PageLayout>
   );
 }
