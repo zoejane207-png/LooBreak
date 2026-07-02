@@ -67,7 +67,11 @@ export default function NavBar() {
             aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
           />
           <Label htmlFor="theme-toggle" aria-hidden="true">
-            {isDark ? <MoonStar size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />}
+            {isDark ? (
+              <MoonStar size={16} aria-hidden="true" />
+            ) : (
+              <Sun size={16} aria-hidden="true" />
+            )}
           </Label>
         </div>
       </div>

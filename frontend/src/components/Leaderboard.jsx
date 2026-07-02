@@ -106,14 +106,18 @@ export default function Leaderboard() {
                       className="mx-auto h-8 w-8"
                     />
                   ) : (
-                    <span className="text-muted-foreground font-medium">{i + 1}</span>
+                    <span className="text-muted-foreground font-medium">
+                      {i + 1}
+                    </span>
                   )}
                 </TableCell>
                 <TableCell className="font-medium">
                   {player.playername}
                 </TableCell>
                 <TableCell className="text-right tabular-nums">
-                  <span aria-hidden="true">{player.score}/{quiz.length}</span>
+                  <span aria-hidden="true">
+                    {player.score}/{quiz.length}
+                  </span>
                   <span className="sr-only">
                     Score: {player.score} out of {quiz.length}
                   </span>

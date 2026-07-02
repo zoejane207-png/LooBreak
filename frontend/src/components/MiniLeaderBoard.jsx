@@ -97,7 +97,10 @@ export default function MiniLeaderboard() {
                       {i < 3 ? (
                         <img src={medals[i]} alt="" className="h-6 w-6" />
                       ) : (
-                        <span className="text-muted-foreground text-sm" aria-hidden="true">
+                        <span
+                          className="text-muted-foreground text-sm"
+                          aria-hidden="true"
+                        >
                           {i + 1}
                         </span>
                       )}
@@ -111,8 +114,12 @@ export default function MiniLeaderboard() {
                   </div>
                 </TableCell>
                 <TableCell className="text-right tabular-nums">
-                  <span aria-hidden="true">{player.score}/{quiz.length}</span>
-                  <span className="sr-only">Score: {player.score} out of {quiz.length}</span>
+                  <span aria-hidden="true">
+                    {player.score}/{quiz.length}
+                  </span>
+                  <span className="sr-only">
+                    Score: {player.score} out of {quiz.length}
+                  </span>
                 </TableCell>
               </TableRow>
             ))

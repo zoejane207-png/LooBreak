@@ -1,17 +1,19 @@
 const cron = require("node-cron");
 const Player = require("../models/player");
 const { populateTodaysQuiz } = require("../services/dailyQuizService");
-const { resetTodaysLeaderboard } = require("../services/dailyLeaderboardService");
+const {
+  resetTodaysLeaderboard,
+} = require("../services/dailyLeaderboardService");
 
 async function resetAllTokens() {
   await Player.updateMany({}, { $inc: { tokenVersion: 1 } });
 }
 
 function startDailyJobs() {
-  populateTodaysQuiz().catch((e) =>
-    console.error("initial run failed:", e.message),
-  resetTodaysLeaderboard().catch((e) =>
-      console.error("initial leaderboard reset failed:", e.message)
+  populateTodaysQuiz().catch(
+    (e) => console.error("initial run failed:", e.message),
+    resetTodaysLeaderboard().catch((e) =>
+      console.error("initial leaderboard reset failed:", e.message),
     ),
   );
 
@@ -25,7 +27,11 @@ function startDailyJobs() {
       ]);
 
       results.forEach((result, i) => {
-        const jobName = ["populateTodaysQuiz", "resetTodaysLeaderboard", "resetAllTokens"][i];
+        const jobName = [
+          "populateTodaysQuiz",
+          "resetTodaysLeaderboard",
+          "resetAllTokens",
+        ][i];
         if (result.status === "rejected") {
           console.error(`${jobName} failed:`, result.reason.message);
         }

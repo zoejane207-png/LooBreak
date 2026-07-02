@@ -64,7 +64,9 @@ describe("Home Page", () => {
     const button = screen.getByTestId("icebreaker-reveal-btn");
     expect(button).toBeInTheDocument();
     await act(async () => {
-      await userEvent.click(screen.getByRole("button", { name: /show me the icebreakers! 🧊/i }));
+      await userEvent.click(
+        screen.getByRole("button", { name: /show me the icebreakers! 🧊/i }),
+      );
     });
     expect(screen.getByTestId("icebreaker-component")).toBeInTheDocument();
   });
@@ -100,33 +102,31 @@ describe("Home Page", () => {
 
   test("displays the quiz navigation button", () => {
     renderHomePage();
-    
+
     const quizButton = screen.getByTestId("homepage-quiz-button");
     expect(quizButton).toBeInTheDocument();
-  });  
+  });
 
   test("the quiz button redirects to quiz page", async () => {
     renderHomePage();
     const linkElement = screen.getByTestId("homepage-quiz-button");
 
     expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveAttribute('href', '/quiz');
-
+    expect(linkElement).toHaveAttribute("href", "/quiz");
   });
 
-    test("displays the leaderboard navigation button", () => {
+  test("displays the leaderboard navigation button", () => {
     renderHomePage();
-    
+
     const leaderboardButton = screen.getByTestId("homepage-leaderboard-button");
     expect(leaderboardButton).toBeInTheDocument();
-  });  
+  });
 
   test("the leaderboard button redirects to leaderboard page", async () => {
     renderHomePage();
     const linkElement = screen.getByTestId("homepage-leaderboard-button");
 
     expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveAttribute('href', '/leaderboard');
-
+    expect(linkElement).toHaveAttribute("href", "/leaderboard");
   });
 });

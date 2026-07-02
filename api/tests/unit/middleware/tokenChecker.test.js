@@ -1,6 +1,6 @@
 const JWT = require("jsonwebtoken");
 const Player = require("../../../models/player");
-const { tokenChecker} = require("../../../middleware/tokenChecker");
+const { tokenChecker } = require("../../../middleware/tokenChecker");
 
 jest.mock("../../../models/player", () => ({
   findById: jest.fn(),

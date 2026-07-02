@@ -16,6 +16,7 @@ import no9 from "../../assets/loobreak-number-9.svg";
 import no10 from "../../assets/loobreak-number-10.svg";
 
 const quizNumbers = [no1, no2, no3, no4, no5, no6, no7, no8, no9, no10];
+
 import {
   Item,
   ItemContent,
@@ -152,18 +153,21 @@ export function QuizPage() {
       {!finished && (
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
           <h1 className="text-2xl font-bold">Quiz</h1>
-          <p className="text-accent">
+          <p className="text-accent" aria-live="polite">
                         Score: {score}/{quiz.length}
                       
           </p>
                     
           <div className="quiz">
+            <div aria-live="polite" className="sr-only">
+              Question {currentIndex + 1} of {quiz.length}: {currentQuestion.question}
+            </div>
             <Item className="border-border">
               <ItemContent className="text-center">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <img
                     src={quizNumbers[currentIndex]}
-                    alt={`Question ${currentIndex + 1}`}
+                    alt={`Question ${currentIndex + 1} Looroll`}
                     className="w-8 h-8"
                   />
                   <ItemTitle className="text-xs text-muted-foreground">
@@ -187,16 +191,17 @@ export function QuizPage() {
                   key={index}
                   onClick={() => handleAnswer(currentQuestion, answer)}
                   disabled={hasSubmitted}
+                  aria-pressed={isSelected && answer === playerAnswer}
                 >
                                     {answer}
                                     
                   {hasSubmitted && (
                     <span style={{ marginLeft: "0.5rem" }}>
-                                            
-                      {answer === currentQuestion.correct_answer
-                        ? "✓ Correct"
-                        : "✗ Incorrect"}
-                                          
+                      <span aria-hidden="true">
+                        {answer === currentQuestion.correct_answer ? "✓" : "✗"}
+                      </span>
+                      {" "}
+                      {answer === currentQuestion.correct_answer ? "Correct" : "Incorrect"}
                     </span>
                   )}
                                   
@@ -225,9 +230,10 @@ export function QuizPage() {
               onClick={handleNextQuestion}
               className="w-20 h-8"
               data-testid="arrow-button"
+              aria-label="Next question"
             >
                             
-              <CircleArrowRight />
+              <CircleArrowRight aria-hidden="true" />
                           
             </Button>
           )}
@@ -238,7 +244,7 @@ export function QuizPage() {
       {finished && (
         <div data-testid="quiz-result">
                     
-          <Results score={score} total={quiz.length}/>
+          <Results score={score} total={quiz.length} />
                     
           <ResultsForm score={score} />
                   

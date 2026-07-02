@@ -16,7 +16,8 @@ jest.mock("../../../services/dailyQuizService", () => ({
   populateTodaysQuiz: jest.fn().mockResolvedValue(),
 }));
 jest.mock("../../../models/player");
-jest.mock("../../../services/dailyLeaderboardService", () => ({  // Add this
+jest.mock("../../../services/dailyLeaderboardService", () => ({
+  // Add this
   resetTodaysLeaderboard: jest.fn().mockResolvedValue(),
 }));
 
