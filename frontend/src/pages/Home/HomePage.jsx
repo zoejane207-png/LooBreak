@@ -53,7 +53,6 @@ export default function HomePage() {
           <Button variant="default">Check out the full leaderboard</Button>
       </Link>
       <Icebreaker />
-      <Footer />
     </PageLayout>
   );
 }

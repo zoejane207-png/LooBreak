@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getPlayers } from "../services/results";
+import { getQuiz } from "@/services/quiz";
 import medal1 from "../assets/loobreak-medal-1.svg";
 import medal2 from "../assets/loobreak-medal-2.svg";
 import medal3 from "../assets/loobreak-medal-3.svg";
@@ -41,7 +42,8 @@ function LeaderboardSkeletonRows() {
 }
 
 export default function Leaderboard() {
-  const [players, setPlayers] = useState({});
+  const [quiz, setQuiz] = useState([]);
+  const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -49,7 +51,9 @@ export default function Leaderboard() {
     const fetchPlayers = async () => {
       try {
         const data = await getPlayers();
+        const quizData = await getQuiz();
         setPlayers(data.players);
+        setQuiz(quizData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -64,7 +68,9 @@ export default function Leaderboard() {
       data-testid="leaderboard"
       className="bg-card text-card-foreground mx-auto w-full max-w-md overflow-hidden rounded-xl border shadow-sm"
     >
-      <Table>
+      <Table aria-live="polite" className="sr-only">
+        {loading ? "Loading leaderboard" : ""}
+        <caption className="sr-only">Full leaderboard</caption>
         <TableHeader>
           <TableRow className="hover:bg-transparent">
             <TableHead className="w-16 text-center">Rank</TableHead>
@@ -80,6 +86,7 @@ export default function Leaderboard() {
               <TableCell
                 colSpan={3}
                 className="text-destructive py-6 text-center"
+                role="alert"
               >
                 {error}
               </TableCell>
@@ -99,16 +106,17 @@ export default function Leaderboard() {
                       className="mx-auto h-8 w-8"
                     />
                   ) : (
-                    <span className="text-muted-foreground font-medium">
-                      {i + 1}
-                    </span>
+                    <span className="text-muted-foreground font-medium">{i + 1}</span>
                   )}
                 </TableCell>
                 <TableCell className="font-medium">
                   {player.playername}
                 </TableCell>
                 <TableCell className="text-right tabular-nums">
-                  {player.score}/10
+                  <span aria-hidden="true">{player.score}/{quiz.length}</span>
+                  <span className="sr-only">
+                    Score: {player.score} out of {quiz.length}
+                  </span>
                 </TableCell>
               </TableRow>
             ))

@@ -12,9 +12,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getQuiz } from "@/services/quiz";
 
 const medals = [medal1, medal2, medal3];
-const medalAlt = ["1st place", "2nd place", "3rd place"];
+const medalLabel = ["1st place", "2nd place", "3rd place"];
 
 // Gold / silver / bronze tints for the podium rows (index 0–2).
 const podiumRowClass = [
@@ -38,6 +39,7 @@ function MiniLeaderboardSkeletonRows() {
 }
 
 export default function MiniLeaderboard() {
+  const [quiz, setQuiz] = useState({});
   const [players, setPlayers] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -46,7 +48,9 @@ export default function MiniLeaderboard() {
     const fetchPlayers = async () => {
       try {
         const data = await getPlayers();
+        const quizData = await getQuiz();
         setPlayers(data.players.slice(0, 3));
+        setQuiz(quizData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -62,6 +66,7 @@ export default function MiniLeaderboard() {
       className="bg-card text-card-foreground mx-auto w-full max-w-xs overflow-hidden rounded-xl border shadow-sm"
     >
       <Table>
+        <caption className="sr-only">Mini leaderboard</caption>
         <TableHeader>
           <TableRow className="hover:bg-transparent">
             <TableHead>Player</TableHead>
@@ -86,16 +91,28 @@ export default function MiniLeaderboard() {
                 key={player._id}
                 className={i < 3 ? podiumRowClass[i] : undefined}
               >
-                <TableCell className="font-medium flex items-center gap-2">
-                  <img
-                    src={medals[i]}
-                    alt={medalAlt[i]}
-                    className="mr-2 inline-block h-6 w-6 align-middle"
-                  />
-                  {player.playername}
+                <TableCell className="font-medium">
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex h-6 w-6 items-center justify-center">
+                      {i < 3 ? (
+                        <img src={medals[i]} alt="" className="h-6 w-6" />
+                      ) : (
+                        <span className="text-muted-foreground text-sm" aria-hidden="true">
+                          {i + 1}
+                        </span>
+                      )}
+                    </span>
+                    <span>
+                      {player.playername}
+                      <span className="sr-only">
+                        {i < 3 ? `, ${medalLabel[i]}` : `, rank ${i + 1}`}
+                      </span>
+                    </span>
+                  </div>
                 </TableCell>
                 <TableCell className="text-right tabular-nums">
-                  {player.score}/10
+                  <span aria-hidden="true">{player.score}/{quiz.length}</span>
+                  <span className="sr-only">Score: {player.score} out of {quiz.length}</span>
                 </TableCell>
               </TableRow>
             ))
