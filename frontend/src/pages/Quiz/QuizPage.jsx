@@ -35,15 +35,23 @@ const QUIZ_CONTAINER_CLASS =
 function QuizSkeleton() {
   return (
     <div data-testid="quiz-skeleton" className={QUIZ_CONTAINER_CLASS}>
+            
       <Skeleton className="h-8 w-32" />
+            
       <Skeleton className="h-7 w-40" />
+            
       <Skeleton className="h-5 w-24" />
+            
       <Skeleton className="h-16 w-full" />
+            
       <div className="flex flex-col gap-2">
+                
         {Array.from({ length: 4 }).map((_, index) => (
           <Skeleton key={index} className="h-11 w-full rounded-md" />
         ))}
+              
       </div>
+          
     </div>
   );
 }
@@ -82,8 +90,7 @@ export function QuizPage() {
   function handleSubmit() {
     setHasSubmitted(true);
     if (playerAnswer === currentQuestion.correct_answer) {
-      setScore(score + 1);
-      // turn button green
+      setScore(score + 1); // turn button green
     } else {
       //turn button red
     }
@@ -146,8 +153,10 @@ export function QuizPage() {
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
           <h2 className="text-2xl font-bold">Quiz</h2>
           <p className="text-accent">
-            Score: {score}/{quiz.length}
+                        Score: {score}/{quiz.length}
+                      
           </p>
+                    
           <div className="quiz">
             <Item className="border-border">
               <ItemContent className="text-center">
@@ -163,9 +172,12 @@ export function QuizPage() {
                 </div>
                 <ItemDescription>{currentQuestion.question}</ItemDescription>
               </ItemContent>
+                          
             </Item>
-            <br></br>
+                        <br></br>
+                        
             <div className="flex flex-col gap-0.5">
+                            
               {answers.map((answer, index) => (
                 <Button
                   variant="outline"
@@ -176,18 +188,25 @@ export function QuizPage() {
                   onClick={() => handleAnswer(currentQuestion, answer)}
                   disabled={hasSubmitted}
                 >
-                  {answer}
+                                    {answer}
+                                    
                   {hasSubmitted && (
                     <span style={{ marginLeft: "0.5rem" }}>
+                                            
                       {answer === currentQuestion.correct_answer
                         ? "✓ Correct"
                         : "✗ Incorrect"}
+                                          
                     </span>
                   )}
+                                  
                 </Button>
               ))}
+                          
             </div>
+                      
           </div>
+                    
           {!hasSubmitted && (
             <Button
               variant="default"
@@ -195,9 +214,10 @@ export function QuizPage() {
               onClick={handleSubmit}
               className="w-20 h-8"
             >
-              Submit
+                            Submit             
             </Button>
           )}
+                    
           {!finished && hasSubmitted && (
             <Button
               variant="default"
@@ -206,15 +226,22 @@ export function QuizPage() {
               className="w-20 h-8"
               data-testid="arrow-button"
             >
+                            
               <CircleArrowRight />
+                          
             </Button>
           )}
+                  
         </div>
       )}
+            
       {finished && (
         <div data-testid="quiz-result">
-          <Results score={score} />
+                    
+          <Results score={score} total={quiz.length}/>
+                    
           <ResultsForm score={score} />
+                  
         </div>
       )}
     </PageLayout>

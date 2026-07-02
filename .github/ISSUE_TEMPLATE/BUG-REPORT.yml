@@ -35,13 +35,14 @@ body:
         - v3.4 reset index being set in local storage. added test id's leaderboards
         - v3.5 added flush animation to footer
         - v3.7 coverage report
-        - v3.8 leaderboard styling
+        - v3.8 Added styling to results page, leaderboard styling
         - v3.9 quiz page styling, light/dark mode fixed, toggle switch implemented for theme change
         - v4.0 homepage styling with shadcn for icebreaker drawer for light / dark mode and quiz button
         - v4.1 added custom images
         - v4.2 Site aligment and image placements
         - v4.3 leaderboard button added onto homepage
         - v4.4 added in icons on quiz, leaderboard, mini leaderboard and score badge
+        - v4.6 styling for results page, fixed tests and added aria labels
 
   - type: dropdown
     id: severity
