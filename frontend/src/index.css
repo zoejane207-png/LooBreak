@@ -39,10 +39,10 @@ h5 {
 
   --muted: 60 5% 96%; /* #F5F5F4 */
   --muted-foreground: 24 5% 45%; /* #78716C */
-  
+
   --destructive: 24 95% 53%; /* Orange instead of red */
   --destructive-foreground: 0 0% 100%;
-  
+
   --success: 172 66% 50%; /* Blue instead of green */
   --success-foreground: 0 0% 100%;
 
@@ -67,11 +67,12 @@ h5 {
   --secondary-foreground: 166 76% 79%; /* #99F6E4 */
 
   --accent: 27 96% 61%; /* #FB923C orange-400 */
-  --accent-foreground: 15, 93%, 49%; /* #431407 dark orange for contrast on the accent fill */
+  --accent-foreground:
+    15, 93%, 49%; /* #431407 dark orange for contrast on the accent fill */
 
   --muted: 20 6% 15%; /* #262625 */
   --muted-foreground: 24 5% 65%; /* #A8A29E */
-  
+
   --destructive: 27 96% 65%; /* Brighter orange for dark */
   --destructive-foreground: 15 90% 14%;
 

@@ -36,5 +36,4 @@ describe("resetTodaysLeaderboard", () => {
       "Database connection failed",
     );
   });
-  
 });

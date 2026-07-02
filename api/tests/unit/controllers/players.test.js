@@ -183,15 +183,15 @@ describe("/players", () => {
 
   describe("GET, fetch all players and scores for leaderboard", () => {
     test("returned in order of score value - highest to lowest", async () => {
-      const player1 = new Player ({
+      const player1 = new Player({
         playername: "John",
         score: 3,
       });
-      const player2 = new Player ({
+      const player2 = new Player({
         playername: "Paul",
         score: 10,
       });
-      const player3 = new Player ({
+      const player3 = new Player({
         playername: "Ringo",
         score: 5,
       });
@@ -219,10 +219,10 @@ describe("/players", () => {
       const response = await request(app).get("/players");
 
       expect(response.status).toBe(404);
-      
+
       const data = response.body;
-      
+
       expect(data.message).toBe("Players not found");
-    })
-  })
+    });
+  });
 });

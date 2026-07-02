@@ -3581,6 +3581,10 @@ const lootips = [
     lootip:
       "Open a window or use the fan — Good ventilation keeps the bathroom fresh and reduces mould.",
   },
+  {
+    lootip:
+      "Clean your mobile phone properly after playing games on the loo - Stop those germs from spreading.",
+  },
 ];
 
 async function seed() {

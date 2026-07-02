@@ -33,53 +33,61 @@ export default function Icebreaker() {
   const [isOpen, setIsOpen] = useState(false);
 
   const fetchIcebreakers = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const icebreakerData = await getIcebreaker();
-        setIcebreakers(icebreakerData.iceBreakers);
-      } catch (err) {
-        console.error("Could not fetch icebreaker:", err);
-        setError("Could not fetch icebreaker");
-      } finally {
-        setLoading(false);
-      }
+    setLoading(true);
+    setError(null);
+    try {
+      const icebreakerData = await getIcebreaker();
+      setIcebreakers(icebreakerData.iceBreakers);
+    } catch (err) {
+      console.error("Could not fetch icebreaker:", err);
+      setError("Could not fetch icebreaker");
+    } finally {
+      setLoading(false);
+    }
   };
   return (
-    <Drawer 
+    <Drawer
       open={isOpen}
       onOpenChange={(open) => {
-      setIsOpen(open);
-      if (open) fetchIcebreakers();
-    }}>
+        setIsOpen(open);
+        if (open) fetchIcebreakers();
+      }}
+    >
       <DrawerTrigger asChild>
-        <Button variant="outline" data-testid="icebreaker-reveal-btn">
-          {isOpen ? "Hide the icebreakers 🧊 " : "Show me the icebreakers! 🧊 "}
+        <Button variant="outline" data-testid="icebreaker-reveal">
+          {isOpen ? "Hide the icebreakers" : "Show me the icebreakers!"}{" "}
+          <span aria-hidden="true">🧊</span>
         </Button>
       </DrawerTrigger>
 
-        <DrawerContent 
+      <DrawerContent
         data-testid="icebreaker-component"
-        className="bg-background text-foreground flex h-auto flex-col rounded-t-[10px]">
-          <div className="mx-auto w-full max-w-sm overflow-y-auto pb-34 md:pb-24">
-
-            <div className="p-4 flex flex-col items-center justify-center min-h-50">
-              {loading && (
-                <div className="space-y-3" aria-busy="true" data-testid="icebreaker-skeleton">
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-5/6" />
-                  <Skeleton className="h-4 w-4/6" />
-                </div>
-              )}
+        className="bg-background text-foreground flex h-auto flex-col rounded-t-[10px]"
+      >
+        <div className="mx-auto w-full max-w-sm overflow-y-auto pb-34 md:pb-24">
+          <div className="p-4 flex flex-col items-center justify-center min-h-50">
+            {loading && (
+              <div
+                className="space-y-3"
+                aria-busy="true"
+                data-testid="icebreaker-skeleton"
+              >
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-5/6" />
+                <Skeleton className="h-4 w-4/6" />
+              </div>
+            )}
 
             {error && (
-              <p className="text-destructive text-center p-4" data-testid="icebreaker-error">
+              <p
+                className="text-destructive text-center p-4"
+                data-testid="icebreaker-error"
+              >
                 {error}
               </p>
             )}
 
             {!loading && icebreakers.length > 0 && (
-
               <ul className="space-y-4" data-testid="icebreaker-list">
                 {icebreakers.map((item) => (
                   <li key={item._id} className="text-base font-normal">
@@ -89,12 +97,14 @@ export default function Icebreaker() {
               </ul>
             )}
           </div>
-          <DrawerFooter >
+          <DrawerFooter>
             <DrawerClose asChild>
-              <Button variant="outline" aria-label="hide-icebreakers-btn">Hide the icebreakers 🧊</Button>
+              <Button variant="outline" aria-label="Close icebreakers drawer">
+                Hide the icebreakers <span aria-hidden="true">🧊</span>
+              </Button>
             </DrawerClose>
           </DrawerFooter>
-        </div>  
+        </div>
       </DrawerContent>
     </Drawer>
   );
