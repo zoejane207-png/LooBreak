@@ -31,18 +31,20 @@ export default function ScoreBadge({ data }) {
       ) : loading ? (
         <Badge variant="destructive">Loading...</Badge>
       ) : (
-        <Badge 
+        <Badge
           variant={isGoodScore ? "default" : "destructive"}
           className="flex items-center gap-2 px-4 py-2"
         >
-          <img 
+          <img
             src={isGoodScore ? correctSvg : incorrectSvg}
             alt={isGoodScore ? "Good score" : "Low score"}
             className="w-5 h-5"
           />
           <div className="flex flex-col">
             <span>Keep it up {data.playername}!</span>
-            <span className="font-bold">{data.score}/{quiz.length}</span>
+            <span className="font-bold">
+              {data.score}/{quiz.length}
+            </span>
           </div>
         </Badge>
       )}
