@@ -4,6 +4,7 @@ import { createPlayer } from "../services/results";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import { setToken } from "../services/auth";
 
 export default function ResultsForm(props) {
   const score = props.score;
@@ -77,11 +78,12 @@ export default function ResultsForm(props) {
       }
 
       const { playername, score, ...rest } = formData;
-      await createPlayer({
+      const response = await createPlayer({
         ...rest,
         playername: playername.trim(),
         score: score,
       });
+      setToken(response.token);
       navigate("/leaderboard");
     } catch (err) {
       console.error(err);

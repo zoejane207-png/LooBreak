@@ -5,7 +5,7 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="frontend/public/toilet-vector.png"
+      href="frontend/public/loobreak-logo.svg"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LooBreak</title>
@@ -33,6 +33,11 @@
         animation: app-skeleton-pulse 1.5s ease-in-out infinite;
       }
     </style>
+    <script>
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
   </head>
   <body>
     <div id="root">

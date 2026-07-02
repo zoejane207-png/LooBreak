@@ -2,6 +2,8 @@ import Results from "../../../src/components/Results";
 import { BrowserRouter } from "react-router-dom";
 import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { getQuiz } from "../../../src/services/quiz";
+import { vi, beforeEach } from "vitest";
 
 describe("Results", () => {
   test("that headers appear", () => {
@@ -21,14 +23,15 @@ describe("Results", () => {
   });
 });
 
-test("prompts the user to enter a playername", () => {
+function renderResults(score) {
   render(
     <BrowserRouter
       future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
     >
-      <Results />
+      <Results score={score} />
     </BrowserRouter>,
   );
+}
 
   expect(
     screen.getByText(

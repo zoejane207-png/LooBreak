@@ -9,7 +9,7 @@ describe("NavBar", () => {
   beforeEach(() => {
     render(
       <MemoryRouter
-        future={{ v7_startTransition: true, v7_relativeSplatPath: true }} 
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
         initialEntries={["/"]}
       >
         <NavBar />
@@ -46,8 +46,7 @@ describe("NavBar", () => {
 
   test("Navbar shows the light/dark mode button", () => {
     expect(
-      screen.getByRole("button", { name: /dark mode|light mode/i }),
-    ).toBeInTheDocument();
+      screen.getByTestId("theme-toggle")).toBeInTheDocument();
   });
 
   test("home button redirects to homepage", async () => {
@@ -59,7 +58,7 @@ describe("NavBar", () => {
 
   test("quiz button redirects to quizpage", async () => {
     await act(async () => {
-        await userEvent.click(screen.getByRole("link", { name: /quiz/i }));
+      await userEvent.click(screen.getByRole("link", { name: /quiz/i }));
     });
     expect(await screen.findByText(/quiz page/i)).toBeInTheDocument();
   });

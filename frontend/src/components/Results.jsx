@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ArrowDown } from "lucide-react";
+import { getQuiz } from "../services/quiz";
 
 const messages = [
   "That's almost impressively wrong.",
@@ -18,34 +19,34 @@ const messages = [
 
 export default function Results(props) {
   const score = props.score;
+  const [quiz, setQuiz] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    setMessage(messages[score]);
+    const fetchResult = async () => {
+      try {
+        const quizData = await getQuiz();
+        setQuiz(quizData);
+        setMessage(messages[score]);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchResult();
   }, [score]);
 
   return (
-    <Card data-testid="results" className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <h1 className="text-3xl font-bold text-center">Game Over!</h1>
-      </CardHeader>
-      <CardContent className="flex flex-col items-center gap-4 text-center">
-        <h2 data-testid="score" className="text-5xl font-bold text-accent">
-          {score}/10
-        </h2>
-        <h3
-          data-testid="results-message"
-          className="text-lg italic text-muted-foreground"
-        >
-          {message}
-        </h3>
-        <p className="text-sm">
-          Enter a playername to save your score to the leaderboard
-        </p>
-        <div className="flex justify-center my-2">
-          <ArrowDown />
-        </div>
-      </CardContent>
-    </Card>
+    <>
+      <div data-testid="results">
+        <h1>Game Over!</h1>
+        <h2 data-testid="score">{score}/{quiz.length}</h2>
+        <h3 data-testid="results-message">{message}</h3>
+        <p>Enter a playername to save your score to the leaderboard:</p>
+      </div>
+    </>
   );
 }

@@ -1,10 +1,13 @@
 const cron = require("node-cron");
-
+const Player = require("../../../models/player");
 const { populateTodaysQuiz } = require("../../../services/dailyQuizService");
+const {
+  startDailyJobs,
+  resetAllTokens,
+} = require("../../../jobs/startDailyJobs");
 const {
   resetTodaysLeaderboard,
 } = require("../../../services/dailyLeaderboardService");
-const { startDailyJobs } = require("../../../jobs/startDailyJobs");
 
 jest.mock("node-cron", () => ({
   schedule: jest.fn(),
@@ -12,7 +15,7 @@ jest.mock("node-cron", () => ({
 jest.mock("../../../services/dailyQuizService", () => ({
   populateTodaysQuiz: jest.fn().mockResolvedValue(),
 }));
-
+jest.mock("../../../models/player");
 jest.mock("../../../services/dailyLeaderboardService", () => ({  // Add this
   resetTodaysLeaderboard: jest.fn().mockResolvedValue(),
 }));
@@ -54,7 +57,7 @@ describe("startDailyJobs", () => {
     await callback();
 
     expect(errorSpy).toHaveBeenCalledWith(
-      "Daily jobs failed:",
+      "populateTodaysQuiz failed:",
       "whatever the error message is",
     );
   });
@@ -70,8 +73,31 @@ describe("startDailyJobs", () => {
     await callback();
 
     expect(errorSpy).toHaveBeenCalledWith(
-      "Daily jobs failed:",
+      "resetTodaysLeaderboard failed:",
       "whatever the error message is",
     );
+  });
+});
+
+describe("resetAllTokens", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("increments tokenVersion for all players", async () => {
+    Player.updateMany.mockResolvedValueOnce({ modifiedCount: 5 });
+
+    await resetAllTokens();
+
+    expect(Player.updateMany).toHaveBeenCalledWith(
+      {},
+      { $inc: { tokenVersion: 1 } },
+    );
+  });
+
+  test("propagates an error if the update fails", async () => {
+    Player.updateMany.mockRejectedValueOnce(new Error("DB connection lost"));
+
+    await expect(resetAllTokens()).rejects.toThrow("DB connection lost");
   });
 });
