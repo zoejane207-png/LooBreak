@@ -42,15 +42,17 @@ export default function HomePage() {
   // rather than the ad-hoc padding/spacer hacks main's standalone version used.
   return (
     <PageLayout>
-      <h1 className="text-4xl font-bold" data-testid="homepage-header">Welcome to LooBreak!</h1>
+      <h1 className="text-4xl font-bold" data-testid="homepage-header">
+        Welcome to LooBreak!
+      </h1>
       {quizCompleted && <ScoreBadge data={scoreData} />}
       <Link to="/quiz" data-testid="homepage-quiz-button">
         <Button variant="default">Take the Quiz</Button>
       </Link>
-      <h3>Top 3 Players Today:</h3>
+      <h2>Top 3 Players Today:</h2>
       <MiniLeaderboard data-testid="mini-leaderboard" />
       <Link to="/leaderboard" data-testid="homepage-leaderboard-button">
-          <Button variant="default">Check out the full leaderboard</Button>
+        <Button variant="default">Check out the full leaderboard</Button>
       </Link>
       <Icebreaker />
     </PageLayout>
