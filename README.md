@@ -1,135 +1,149 @@
-## LooBreak
+# 🚽 LooBreak
 
-### Structure
+LooBreak is a daily trivia quiz app designed to be played on your loo break. Play a quick 10-question quiz, compete on the daily leaderboard, and discover icebreaker questions and bathroom tips along the way.
+
+**Live app:** https://loobreak.onrender.com/
+
+---
+
+## Features
+
+- 🎯 **Daily Quiz** — 10 multiple choice questions, same for everyone each day
+- 🏆 **Daily Leaderboard** — see how you rank against other players
+- 🧊 **Icebreaker Button** — random icebreaker questions to think about or discuss
+- 💡 **LooTip of the Day** — a handy bathroom tip shown in the footer
+- 🌙 **Dark Mode** — toggle between light and dark themes
+
+---
+
+## Structure
 
 This repo contains two applications:
 
-- A frontend React App
-- A backend api server
+- A **frontend** React app
+- A **backend** API server
 
-These two applications will communicate through HTTP requests, and need to be
-run separately.
+These two applications communicate through HTTP requests and need to be run separately.
 
-### Documentation
+---
 
-[More documentation of the codebase and its architecture can be found here.](./DOCUMENTATION.md)
-It's recommended you all read the suggested docs _after making sure the whole
-setup below worked for everyone_. Then work together on a diagram describing how
-the application works.
-
-### Card wall
-
-[TRELLO](https://trello.com/b/xcTayIHB/push-play-flush)
-
-### Quickstart
+## Quickstart
 
 ### Install Node.js
 
-If you haven't already, make sure you have node and NVM installed.
+1. Install Node Version Manager (NVM):
 
-1. Install Node Version Manager (NVM)
-   ```
-   brew install nvm
-   ```
-   Then follow the instructions to update your `~/.zshrc`.
-2. Open a new terminal
-3. Install Node.js version 24:
-   ```
-   nvm install 24
-   ```
-   _Note: This project requires Node 24 or later to run._
+brew install nvm
 
-### Set up your project
+Then follow the instructions to update your `~/.zshrc`.
 
-1. Every team member clone the fork to their local machine
-2. Install dependencies for both the `frontend` and `api` applications:
+2. Open a new terminal and install Node.js version 24:
 
-   ```
-   cd frontend
-   npm install
-   cd ../api
-   npm install
-   ```
+nvm install 24
 
-   **Note:** If you see peer dependency warnings during install, they should resolve automatically. If you encounter `ERESOLVE` errors, you can use `npm install --legacy-peer-deps` as a fallback.
+> This project requires Node 24.
 
-3. Install an ESLint plugin for your editor, for example
-   [ESLint for VSCode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-4. Install MongoDB - pick the latest version available, at the time of writing this, it's @8.0.
-   ```
-   brew tap mongodb/brew
-   brew install mongodb-community@8.0
-   ```
-   _Note:_ If you see a message that says
-   `If you need to have mongodb-community@8.0 first in your PATH, run:`, follow
-   the instruction. Restart your terminal after this.
-5. Start MongoDB
+### Install MongoDB
 
-   ```
-   brew services start mongodb-community@8.0
-   ```
+brew tap mongodb/brew
+brew install mongodb-community@8.0
 
-### Setting up environment variables.
+> If you see a message saying `If you need to have mongodb-community@8.0 first in your PATH, run:`, follow the instruction and restart your terminal.
 
-We need to create two `.env` files, one in the frontend and one in the api.
+Start MongoDB:
 
-#### Frontend
+brew services start mongodb-community@8.0
 
-Create a file `frontend/.env` with the following contents:
+### Set up the project
 
-```
+1. Clone the repo to your local machine
+2. Install dependencies for both applications:
+
+cd frontend
+npm install
+cd ../api
+npm install
+
+---
+
+## Environment Variables
+
+### Frontend
+
+Create a file `frontend/.env`:
+
 VITE_BACKEND_URL="http://localhost:3000"
-```
 
-#### Backend
+### Backend
 
-Create a file `api/.env` with the following contents:
+Create a file `api/.env`:
 
-```
 MONGODB_URL="mongodb://0.0.0.0/loobreak"
 NODE_ENV="development"
 JWT_SECRET="secret"
-```
 
-For an explanation of these environment variables, see the documentation.
+### Backend (test)
 
-### How to run the server and use the app
+Create a file `api/.env.test`:
 
-1. Start the server application (in the `api` directory) in dev mode:
+MONGODB_URL="mongodb://0.0.0.0/loobreak_test"
+JWT_SECRET="test_secret"
 
-```
-; cd api
-; npm run dev
-```
+---
 
-2. Start the front end application (in the `frontend` directory)
+## Seed the Database
 
-In a new terminal session...
+To populate the database with questions, players, tips and icebreakers:
 
-```
-; cd frontend
-; npm run dev
-```
+cd api
+npm run seed
 
-You should now be able to open your browser and go to
-`http://localhost:5173/signup` to create a new user.
+---
 
-Then, after signing up, you should be able to log in by going to
-`http://localhost:5173/login`.
+## Running the App
 
-After logging in, you won't see much but you can create posts using PostMan and
-they should then show up in the browser if you refresh the page.
+### Start the backend (in the `api` directory):
 
-### Dependencies
+cd api
+npm run dev
 
-This project uses:
+### Start the frontend (in a new terminal, in the `frontend` directory):
 
-- **Node.js 24+** - Runtime
-- **React 18** - Frontend UI
-- **Vite 8** - Frontend build tool
-- **Express 4** - Backend server
-- **Mongoose 8** - MongoDB object modeling
-- **MongoDB 8** - Database
-- **Vitest 4** - Testing framework
+cd frontend
+npm run dev
 
-All versions have been tested together and should work without conflicts.
+Open your browser and go to `http://localhost:5173/`
+
+---
+
+## Running Tests
+
+### Backend:
+
+cd api
+npm test
+
+### Frontend:
+
+cd frontend
+npm test
+
+### Frontend coverage report:
+
+cd frontend
+npm test -- --coverage --run
+
+---
+
+## Tech Stack
+
+| Frontend | React 18, Vite 8, Tailwind CSS, shadcn/ui |
+| Backend | Node.js 24, Express 4 |
+| Database | MongoDB 8, Mongoose 8 |
+| Testing | Vitest 4 (frontend), Jest (backend) |
+
+---
+
+## Card Wall
+
+[Trello Board](https://trello.com/b/xcTayIHB/push-play-flush)
