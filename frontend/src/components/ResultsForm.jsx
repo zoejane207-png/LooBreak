@@ -71,6 +71,9 @@ export default function ResultsForm(props) {
       if (formData.playername.length > 12)
         newErrors.playername =
           "Playername must be less than 12 characters long";
+      if (/\s/.test(formData.playername)) {
+        newErrors.playername = "Player name cannot contain spaces";
+      }
       if (!formData.playername) newErrors.playername = "Playername is required";
       if (Object.keys(newErrors).length > 0) {
         setErrors(newErrors);
