@@ -29,7 +29,7 @@ describe("startDailyJobs", () => {
 
   it("registers the job with the correct cron expression and timezone", () => {
     expect(cron.schedule).toHaveBeenCalledWith(
-      "15 * * * *",
+      "1 0 * * *",
       expect.any(Function),
       { timezone: "Europe/London" },
     );
