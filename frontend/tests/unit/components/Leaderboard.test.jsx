@@ -23,10 +23,12 @@ describe("Leaderboard", () => {
     vi.mocked(getPlayers).mockResolvedValue(mockPlayersData);
   });
 
-  test("shows loading state before data resolves", () => {
+  test("shows skeleton rows before data resolves", () => {
     getPlayers.mockReturnValueOnce(new Promise(() => {}));
     render(<Leaderboard />);
-    expect(screen.getByText("Loading...")).toBeInTheDocument();
+    expect(
+      screen.getAllByTestId("leaderboard-skeleton-row").length,
+    ).toBeGreaterThan(0);
   });
 
   test("displays the players in a table", async () => {

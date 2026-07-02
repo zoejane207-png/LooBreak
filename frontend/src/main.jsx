@@ -7,6 +7,9 @@ import "./index.css";
 // The React application will be inserted into this div.
 const rootElement = document.getElementById("root");
 
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") document.documentElement.classList.add("dark");
+
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <App />

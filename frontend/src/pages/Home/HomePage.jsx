@@ -1,5 +1,4 @@
 import "./HomePage.css";
-import "../../components/icebreaker.module.css";
 import Icebreaker from "../../components/icebreaker";
 import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar";
@@ -9,6 +8,7 @@ import ScoreBadge from "../../components/ScoreBadge";
 import { getToken, removeToken } from "../../services/auth";
 import { getMyScore } from "../../services/results";
 import MiniLeaderboard from "../../components/MiniLeaderBoard";
+import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
   const [quizCompleted, setQuizCompleted] = useState(false);
@@ -44,8 +44,8 @@ export default function HomePage() {
       <div className="home flex flex-col items-center gap-4 p-6">
         <h1 className="text-4xl font-bold">Welcome to LooBreak!</h1>
         {quizCompleted && <ScoreBadge data={scoreData} />}
-        <Link to="/quiz" data-testid="quiz-button">
-          Quiz
+        <Link to="/quiz" data-testid="homepage-quiz-button">
+          <Button variant="default">Take the Quiz</Button>
         </Link>
         <h3>Top 3 Players Today:</h3>
         <div style={{ paddingLeft: "190px" }}>
@@ -53,12 +53,12 @@ export default function HomePage() {
         </div>
         <br></br>
         <br></br>
-        <Icebreaker data-testid="icebreaker-component" />
-        <br></br>
-        <br></br>
         <Link to="/leaderboard" data-testid="leaderboard-button">
           Leaderboard
-        </Link>
+        </Link>        
+        <br></br>
+        <br></br>
+        <Icebreaker />
       </div>
       <Footer />
     </>
