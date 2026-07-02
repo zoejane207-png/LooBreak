@@ -67,8 +67,7 @@ h5 {
   --secondary-foreground: 166 76% 79%; /* #99F6E4 */
 
   --accent: 27 96% 61%; /* #FB923C orange-400 */
-  --accent-foreground:
-    15, 93%, 49%; /* #431407 dark orange for contrast on the accent fill */
+  --accent-foreground: 15 93% 49%; /* #431407 dark orange for contrast on the accent fill */
 
   --muted: 20 6% 15%; /* #262625 */
   --muted-foreground: 24 5% 65%; /* #A8A29E */
