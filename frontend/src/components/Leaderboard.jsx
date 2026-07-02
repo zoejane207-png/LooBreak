@@ -68,8 +68,10 @@ export default function Leaderboard() {
       data-testid="leaderboard"
       className="bg-card text-card-foreground mx-auto w-full max-w-md overflow-hidden rounded-xl border shadow-sm"
     >
-      <Table aria-live="polite" className="sr-only">
-        {loading ? "Loading leaderboard" : ""}
+      <span className="sr-only" aria-live="polite">
+        {loading ? "Loading leaderboard" : "Leaderboard loaded"}
+      </span>
+      <Table aria-live="polite">
         <caption className="sr-only">Full leaderboard</caption>
         <TableHeader>
           <TableRow className="hover:bg-transparent">
