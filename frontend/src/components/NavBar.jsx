@@ -23,7 +23,7 @@ export default function NavBar() {
       <Link to="/quiz" data-testid="navbar-quiz-button">
         Quiz
       </Link>
-      <Link to="/leaderboard" data-testid="leaderboard-button">
+      <Link to="/leaderboard" data-testid="navbar-leaderboard-button">
         Leaderboard
       </Link>
       <div className="flex fixed right-2 top-4">
