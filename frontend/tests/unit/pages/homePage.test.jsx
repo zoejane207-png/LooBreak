@@ -113,4 +113,20 @@ describe("Home Page", () => {
     expect(linkElement).toHaveAttribute('href', '/quiz');
 
   });
+
+    test("displays the leaderboard navigation button", () => {
+    renderHomePage();
+    
+    const leaderboardButton = screen.getByTestId("homepage-leaderboard-button");
+    expect(leaderboardButton).toBeInTheDocument();
+  });  
+
+  test("the leaderboard button redirects to leaderboard page", async () => {
+    renderHomePage();
+    const linkElement = screen.getByTestId("homepage-leaderboard-button");
+
+    expect(linkElement).toBeInTheDocument();
+    expect(linkElement).toHaveAttribute('href', '/leaderboard');
+
+  });
 });

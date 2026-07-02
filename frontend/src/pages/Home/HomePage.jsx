@@ -45,7 +45,7 @@ export default function HomePage() {
         <h1 className="text-4xl font-bold">Welcome to LooBreak!</h1>
         {quizCompleted && <ScoreBadge data={scoreData} />}
         <Link to="/quiz" data-testid="homepage-quiz-button">
-          <Button variant="default">Take the Quiz</Button>
+          <Button variant="default">Take the quiz</Button>
         </Link>
         <h3>Top 3 Players Today:</h3>
         <div style={{ paddingLeft: "190px" }}>
@@ -53,8 +53,8 @@ export default function HomePage() {
         </div>
         <br></br>
         <br></br>
-        <Link to="/leaderboard" data-testid="leaderboard-button">
-          Leaderboard
+        <Link to="/leaderboard" data-testid="homepage-leaderboard-button">
+          <Button variant="default">Check out the full leaderboard</Button>
         </Link>        
         <br></br>
         <br></br>
