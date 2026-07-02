@@ -33,7 +33,9 @@ export default function NavBar() {
           data-testid="navbar-logo"
           className="h-9 w-9"
         />
-        <span className="text-lg font-bold tracking-tight">LooBreak</span>
+        <span className="hidden text-lg font-bold tracking-tight sm:inline">
+          LooBreak
+        </span>
       </NavLink>
 
       <div className="flex items-center gap-1 sm:gap-2">
@@ -64,9 +66,14 @@ export default function NavBar() {
             checked={isDark}
             onCheckedChange={setIsDark}
             data-testid="theme-toggle"
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
           />
-          <Label htmlFor="theme-toggle" aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
-            {isDark ? <MoonStar size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />}
+          <Label htmlFor="theme-toggle" aria-hidden="true">
+            {isDark ? (
+              <MoonStar size={16} aria-hidden="true" />
+            ) : (
+              <Sun size={16} aria-hidden="true" />
+            )}
           </Label>
         </div>
       </div>

@@ -44,6 +44,7 @@ body:
         - v4.4 added in icons on quiz, leaderboard, mini leaderboard and score badge
         - v4.5 bugs/deleting-files-fixing-accessibility
         - v4.6 styling for results page, fixed tests and added aria labels
+        - v4.7 final bug fixes and voiceover tweaks
 
   - type: dropdown
     id: severity

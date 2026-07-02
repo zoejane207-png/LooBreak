@@ -16,10 +16,10 @@ import no9 from "../../assets/loobreak-number-9.svg";
 import no10 from "../../assets/loobreak-number-10.svg";
 
 const quizNumbers = [no1, no2, no3, no4, no5, no6, no7, no8, no9, no10];
+
 import {
   Item,
   ItemContent,
-  ItemMedia,
   ItemDescription,
   ItemTitle,
 } from "@/components/ui/item";
@@ -35,23 +35,15 @@ const QUIZ_CONTAINER_CLASS =
 function QuizSkeleton() {
   return (
     <div data-testid="quiz-skeleton" className={QUIZ_CONTAINER_CLASS}>
-            
       <Skeleton className="h-8 w-32" />
-            
       <Skeleton className="h-7 w-40" />
-            
       <Skeleton className="h-5 w-24" />
-            
       <Skeleton className="h-16 w-full" />
-            
       <div className="flex flex-col gap-2">
-                
         {Array.from({ length: 4 }).map((_, index) => (
           <Skeleton key={index} className="h-11 w-full rounded-md" />
         ))}
-              
       </div>
-          
     </div>
   );
 }
@@ -152,18 +144,20 @@ export function QuizPage() {
       {!finished && (
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
           <h1 className="text-2xl font-bold">Quiz</h1>
-          <p className="text-accent">
-                        Score: {score}/{quiz.length}
-                      
+          <p className="text-accent" aria-live="polite">
+            Score: {score}/{quiz.length}
           </p>
-                    
           <div className="quiz">
+            <div aria-live="polite" className="sr-only">
+              Question {currentIndex + 1} of {quiz.length}:{" "}
+              {currentQuestion.question}
+            </div>
             <Item className="border-border">
               <ItemContent className="text-center">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <img
                     src={quizNumbers[currentIndex]}
-                    alt={`Question ${currentIndex + 1}`}
+                    alt={`Question ${currentIndex + 1} Looroll`}
                     className="w-8 h-8"
                   />
                   <ItemTitle className="text-xs text-muted-foreground">
@@ -172,12 +166,9 @@ export function QuizPage() {
                 </div>
                 <ItemDescription>{currentQuestion.question}</ItemDescription>
               </ItemContent>
-                          
             </Item>
-                        <br></br>
-                        
+            <br></br>
             <div className="flex flex-col gap-0.5">
-                            
               {answers.map((answer, index) => (
                 <Button
                   variant="outline"
@@ -187,26 +178,24 @@ export function QuizPage() {
                   key={index}
                   onClick={() => handleAnswer(currentQuestion, answer)}
                   disabled={hasSubmitted}
+                  aria-pressed={isSelected && answer === playerAnswer}
+                  className="h-auto min-h-11 whitespace-normal text-wrap py-2 text-left"
                 >
-                                    {answer}
-                                    
+                  {answer}
                   {hasSubmitted && (
                     <span style={{ marginLeft: "0.5rem" }}>
-                                            
+                      <span aria-hidden="true">
+                        {answer === currentQuestion.correct_answer ? "✓" : "✗"}
+                      </span>{" "}
                       {answer === currentQuestion.correct_answer
-                        ? "✓ Correct"
-                        : "✗ Incorrect"}
-                                          
+                        ? "Correct"
+                        : "Incorrect"}
                     </span>
                   )}
-                                  
                 </Button>
               ))}
-                          
             </div>
-                      
           </div>
-                    
           {!hasSubmitted && (
             <Button
               variant="default"
@@ -214,10 +203,9 @@ export function QuizPage() {
               onClick={handleSubmit}
               className="w-20 h-8"
             >
-                            Submit             
+              Submit
             </Button>
           )}
-                    
           {!finished && hasSubmitted && (
             <Button
               variant="default"
@@ -225,23 +213,17 @@ export function QuizPage() {
               onClick={handleNextQuestion}
               className="w-20 h-8"
               data-testid="arrow-button"
+              aria-label="Next question"
             >
-                            
-              <CircleArrowRight />
-                          
+              <CircleArrowRight aria-hidden="true" />
             </Button>
           )}
-                  
         </div>
       )}
-            
       {finished && (
         <div data-testid="quiz-result">
-                    
-          <Results score={score} total={quiz.length}/>
-                    
+          <Results score={score} total={quiz.length} />
           <ResultsForm score={score} />
-                  
         </div>
       )}
     </PageLayout>
