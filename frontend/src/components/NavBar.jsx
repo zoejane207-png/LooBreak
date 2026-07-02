@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/toilet-vector.png";
+import logo from "../assets/loobreak-logo.svg";
 import useDarkMode from "../utils/useDarkMode";
 
 export default function NavBar() {

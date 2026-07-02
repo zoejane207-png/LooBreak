@@ -4,6 +4,18 @@ import NavBar from "../../components/NavBar";
 import Results from "../../components/Results";
 import ResultsForm from "../../components/ResultsForm";
 import { Skeleton } from "@/components/ui/skeleton";
+import no1 from "../assets/loobreak-number-1.svg";
+import no2 from "../assets/loobreak-number-2.svg";
+import no3 from "../assets/loobreak-number-3.svg";
+import no4 from "../assets/loobreak-number-4.svg";
+import no5 from "../assets/loobreak-number-5.svg";
+import no6 from "../assets/loobreak-number-6.svg";
+import no7 from "../assets/loobreak-number-7.svg";
+import no8 from "../assets/loobreak-number-8.svg";
+import no9 from "../assets/loobreak-number-9.svg";
+import no10 from "../assets/loobreak-number-10.svg";
+
+const quizNumbers = [{no1}, {no2}, (no3), {no4}, {no5}, (no6), {no7}, {no8}, (no9), {no10}];
 
 // Shared shell so the skeleton and the real quiz can't drift apart.
 const QUIZ_CONTAINER_CLASS = "mx-auto flex w-full max-w-md flex-col gap-3 p-6";
@@ -113,9 +125,10 @@ export function QuizPage() {
       {!finished && (
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
           <h2 className="text-2xl font-bold">Quiz</h2>
-          <h3 className="text-lg font-semibold">
+          <h3 className="text-lg font-semibold" data-testid="{currentIndex + 1}" aria-label="{currentIndex + 1}">
             Question {currentIndex + 1}:
           </h3>
+          <img src="{quizNumbers}" alt="" />
           <p className="text-muted-foreground">
             Score: {score}/{quiz.length}
           </p>

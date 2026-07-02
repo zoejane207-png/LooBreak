@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { getPlayers } from "../services/results";
+import medal1 from "../assets/loobreak-medal-1.svg";
+import medal2 from "../assets/loobreak-medal-2.svg";
+import medal3 from "../assets/loobreak-medal-3.svg";
 
-const medals = ["🥇", "🥈", "🥉"];
+const medals = [{medal1}, {medal2}, (medal3)];
 
 export default function MiniLeaderboard() {
   const [players, setPlayers] = useState({});
