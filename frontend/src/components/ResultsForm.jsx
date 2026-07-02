@@ -91,14 +91,13 @@ export default function ResultsForm(props) {
     }
   }
 
-
   return (
     <Card className="px-4 w-full max-w-md mx-auto mt-4">
       <CardContent className="pt-6">
         <form
           onSubmit={handleSubmit}
           data-testid="results-form"
-          aria-label="results-form"
+          aria-label="Save your score"
           className="flex flex-col gap-4"
         >
           <div className="flex flex-col gap-2">
@@ -116,11 +115,17 @@ export default function ResultsForm(props) {
               name="playername"
               value={formData.playername}
               onChange={handleChange}
+              aria-invalid={!!errors.playername}
+              aria-describedby={
+                errors.playername ? "playername-error" : undefined
+              }
               style={{ border: "1px solid hsl(var(--border))" }}
             />
             {errors.playername && (
               <p
+                id="playername-error"
                 data-testid="playername-error"
+                role="alert"
                 className="text-destructive text-sm"
               >
                 {errors.playername}
