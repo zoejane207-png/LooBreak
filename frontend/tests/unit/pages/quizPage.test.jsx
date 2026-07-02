@@ -46,7 +46,7 @@ const renderWithRouter = (component) => {
       future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
     >
       {component}
-    </BrowserRouter>
+    </BrowserRouter>,
   );
 };
 
@@ -108,12 +108,12 @@ describe("Quiz Page", () => {
     await screen.findByText(mockQuiz[0].question);
 
     const answerButton = screen.getByRole("button", { name: "Licorice" });
-    await clickAndWait(answerButton)
-    
+    await clickAndWait(answerButton);
+
     const submitButton = screen.getByRole("button", { name: "Submit" });
     expect(submitButton).not.toBeDisabled();
 
-    await clickAndWait(submitButton)
+    await clickAndWait(submitButton);
 
     expect(answerButton).toBeDisabled();
     expect(
@@ -128,16 +128,12 @@ describe("Quiz Page", () => {
 
     await screen.findByText(mockQuiz[0].question);
 
-    expect(
-      screen.getByText(`Score: 0/${mockQuiz.length}`),
-    ).toBeInTheDocument();
+    expect(screen.getByText(`Score: 0/${mockQuiz.length}`)).toBeInTheDocument();
 
     await clickAndWait(screen.getByRole("button", { name: "Licorice" }));
     await clickAndWait(screen.getByRole("button", { name: "Submit" }));
 
-    expect(
-      screen.getByText(`Score: 1/${mockQuiz.length}`),
-    ).toBeInTheDocument();
+    expect(screen.getByText(`Score: 1/${mockQuiz.length}`)).toBeInTheDocument();
   });
 
   test("Score does not increment after submit when answer is wrong", async () => {
@@ -145,16 +141,12 @@ describe("Quiz Page", () => {
 
     await screen.findByText(mockQuiz[0].question);
 
-    expect(
-      screen.getByText(`Score: 0/${mockQuiz.length}`),
-    ).toBeInTheDocument();
+    expect(screen.getByText(`Score: 0/${mockQuiz.length}`)).toBeInTheDocument();
 
     await clickAndWait(screen.getByRole("button", { name: "Chocolate" }));
     await clickAndWait(screen.getByRole("button", { name: "Submit" }));
 
-    expect(
-      screen.getByText(`Score: 0/${mockQuiz.length}`),
-    ).toBeInTheDocument();
+    expect(screen.getByText(`Score: 0/${mockQuiz.length}`)).toBeInTheDocument();
   });
 
   test("Navigates to next question when → button is clicked", async () => {

@@ -6,7 +6,7 @@ export async function createPlayer({ playername, score }) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ playername, score }),
   };
-  
+
   const response = await fetch(`${BACKEND_URL}/players`, requestOptions);
   const data = await response.json();
 
@@ -23,6 +23,22 @@ export async function getPlayers() {
   const response = await fetch(`${BACKEND_URL}/players`, requestOptions);
   if (response.status !== 200) {
     throw new Error("Unable to fetch players and their scores");
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+export async function getMyScore(token) {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await fetch(`${BACKEND_URL}/players/me`, requestOptions);
+  if (response.status !== 200) {
+    throw new Error("Unable to fetch your score");
   }
 
   const data = await response.json();

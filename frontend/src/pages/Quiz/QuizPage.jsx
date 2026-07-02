@@ -25,16 +25,15 @@ function QuizSkeleton() {
     </div>
   );
 }
-
 export function QuizPage() {
   const [quiz, setQuiz] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [finished, setFinished] = useState(false);
-  const currentQuestion = quiz[currentIndex];
   const [score, setScore] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
   const [playerAnswer, setPlayerAnswer] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentQuestion = quiz[currentIndex]; // Now it can access currentIndex
+  const [finished, setFinished] = useState(false);
 
   useEffect(() => {
     getQuiz().then((data) => {
@@ -88,11 +87,10 @@ export function QuizPage() {
         style.backgroundColor = "red";
       }
     }
-
     return style;
   }
 
-  if (!quiz.length) {
+  if (!finished && !quiz.length) {
     return (
       <>
         <NavBar />
@@ -101,10 +99,13 @@ export function QuizPage() {
     );
   }
 
-  const answers = [
-    currentQuestion.correct_answer,
-    ...currentQuestion.incorrect_answers,
-  ].sort();
+  const answers =
+    !finished && currentQuestion
+      ? [
+          currentQuestion.correct_answer,
+          ...currentQuestion.incorrect_answers,
+        ].sort()
+      : [];
 
   return (
     <>
@@ -112,7 +113,9 @@ export function QuizPage() {
       {!finished && (
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
           <h2 className="text-2xl font-bold">Quiz</h2>
-          <h3 className="text-lg font-semibold">Question {currentIndex + 1}:</h3>
+          <h3 className="text-lg font-semibold">
+            Question {currentIndex + 1}:
+          </h3>
           <p className="text-muted-foreground">
             Score: {score}/{quiz.length}
           </p>

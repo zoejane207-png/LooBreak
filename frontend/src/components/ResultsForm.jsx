@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { createPlayer } from "../services/results";
+import { setToken } from "../services/auth";
 
 export default function ResultsForm(props) {
   const score = props.score;
@@ -74,11 +75,12 @@ export default function ResultsForm(props) {
       }
 
       const { playername, score, ...rest } = formData;
-      await createPlayer({
+      const response = await createPlayer({
         ...rest,
         playername: playername.trim(),
         score: score,
       });
+      setToken(response.token);
       navigate("/leaderboard");
     } catch (err) {
       console.error(err);

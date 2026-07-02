@@ -26,7 +26,7 @@ describe("MiniLeaderBoard", () => {
     render(<MiniLeaderboard />);
     expect(screen.getByText("Loading...")).toBeInTheDocument();
   });
-  
+
   test("displays the players in a table", async () => {
     render(<MiniLeaderboard />);
     const table = await screen.findByRole("table");
@@ -58,18 +58,18 @@ describe("MiniLeaderBoard", () => {
   });
 
   test("displays medals with each name", async () => {
-      render(<MiniLeaderboard />);
-      await screen.findByText(/alice/i);
-      const rows = screen.getAllByRole("row");
-      expect(rows).toHaveLength(4);
-      expect(rows[1]).toHaveTextContent("🥇");
-      expect(rows[2]).toHaveTextContent("🥈");
-      expect(rows[3]).toHaveTextContent("🥉");
-    });
+    render(<MiniLeaderboard />);
+    await screen.findByText(/alice/i);
+    const rows = screen.getAllByRole("row");
+    expect(rows).toHaveLength(4);
+    expect(rows[1]).toHaveTextContent("🥇");
+    expect(rows[2]).toHaveTextContent("🥈");
+    expect(rows[3]).toHaveTextContent("🥉");
+  });
 
   test("shows an error message if players fail to load", async () => {
-      getPlayers.mockRejectedValueOnce(new Error("Network error"));
-      render(<MiniLeaderboard />);
-      expect(await screen.findByText(/network error/i)).toBeInTheDocument();
-    });
+    getPlayers.mockRejectedValueOnce(new Error("Network error"));
+    render(<MiniLeaderboard />);
+    expect(await screen.findByText(/network error/i)).toBeInTheDocument();
+  });
 });

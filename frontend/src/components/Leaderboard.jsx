@@ -45,7 +45,13 @@ export default function Leaderboard() {
             ) : (
               players.map((player, i) => (
                 <tr key={player._id}>
-                  {i < 3 ? <td>{medals[i]}</td> : <td>{i + 1}</td>}
+                  {i < 3 ? (
+                    <td data-testid="{i}" aria-label="{i}">
+                      {medals[i]}
+                    </td>
+                  ) : (
+                    <td>{i + 1}</td>
+                  )}
                   <td>{player.playername}</td>
                   <td>{player.score}/10</td>
                 </tr>
