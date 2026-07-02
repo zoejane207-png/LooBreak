@@ -18,7 +18,7 @@ function startDailyJobs() {
   );
 
   cron.schedule(
-    "15 * * * *", // currently changed to refresh each 15 mins, can change back to 1 0 * * *
+    "1 0 * * *",
     async () => {
       const results = await Promise.allSettled([
         populateTodaysQuiz(),

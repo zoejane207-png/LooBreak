@@ -33,7 +33,7 @@ export default function NavBar() {
           data-testid="navbar-logo"
           className="h-9 w-9"
         />
-        <span className="text-lg font-bold tracking-tight">LooBreak</span>
+        <span className="hidden text-lg font-bold tracking-tight sm:inline">LooBreak</span>
       </NavLink>
 
       <div className="flex items-center gap-1 sm:gap-2">

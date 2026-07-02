@@ -69,6 +69,7 @@ export default function MiniLeaderboard() {
         <caption className="sr-only">Mini leaderboard</caption>
         <TableHeader>
           <TableRow className="hover:bg-transparent">
+            <TableHead className="w-10 text-center">Rank</TableHead>
             <TableHead>Player</TableHead>
             <TableHead className="text-right">Score</TableHead>
           </TableRow>
@@ -79,7 +80,7 @@ export default function MiniLeaderboard() {
           ) : error ? (
             <TableRow>
               <TableCell
-                colSpan={2}
+                colSpan={3}
                 className="text-destructive py-6 text-center"
               >
                 {error}
@@ -91,27 +92,21 @@ export default function MiniLeaderboard() {
                 key={player._id}
                 className={i < 3 ? podiumRowClass[i] : undefined}
               >
+                <TableCell className="text-center">
+                  {i < 3 ? (
+                    <img
+                      src={medals[i]}
+                      alt={medalLabel[i]}
+                      className="mx-auto h-6 w-6"
+                    />
+                  ) : (
+                    <span className="text-muted-foreground text-sm">
+                      {i + 1}
+                    </span>
+                  )}
+                </TableCell>
                 <TableCell className="font-medium">
-                  <div className="flex items-center gap-2">
-                    <span className="inline-flex h-6 w-6 items-center justify-center">
-                      {i < 3 ? (
-                        <img src={medals[i]} alt="" className="h-6 w-6" />
-                      ) : (
-                        <span
-                          className="text-muted-foreground text-sm"
-                          aria-hidden="true"
-                        >
-                          {i + 1}
-                        </span>
-                      )}
-                    </span>
-                    <span>
-                      {player.playername}
-                      <span className="sr-only">
-                        {i < 3 ? `, ${medalLabel[i]}` : `, rank ${i + 1}`}
-                      </span>
-                    </span>
-                  </div>
+                  {player.playername}
                 </TableCell>
                 <TableCell className="text-right tabular-nums">
                   <span aria-hidden="true">
