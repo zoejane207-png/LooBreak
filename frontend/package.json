@@ -15,7 +15,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "jwt-decode": "^4.0.0",
-    "lucide-react": "^1.22.0",
+    "lucide-react": "^1.23.0",
     "mongoose": "^8.24.1",
     "radix-ui": "^1.6.1",
     "react": "^18.2.0",
