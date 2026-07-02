@@ -33,6 +33,11 @@
         animation: app-skeleton-pulse 1.5s ease-in-out infinite;
       }
     </style>
+    <script>
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
   </head>
   <body>
     <div id="root">
