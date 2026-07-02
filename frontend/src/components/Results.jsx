@@ -30,7 +30,7 @@ export default function Results(props) {
         <h1 className="text-3xl font-bold text-center">Game Over!</h1>
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-4 text-center">
-        <h2 data-testid="score" className="text-5xl font-bold">
+        <h2 data-testid="score" className="text-5xl font-bold text-accent">
           {score}/10
         </h2>
         <h3

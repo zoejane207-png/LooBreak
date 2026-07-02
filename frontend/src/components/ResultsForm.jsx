@@ -89,6 +89,50 @@ export default function ResultsForm(props) {
     }
   }
 
+  //   return (
+  //     <Card className="px-4 w-full max-w-md mx-auto mt-4">
+  //       <CardContent className="pt-6">
+  //         <form
+  //           onSubmit={handleSubmit}
+  //           data-testid="results-form"
+  //           aria-label="results-form"
+  //           className="flex flex-col gap-4"
+  //         >
+  //           <div className="flex flex-col gap-2">
+  //             <label htmlFor="playername" className="text-sm font-medium">
+  //               Playername
+  //             </label>
+  //             <Input
+  //               type="text"
+  //               placeholder="Enter playername"
+  //               id="playername"
+  //               name="playername"
+  //               value={formData.playername}
+  //               onChange={handleChange}
+  //             />
+  //             {errors.playername && (
+  //               <p className="text-destructive">{errors.playername}</p>
+  //             )}
+  //           </div>
+
+  //           <input type="hidden" name="score" value={score} />
+
+  //           <div className="flex flex-col gap-2">
+  //             <Button
+  //               type="button"
+  //               variant="outline"
+  //               onClick={generatePlayerName}
+  //             >
+  //               Generate playername
+  //             </Button>
+  //             <Button type="submit">Submit</Button>
+  //           </div>
+  //         </form>
+  //       </CardContent>
+  //     </Card>
+  //   );
+  // }
+
   return (
     <Card className="px-4 w-full max-w-md mx-auto mt-4">
       <CardContent className="pt-6">
@@ -99,7 +143,10 @@ export default function ResultsForm(props) {
           className="flex flex-col gap-4"
         >
           <div className="flex flex-col gap-2">
-            <label htmlFor="playername" className="text-sm font-medium">
+            <label
+              htmlFor="playername"
+              className="text-xs text-muted-foreground"
+            >
               Playername
             </label>
             <Input
@@ -109,9 +156,10 @@ export default function ResultsForm(props) {
               name="playername"
               value={formData.playername}
               onChange={handleChange}
+              style={{ border: "1px solid hsl(var(--border))" }}
             />
             {errors.playername && (
-              <p className="text-sm text-red-500">{errors.playername}</p>
+              <p className="text-destructive text-sm">{errors.playername}</p>
             )}
           </div>
 
@@ -122,10 +170,13 @@ export default function ResultsForm(props) {
               type="button"
               variant="outline"
               onClick={generatePlayerName}
+              className="w-full"
             >
               Generate playername
             </Button>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" variant="default" className="w-full">
+              Submit
+            </Button>
           </div>
         </form>
       </CardContent>
