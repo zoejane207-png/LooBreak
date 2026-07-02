@@ -154,10 +154,8 @@ export function QuizPage() {
         <div data-test-id="quiz" className={QUIZ_CONTAINER_CLASS}>
           <h1 className="text-2xl font-bold">Quiz</h1>
           <p className="text-accent" aria-live="polite">
-                        Score: {score}/{quiz.length}
-                      
+            Score: {score}/{quiz.length}
           </p>
-                    
           <div className="quiz">
             <div aria-live="polite" className="sr-only">
               Question {currentIndex + 1} of {quiz.length}: {currentQuestion.question}
@@ -176,12 +174,9 @@ export function QuizPage() {
                 </div>
                 <ItemDescription>{currentQuestion.question}</ItemDescription>
               </ItemContent>
-                          
             </Item>
-                        <br></br>
-                        
+            <br></br>
             <div className="flex flex-col gap-0.5">
-                            
               {answers.map((answer, index) => (
                 <Button
                   variant="outline"
@@ -192,9 +187,9 @@ export function QuizPage() {
                   onClick={() => handleAnswer(currentQuestion, answer)}
                   disabled={hasSubmitted}
                   aria-pressed={isSelected && answer === playerAnswer}
+                  className="h-auto min-h-11 whitespace-normal text-wrap py-2 text-left"
                 >
-                                    {answer}
-                                    
+                  {answer}
                   {hasSubmitted && (
                     <span style={{ marginLeft: "0.5rem" }}>
                       <span aria-hidden="true">
@@ -204,14 +199,10 @@ export function QuizPage() {
                       {answer === currentQuestion.correct_answer ? "Correct" : "Incorrect"}
                     </span>
                   )}
-                                  
                 </Button>
               ))}
-                          
             </div>
-                      
           </div>
-                    
           {!hasSubmitted && (
             <Button
               variant="default"
