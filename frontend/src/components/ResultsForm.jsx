@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { createPlayer } from "../services/results";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
 import { setToken } from "../services/auth";
 
 export default function ResultsForm(props) {
@@ -89,28 +92,70 @@ export default function ResultsForm(props) {
   }
 
   return (
-    <>
-      <form
-        onSubmit={handleSubmit}
-        data-testid="results-form"
-        aria-label="results-form"
-      >
-        <label htmlFor="playername">Playername</label>
-        <input
-          type="text"
-          placeholder="Enter playername"
-          id="playername"
-          name="playername"
-          value={formData.playername}
-          onChange={handleChange}
-        />
-        <button type="button" onClick={generatePlayerName}>
-          Generate playername
-        </button>
-        <input type="hidden" name="score" value={score} />
-        {errors.playername && <p>{errors.playername}</p>}
-        <button type="submit">Submit</button>
-      </form>
-    </>
+    <Card className="px-4 w-full max-w-md mx-auto mt-4">
+      <CardContent className="pt-6">
+        <form
+          onSubmit={handleSubmit}
+          data-testid="results-form"
+          aria-label="Save your score"
+          className="flex flex-col gap-4"
+        >
+          <div className="flex flex-col gap-2">
+            <label
+              htmlFor="playername"
+              className="text-xs text-muted-foreground"
+            >
+              Playername
+            </label>
+            <Input
+              data-testid="playername-input"
+              type="text"
+              placeholder="Enter playername"
+              id="playername"
+              name="playername"
+              value={formData.playername}
+              onChange={handleChange}
+              aria-invalid={!!errors.playername}
+              aria-describedby={
+                errors.playername ? "playername-error" : undefined
+              }
+              style={{ border: "1px solid hsl(var(--border))" }}
+            />
+            {errors.playername && (
+              <p
+                id="playername-error"
+                data-testid="playername-error"
+                role="alert"
+                className="text-destructive text-sm"
+              >
+                {errors.playername}
+              </p>
+            )}
+          </div>
+
+          <input type="hidden" name="score" value={score} />
+
+          <div className="flex flex-col gap-2">
+            <Button
+              data-testid="generate-button"
+              type="button"
+              variant="outline"
+              onClick={generatePlayerName}
+              className="w-full"
+            >
+              Generate playername
+            </Button>
+            <Button
+              data-testid="submit-button"
+              type="submit"
+              variant="default"
+              className="w-full"
+            >
+              Submit
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   );
 }

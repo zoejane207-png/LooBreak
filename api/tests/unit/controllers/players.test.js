@@ -75,6 +75,87 @@ describe("/players", () => {
     });
   });
 
+  // Guards against clients (e.g. Postman) bypassing the front-end form and
+  // posting values the results form would have rejected.
+  describe("POST, playername length is enforced server-side", () => {
+    test("rejects a playername shorter than 3 characters with 400", async () => {
+      const response = await request(app)
+        .post("/players")
+        .send({ playername: "ab", score: 5 });
+
+      expect(response.statusCode).toBe(400);
+      expect(await Player.countDocuments()).toBe(0);
+    });
+
+    test("rejects a playername longer than 12 characters with 400", async () => {
+      const response = await request(app)
+        .post("/players")
+        .send({ playername: "a".repeat(13), score: 5 });
+
+      expect(response.statusCode).toBe(400);
+      expect(await Player.countDocuments()).toBe(0);
+    });
+
+    test("accepts boundary lengths of 3 and 12 characters", async () => {
+      const min = await request(app)
+        .post("/players")
+        .send({ playername: "abc", score: 5 });
+      const max = await request(app)
+        .post("/players")
+        .send({ playername: "abcdefghijkl", score: 5 });
+
+      expect(min.statusCode).toBe(201);
+      expect(max.statusCode).toBe(201);
+    });
+  });
+
+  describe("POST, score is validated server-side", () => {
+    test("rejects a score above 10 with 400 (no fake leaderboard entry)", async () => {
+      const response = await request(app)
+        .post("/players")
+        .send({ playername: "cheater", score: 9999 });
+
+      expect(response.statusCode).toBe(400);
+      expect(await Player.countDocuments()).toBe(0);
+    });
+
+    test("rejects a negative score with 400", async () => {
+      const response = await request(app)
+        .post("/players")
+        .send({ playername: "cheater", score: -1 });
+
+      expect(response.statusCode).toBe(400);
+      expect(await Player.countDocuments()).toBe(0);
+    });
+
+    test("rejects a non-integer score with 400", async () => {
+      const response = await request(app)
+        .post("/players")
+        .send({ playername: "cheater", score: 5.5 });
+
+      expect(response.statusCode).toBe(400);
+      expect(await Player.countDocuments()).toBe(0);
+    });
+
+    test("rejects a non-numeric score with 400", async () => {
+      const response = await request(app)
+        .post("/players")
+        .send({ playername: "cheater", score: "10" });
+
+      expect(response.statusCode).toBe(400);
+      expect(await Player.countDocuments()).toBe(0);
+    });
+
+    test("accepts a valid in-range score with 201", async () => {
+      const response = await request(app)
+        .post("/players")
+        .send({ playername: "honest", score: 8 });
+
+      expect(response.statusCode).toBe(201);
+      expect(response.body.player.score).toBe(8);
+    });
+  });
+
   describe("GET, fetch playername and score for results badge", () => {
     test("returns the player once they have submitted their playername & score", async () => {
       const player = await Player.create({

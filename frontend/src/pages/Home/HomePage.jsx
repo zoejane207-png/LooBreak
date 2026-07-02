@@ -1,8 +1,7 @@
 import "./HomePage.css";
 import Icebreaker from "../../components/icebreaker";
 import { Link } from "react-router-dom";
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
+import PageLayout from "../../components/PageLayout";
 import { useState, useEffect } from "react";
 import ScoreBadge from "../../components/ScoreBadge";
 import { getToken, removeToken } from "../../services/auth";
@@ -38,29 +37,24 @@ export default function HomePage() {
 
   if (checkingStatus) return null;
 
+  // Route through the shared PageLayout so the home page lines up with every
+  // other page (centered column, consistent padding, one nav bar + footer)
+  // rather than the ad-hoc padding/spacer hacks main's standalone version used.
   return (
-    <>
-      <NavBar />
-      <div className="home flex flex-col items-center gap-4 p-6">
-        <h1 className="text-4xl font-bold">Welcome to LooBreak!</h1>
-        {quizCompleted && <ScoreBadge data={scoreData} />}
-        <Link to="/quiz" data-testid="homepage-quiz-button">
-          <Button variant="default">Take the Quiz</Button>
-        </Link>
-        <h3>Top 3 Players Today:</h3>
-        <div style={{ paddingLeft: "190px" }}>
-          <MiniLeaderboard data-testid="mini-leaderboard" />
-        </div>
-        <br></br>
-        <br></br>
-        <Link to="/leaderboard" data-testid="leaderboard-button">
-          Leaderboard
-        </Link>        
-        <br></br>
-        <br></br>
-        <Icebreaker />
-      </div>
-      <Footer />
-    </>
+    <PageLayout>
+      <h1 className="text-4xl font-bold" data-testid="homepage-header">
+        Welcome to LooBreak!
+      </h1>
+      {quizCompleted && <ScoreBadge data={scoreData} />}
+      <Link to="/quiz" data-testid="homepage-quiz-button">
+        <Button variant="default">Take the Quiz</Button>
+      </Link>
+      <h2>Top 3 Players Today:</h2>
+      <MiniLeaderboard data-testid="mini-leaderboard" />
+      <Link to="/leaderboard" data-testid="homepage-leaderboard-button">
+        <Button variant="default">Check out the full leaderboard</Button>
+      </Link>
+      <Icebreaker />
+    </PageLayout>
   );
 }

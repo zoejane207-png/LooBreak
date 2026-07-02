@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { getLootip } from "../services/lootips";
 import { Skeleton } from "@/components/ui/skeleton";
 import styles from "./Footer.module.css";
+import flushLong from "../assets/loobreak-flush-long.svg";
+import flushTall from "../assets/loobreak-flush-tall.svg";
 
 // Keep in sync with the lootipFlushDown duration in Footer.module.css so the
 // fetch and the swirl-away animation finish together.
@@ -52,6 +54,10 @@ export default function Footer() {
     .filter(Boolean)
     .join(" ");
 
+  // Swap to the "tall" flush graphic mid-flush to sell the swirl; the wider
+  // "long" graphic is the resting state.
+  const flushSrc = phase === "flush" ? flushTall : flushLong;
+
   return (
     <footer
       className={styles.banner}
@@ -79,7 +85,7 @@ export default function Footer() {
         aria-label="Flush for a new loo tip"
         data-testid="lootip-flush"
       >
-        🚽 Flush
+        <img src={flushSrc} alt="" className={styles.flushImg} />
       </button>
     </footer>
   );
