@@ -32,7 +32,7 @@ test("prompts the user to enter a playername", () => {
 
   expect(
     screen.getByText(
-      "Enter a playername to save your score to the leaderboard:",
+      "Enter a playername to save your score to the leaderboard",
     ),
   ).toBeInTheDocument();
 });

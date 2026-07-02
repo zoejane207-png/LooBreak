@@ -150,6 +150,7 @@ export default function ResultsForm(props) {
               Playername
             </label>
             <Input
+              data-testid="playername-input"
               type="text"
               placeholder="Enter playername"
               id="playername"
@@ -159,7 +160,12 @@ export default function ResultsForm(props) {
               style={{ border: "1px solid hsl(var(--border))" }}
             />
             {errors.playername && (
-              <p className="text-destructive text-sm">{errors.playername}</p>
+              <p
+                data-testid="playername-error"
+                className="text-destructive text-sm"
+              >
+                {errors.playername}
+              </p>
             )}
           </div>
 
@@ -167,6 +173,7 @@ export default function ResultsForm(props) {
 
           <div className="flex flex-col gap-2">
             <Button
+              data-testid="generate-button"
               type="button"
               variant="outline"
               onClick={generatePlayerName}
@@ -174,7 +181,12 @@ export default function ResultsForm(props) {
             >
               Generate playername
             </Button>
-            <Button type="submit" variant="default" className="w-full">
+            <Button
+              data-testid="submit-button"
+              type="submit"
+              variant="default"
+              className="w-full"
+            >
               Submit
             </Button>
           </div>
