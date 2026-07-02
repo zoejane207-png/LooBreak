@@ -13,11 +13,11 @@ const players = [
   { playername: "charlie", score: 8 },
   { playername: "diana", score: 7 },
   { playername: "ethan", score: 6 },
-  { playername: "fiona", score: 12 },
+  { playername: "fiona", score: 2 },
   { playername: "george", score: 4 },
-  { playername: "hana", score: 15 },
+  { playername: "hana", score: 5 },
   { playername: "ivan", score: 3 },
-  { playername: "julia", score: 11 },
+  { playername: "julia", score: 1 },
 ];
 
 const quizzes = [
