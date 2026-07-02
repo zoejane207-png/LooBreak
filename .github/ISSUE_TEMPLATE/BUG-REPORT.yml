@@ -38,6 +38,7 @@ body:
         - v3.8 leaderboard styling
         - v3.9 quiz page styling, light/dark mode fixed, toggle switch implemented for theme change
         - v4.0 homepage styling with shadcn for icebreaker drawer for light / dark mode and quiz button
+        - v4.1 added custom images
 
   - type: dropdown
     id: severity

@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { getPlayers } from "../services/results";
+import medal1 from "../assets/loobreak-medal-1.svg";
+import medal2 from "../assets/loobreak-medal-2.svg";
+import medal3 from "../assets/loobreak-medal-3.svg";
 import {
   Table,
   TableBody,
@@ -10,7 +13,7 @@ import {
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const medals = ["🥇", "🥈", "🥉"];
+const medals = [{medal1}, {medal2}, (medal3)];
 
 // Gold / silver / bronze tints for the podium rows (index 0–2).
 const podiumRowClass = [
