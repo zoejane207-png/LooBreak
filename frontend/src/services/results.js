@@ -22,7 +22,7 @@ export async function getPlayers() {
   };
   const response = await fetch(`${BACKEND_URL}/players`, requestOptions);
   if (response.status !== 200) {
-    throw new Error("Unable to fetch players and their scores");
+    throw new Error("Empty. Be the first to play!");
   }
 
   const data = await response.json();
