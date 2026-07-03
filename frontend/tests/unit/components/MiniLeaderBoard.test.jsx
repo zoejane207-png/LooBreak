@@ -3,8 +3,10 @@ import { vi } from "vitest";
 import "@testing-library/jest-dom";
 import MiniLeaderboard from "../../../src/components/MiniLeaderBoard";
 import { getPlayers } from "../../../src/services/results";
+import { getQuiz } from "../../../src/services/quiz"; 
 
 vi.mock("../../../src/services/results");
+vi.mock("../../../src/services/quiz");
 
 describe("MiniLeaderBoard", () => {
   const mockPlayersData = {
@@ -16,9 +18,12 @@ describe("MiniLeaderBoard", () => {
     ],
   };
 
+  const mockQuizData = { length: 10 };
+
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(getPlayers).mockResolvedValue(mockPlayersData); // Default mock
+    vi.mocked(getPlayers).mockResolvedValue(mockPlayersData);
+    vi.mocked(getQuiz).mockResolvedValue(mockQuizData);
   });
 
   test("shows skeleton rows before data resolves", () => {

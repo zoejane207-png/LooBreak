@@ -3,10 +3,12 @@ import "@testing-library/jest-dom";
 import { vi } from "vitest";
 import Leaderboard from "../../../src/components/Leaderboard";
 import { getPlayers } from "../../../src/services/results";
+import { getQuiz } from "../../../src/services/quiz"; 
 
 vi.mock("../../../src/services/results", () => ({
   getPlayers: vi.fn(),
 }));
+vi.mock("../../../src/services/quiz");
 
 const mockPlayersData = {
   players: [
@@ -17,10 +19,13 @@ const mockPlayersData = {
   ],
 };
 
+const mockQuizData = { length: 10 };
+
 describe("Leaderboard", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(getPlayers).mockResolvedValue(mockPlayersData);
+    vi.mocked(getQuiz).mockResolvedValue(mockQuizData);
   });
 
   test("shows skeleton rows before data resolves", () => {
