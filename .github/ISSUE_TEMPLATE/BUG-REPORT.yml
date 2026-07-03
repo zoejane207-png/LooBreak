@@ -48,7 +48,8 @@ body:
         - v4.8 images re-sizing
         - v4.9.1 added 404 error page, stopped spaces in playername, changed orange in css for lighthouse
         - v5.0 aria labels for icebreaker list items, removed results page from lootip test suite, renamed btn to button, updated cron on startDailyJobs test suite, amended scores to be within 10 of seed.js leaderboard and amended loo tip of the day to loo tip
-
+        - v5.1 added coverage report and fixed 2 tests
+        
   - type: dropdown
     id: severity
     attributes:
