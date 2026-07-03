@@ -16,22 +16,6 @@ const players = [
   { playername: "fiona", score: 2 },
   { playername: "george", score: 4 },
   { playername: "hana", score: 5 },
-  { playername: "ivan", score: 3 },
-  { playername: "kevin", score: 1 },
-  { playername: "lauren", score: 1 },
-  { playername: "mike", score: 1 },
-  { playername: "nina", score: 1 },
-  { playername: "oliver", score: 1 },
-  { playername: "paula", score: 1 },
-  { playername: "quentin", score: 1 },
-  { playername: "rebecca", score: 1 },
-  { playername: "steve", score: 1 },
-  { playername: "trisha", score: 1 },
-  { playername: "u", score: 1 },
-  { playername: "veronica", score: 1 },
-  { playername: "winston", score: 1 },
-  { playername: "xena", score: 1 },
-  { playername: "y", score: 1 },
 ];
 
 const quizzes = [
