@@ -34,6 +34,12 @@ async function createPlayer(req, res) {
       });
     }
 
+    if (/\s/.test(playername)) {
+      return res.status(400).json({
+        message: "Player name cannot contain spaces",
+      });
+    }
+
     if (playername.length > MAX_NAME_LENGTH) {
       return res.status(400).json({
         message: `Playername must be at most ${MAX_NAME_LENGTH} characters long`,
