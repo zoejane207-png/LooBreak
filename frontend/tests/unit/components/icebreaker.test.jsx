@@ -9,7 +9,7 @@ describe("Icebreaker Component - Button UI", () => {
     render(<Icebreaker />);
     const user = userEvent.setup();
 
-    const button = screen.getByTestId("icebreaker-reveal-btn");
+    const button = screen.getByTestId("icebreaker-reveal");
 
     // Check initial state
     expect(button).toHaveTextContent(/show me the icebreakers!/i);
@@ -21,7 +21,7 @@ describe("Icebreaker Component - Button UI", () => {
 
   it("has type='button'", () => {
     render(<Icebreaker />);
-    const button = screen.getByTestId("icebreaker-reveal-btn");
+    const button = screen.getByTestId("icebreaker-reveal");
     expect(button).toHaveAttribute("type", "button");
   });
 });

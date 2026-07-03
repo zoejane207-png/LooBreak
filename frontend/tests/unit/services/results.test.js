@@ -88,7 +88,7 @@ describe("results service", () => {
       expect.assertions(1);
       fetch.mockResponseOnce(
         JSON.stringify({
-          message: "Unable to fetch players and their scores",
+          message: "Empty. Be the first to play!",
         }),
         {
           status: 400,
@@ -97,7 +97,7 @@ describe("results service", () => {
       try {
         await getPlayers();
       } catch (err) {
-        expect(err.message).toEqual("Unable to fetch players and their scores");
+        expect(err.message).toEqual("Empty. Be the first to play!");
       }
     });
 
