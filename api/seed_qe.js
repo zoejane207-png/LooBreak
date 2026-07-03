@@ -57,6 +57,11 @@ const quizzes = [
     incorrect_answers: ["Pablo Picasso", "Vincent van Gogh", "Michelangelo"],
   },
   {
+    question: "Who painted the Mona?",
+    correct_answer: "Leonardo da Vinci",
+    incorrect_answers: ["Pablo Picasso", "Vincent van Gogh", "Michelangelo"],
+  },
+  {
     question: "What is the smallest prime number?",
     correct_answer: "2",
     incorrect_answers: ["1", "3", "0"],

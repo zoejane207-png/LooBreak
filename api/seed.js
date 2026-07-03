@@ -17,7 +17,21 @@ const players = [
   { playername: "george", score: 4 },
   { playername: "hana", score: 5 },
   { playername: "ivan", score: 3 },
-  { playername: "julia", score: 1 },
+  { playername: "kevin", score: 1 },
+  { playername: "lauren", score: 1 },
+  { playername: "mike", score: 1 },
+  { playername: "nina", score: 1 },
+  { playername: "oliver", score: 1 },
+  { playername: "paula", score: 1 },
+  { playername: "quentin", score: 1 },
+  { playername: "rebecca", score: 1 },
+  { playername: "steve", score: 1 },
+  { playername: "trisha", score: 1 },
+  { playername: "u", score: 1 },
+  { playername: "veronica", score: 1 },
+  { playername: "winston", score: 1 },
+  { playername: "xena", score: 1 },
+  { playername: "y", score: 1 },
 ];
 
 const quizzes = [
@@ -25,11 +39,6 @@ const quizzes = [
     question: "Red Vines is a brand of what type of candy?",
     correct_answer: "Licorice",
     incorrect_answers: ["Lollipop", "Chocolate", "Bubblegum"],
-  },
-  {
-    question: "What is the largest planet in our solar system?",
-    correct_answer: "Jupiter",
-    incorrect_answers: ["Saturn", "Earth", "Mars"],
   },
   {
     question: "Which gas do plants primarily absorb from the atmosphere?",
@@ -65,6 +74,11 @@ const quizzes = [
     question: "Which ocean is the largest?",
     correct_answer: "Pacific",
     incorrect_answers: ["Atlantic", "Indian", "Arctic"],
+  },
+  {
+    question: "What language has the most native speakers worldwide?",
+    correct_answer: "Mandarin Chinese",
+    incorrect_answers: ["English", "Spanish", "Hindi"],
   },
   {
     question: "What language has the most native speakers worldwide?",
